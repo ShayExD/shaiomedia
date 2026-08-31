@@ -49,8 +49,8 @@ import { stats, cities, heroTiles, phoneStrip } from "../data/site";
     </div>
 
     <h1 class="mx-auto mt-7 max-w-5xl text-balance text-center text-[clamp(1.95rem,4.8vw,3.75rem)] !text-white">
-      <span class="rise" data-rise><span>הלקוחות שלכם מחפשים בגוגל עכשיו.</span></span>
-      <span class="rise mt-2 !text-brand-300" data-rise style="--rise-delay:130ms"><span>השאלה היא את מי הם מוצאים.</span></span>
+      <span class="rise" data-rise style="--rise-delay:420ms"><span>הלקוחות שלכם מחפשים בגוגל עכשיו.</span></span>
+      <span class="rise mt-2 !text-brand-300" data-rise style="--rise-delay:560ms"><span>השאלה היא את מי הם מוצאים.</span></span>
     </h1>
 
     <p data-hero="2" class="mx-auto mt-6 max-w-2xl text-balance text-center text-[clamp(1.0625rem,2.1vw,1.3125rem)] leading-relaxed text-ink-300">
@@ -118,29 +118,34 @@ import { stats, cities, heroTiles, phoneStrip } from "../data/site";
   [data-hero] {
     opacity: 0; transform: translateY(18px);
     animation: hero-in 720ms var(--ease-out-strong) forwards;
-    animation-delay: calc(var(--i, 0) * 70ms + 60ms);
+    animation-delay: calc(var(--i, 0) * 70ms + 420ms);
   }
   @keyframes hero-in { to { opacity: 1; transform: none; } }
   /* Tiles drift slowly so the field feels alive without competing with the copy */
-  /* The parallax loop writes transform on .parallax, so rotation and the
-     float live on a wrapper-free basis: rotate via a filter-safe property
-     order, and let the loop compose translate3d on top. */
+  /* Tiles drop in from above and settle into their angle. Written with the
+     independent rotate/translate/scale properties, not `transform`, so the
+     parallax loop can own `transform` without the two fighting. */
   .tile {
     opacity: 0;
-    rotate: var(--rot);
-    translate: 0 14px;
-    animation: tile-in 900ms var(--ease-out-strong) forwards;
-    animation-delay: calc(var(--delay) * 0.16s + 120ms);
+    rotate: calc(var(--rot) * 2.4);
+    translate: 0 -190px;
+    scale: 1.09;
+    animation: tile-drop 1250ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--delay) * 0.13s + 240ms);
   }
-  @keyframes tile-in {
-    to { opacity: 0.42; translate: 0 0; }
+  @keyframes tile-drop {
+    60%  { opacity: 0.42; }
+    to   { opacity: 0.42; rotate: var(--rot); translate: 0 0; scale: 1; }
   }
   @media (max-width: 1023px) {
-    @keyframes tile-in { to { opacity: 0.3; translate: 0 0; } }
+    @keyframes tile-drop {
+      60% { opacity: 0.3; }
+      to  { opacity: 0.3; rotate: var(--rot); translate: 0 0; scale: 1; }
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     [data-hero] { animation: none; opacity: 1; transform: none; }
-    .tile { animation: none; opacity: 0.42; translate: 0 0; }
+    .tile { animation: none; opacity: 0.42; rotate: var(--rot); translate: 0 0; scale: 1; }
   }
 </style>
 
