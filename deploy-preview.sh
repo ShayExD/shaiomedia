@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Rebuild the GitHub Pages preview and push it to the gh-pages branch.
+# Rebuild the GitHub Pages preview and push it to gh-pages.
 # The preview is noindex so it never competes with the real domain.
 set -euo pipefail
 cd "$(dirname "$0")"

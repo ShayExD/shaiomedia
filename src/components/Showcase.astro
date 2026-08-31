@@ -4,7 +4,7 @@ import { projects, verticals } from "../data/site";
 import SectionHead from "./SectionHead.astro";
 const filters = [{ id: "all", label: "הכל" }, ...verticals];
 ---
-<section id="work" class="scroll-mt-20 bg-ink-950 px-5 py-24 lg:px-8 lg:py-32">
+<section id="work" data-rise class="sheen lit scroll-mt-20 bg-ink-950 px-5 py-24 lg:px-8 lg:py-32">
   <SectionHead
     light
     kicker="הקטלוג"
@@ -29,7 +29,7 @@ const filters = [{ id: "all", label: "הכל" }, ...verticals];
           <article class="preview group h-full">
             {/* Browser frame with the real page panning inside */}
             <div class="relative">
-              <div class="overflow-hidden rounded-xl border border-white/12 bg-ink-900 shadow-[0_28px_70px_-30px_rgb(0_0_0/0.7)]">
+              <div class="overflow-hidden rounded-xl border border-white/12 bg-ink-900 shadow-[0_34px_80px_-32px_rgb(0_0_0/0.85)] ring-1 ring-inset ring-white/[0.04]">
                 <div class="flex h-8 items-center gap-1.5 border-b border-white/10 bg-white/[0.06] px-3">
                   <span class="h-2.5 w-2.5 rounded-full bg-white/25"></span>
                   <span class="h-2.5 w-2.5 rounded-full bg-white/25"></span>

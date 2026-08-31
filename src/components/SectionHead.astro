@@ -4,10 +4,13 @@ const { kicker, title, sub, center = true, light = false } = Astro.props;
 ---
 <div class={`max-w-3xl ${center ? "mx-auto text-center" : ""}`}>
   {kicker && <p data-reveal class={`eyebrow ${light ? "!bg-white/10 !border-white/15 !text-brand-200" : ""}`}>{kicker}</p>}
-  <h2
-    data-reveal style="--reveal-delay:60ms"
-    class={`mt-4 text-balance text-[clamp(2rem,4.8vw,3.5rem)] ${light ? "!text-white" : ""}`}
-  >{title}</h2>
+  <h2 class={`mt-4 text-balance text-[clamp(2rem,4.8vw,3.5rem)] ${light ? "!text-white" : ""}`}>
+    <span class="rise" data-rise style="--rise-delay:80ms"><span>{title}</span></span>
+  </h2>
+  <span
+    data-rise style="--rise-delay:340ms"
+    class:list={["drawline mx-auto mt-6 block h-px w-24", light ? "bg-white/25" : "bg-ink-200"]}
+  ></span>
   {sub && (
     <p data-reveal style="--reveal-delay:120ms"
        class={`mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed ${light ? "text-ink-200" : "text-ink-600"}`}

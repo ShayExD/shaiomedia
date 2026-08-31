@@ -128,22 +128,55 @@ const jsonLd = { "@context": "https://schema.org", "@graph": graph };
     <Footer />
 
     <script>
-      // Staggered reveal. Observer, not scroll listener — no main-thread cost per frame.
-      const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
-      if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        els.forEach((el) => el.classList.add("is-in"));
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // One observer drives every arrival: the fade-ups, the masked headings,
+      // the drawn hairlines and the single sheen pass.
+      const targets = document.querySelectorAll<HTMLElement>("[data-reveal],[data-rise]");
+      if (reduce) {
+        targets.forEach((el) => el.classList.add("is-in"));
       } else {
         const io = new IntersectionObserver(
           (entries) => {
             for (const e of entries) {
               if (!e.isIntersecting) continue;
               e.target.classList.add("is-in");
-              io.unobserve(e.target); // reveal once; re-animating on scroll-back is noise
+              io.unobserve(e.target); // arrivals happen once
             }
           },
-          { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.05 },
         );
-        els.forEach((el) => io.observe(el));
+        targets.forEach((el) => io.observe(el));
+      }
+
+      // Hero tiles drift against the scroll. One rAF loop, transform only,
+      // and it stops entirely once the hero is off screen.
+      if (!reduce) {
+        const tiles = [...document.querySelectorAll<HTMLElement>(".parallax")];
+        const hero = document.getElementById("top");
+        if (tiles.length && hero) {
+          const depth = tiles.map((_, i) => 0.04 + (i % 4) * 0.022);
+          let visible = true;
+          let queued = false;
+
+          new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) request(); },
+            { rootMargin: "200px" }).observe(hero);
+
+          function apply() {
+            queued = false;
+            const y = window.scrollY;
+            tiles.forEach((el, i) => {
+              el.style.transform = `translate3d(0, ${(-y * depth[i]).toFixed(2)}px, 0)`;
+            });
+          }
+          function request() {
+            if (queued || !visible) return;
+            queued = true;
+            requestAnimationFrame(apply);
+          }
+          addEventListener("scroll", request, { passive: true });
+          apply();
+        }
       }
     </script>
   </body>

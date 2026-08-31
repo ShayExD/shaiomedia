@@ -1,36 +1,41 @@
-/* forest — יער.
-   Each vertical owns a hue so colour is taxonomy, not decoration. */
+/* Navy, expanded.
+   The ramp is built from a single blue-black so every surface — the deepest
+   ground, a raised card, a hairline — is the same hue at a different depth.
+   That is what stops a dark page reading as "grey with blue text". */
 @theme {
-  --color-ink-950: #0F1F19;
-  --color-ink-900: #1D2C26;
-  --color-ink-800: #34423C;
-  --color-ink-700: #4F5B56;
-  --color-ink-600: #747E79;
-  --color-ink-500: #8F9894;
-  --color-ink-400: #ABB2AE;
-  --color-ink-300: #C6CCC8;
-  --color-ink-200: #DBDFDC;
-  --color-ink-100: #E7EBE8;
-  --color-ink-50: #EEF2EF;
+  --color-ink-950: #050A13;
+  --color-ink-925: #080F1C;
+  --color-ink-900: #0B1424;
+  --color-ink-850: #0F1B2E;
+  --color-ink-800: #13233A;
+  --color-ink-700: #1B3350;
+  --color-ink-600: #274766;
+  --color-ink-500: #3D6187;
+  --color-ink-400: #5D80A8;
+  --color-ink-300: #8AA6C6;
+  --color-ink-200: #B6C8DE;
+  --color-ink-100: #D8E2EE;
+  --color-ink-50:  #EDF2F8;
 
-  --color-paper: #F4F7F4;
+  --color-paper: #F4F7FA;
 
-  --color-brand-700: #175F42;
-  --color-brand-600: #1B6D4C;
-  --color-brand-500: #1E7A55;
-  --color-brand-400: #5A9D82;
-  --color-brand-300: #89B8A4;
-  --color-brand-200: #B4D2C4;
-  --color-brand-100: #D4E4DC;
-  --color-brand-50: #E7F0EA;
+  --color-brand-700: #12386B;
+  --color-brand-600: #17457F;
+  --color-brand-500: #1B4F8A;
+  --color-brand-400: #2E6FB8;
+  --color-brand-300: #4C8FE0;
+  --color-brand-200: #8FBAF0;
+  --color-brand-100: #CDE0F8;
+  --color-brand-50:  #E9F1FC;
 
-  --color-win-600: #38708C;
-  --color-win-100: #DBE6E8;
+  --color-win-600: #2E9B7A;
+  --color-win-100: #DFF1EA;
 }
 
 :root {
-  --v-construction: #1E7A55;
-  --v-roofing: #3E7C9B;
-  --v-chimney: #C98A1B;
-  --v-locksmith: #B4433F;
+  /* Mid-saturation so the same value carries on paper and on the deep ground */
+  --v-construction: #3D82D1;
+  --v-roofing:      #2E9B7A;
+  --v-chimney:      #DFA33A;
+  --v-locksmith:    #D45560;
 }

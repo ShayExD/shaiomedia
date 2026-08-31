@@ -63,6 +63,77 @@
 }
 
 /* ============================================================
+   Motion — restrained, and only on things you see once.
+   Long durations are fine here because these are arrivals, not UI
+   feedback; the rule of thumb about staying under 300ms applies to
+   controls, not to a heading entering the page.
+   ============================================================ */
+
+/* Type rises out from behind a mask, the way it does in print titles.
+   Two layers: the clip holds the mask, the inner span does the travel. */
+@utility rise {
+  display: block;
+  overflow: hidden;
+}
+
+@layer components {
+  .js .rise > * {
+    display: block;
+    transform: translateY(105%);
+    transition: transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--rise-delay, 0ms);
+  }
+  .js .rise.is-in > * { transform: none; }
+
+  /* A slow specular pass over deep surfaces. Once, on arrival — a looping
+     shine reads as a banner ad. */
+  .sheen { position: relative; overflow: hidden; }
+  .sheen::after {
+    content: "";
+    position: absolute;
+    inset: -40% -60%;
+    background: linear-gradient(105deg, transparent 42%, rgb(255 255 255 / 0.055) 50%, transparent 58%);
+    transform: translateX(-70%);
+    pointer-events: none;
+  }
+  .js .sheen.is-in::after {
+    transition: transform 2600ms cubic-bezier(0.22, 1, 0.36, 1) 240ms;
+    transform: translateX(70%);
+  }
+
+  /* Hairline that draws itself across, used under section headings */
+  .js .drawline {
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 1000ms cubic-bezier(0.16, 1, 0.3, 1) var(--rise-delay, 0ms);
+  }
+  .js .drawline.is-in { transform: scaleX(1); }
+
+  /* Deep surfaces get a faint top edge so they read as lit, not flat */
+  .lit { position: relative; }
+  .lit::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(140 180 240 / 0.28), transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js .rise > * { transform: none; transition: none; }
+    .js .sheen.is-in::after { transition: none; opacity: 0; }
+    .js .drawline { transform: none; transition: none; }
+  }
+}
+
+/* Tiles drift against the scroll. Transform only, driven by one rAF loop. */
+@layer components {
+  .parallax { will-change: transform; }
+  @media (prefers-reduced-motion: reduce) { .parallax { transform: none !important; } }
+}
+
+/* ============================================================
    Components
    ============================================================ */
 @layer components {
@@ -91,10 +162,19 @@
 
   /* Pewter reads only against dark. On light grounds ink is the CTA. */
   .btn-accent {
-    background: var(--color-brand-300);
-    color: var(--color-ink-950);
+    background: var(--color-brand-400);
+    color: #fff;
   }
-  .btn-accent:hover { background: var(--color-brand-200); }
+  .btn-accent:hover { background: var(--color-brand-300); }
+
+  /* On deep grounds a solid white button is too loud; this reads as glass. */
+  .btn-glass {
+    background: rgb(255 255 255 / 0.08);
+    color: #fff;
+    border: 1px solid rgb(255 255 255 / 0.16);
+    backdrop-filter: blur(10px);
+  }
+  .btn-glass:hover { background: rgb(255 255 255 / 0.15); }
 
   .btn-dark { background: var(--color-ink-900); color: #fff; }
   .btn-dark:hover { background: var(--color-ink-800); }
