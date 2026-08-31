@@ -6,35 +6,35 @@
    Palette taken from the logo PNG: navy #1C1D46, violet #6F64EA
    ============================================================ */
 @theme {
-  /* Ink — warm near-black through to bone. Warm neutrals read classic;
-     cool greys read like a SaaS template. */
-  --color-ink-950: #12100C;
-  --color-ink-900: #1C1913;
-  --color-ink-800: #2C2820;
-  --color-ink-700: #3B362C;
-  --color-ink-600: #5A5347;
-  --color-ink-500: #7A7264;
-  --color-ink-400: #9C9484;
-  --color-ink-300: #C3BBA9;
-  --color-ink-200: #DED7C6;
-  --color-ink-100: #EDE8DC;
-  --color-ink-50:  #F6F3EA;
+  /* Ink — warm near-black through to bone. */
+  --color-ink-950: #121110;
+  --color-ink-900: #1B1A18;
+  --color-ink-800: #2A2822;
+  --color-ink-700: #3B3831;
+  --color-ink-600: #57524A;
+  --color-ink-500: #6B655C;
+  --color-ink-400: #8E8879;
+  --color-ink-300: #B5AFA3;
+  --color-ink-200: #D5D0C6;
+  --color-ink-100: #E7E4DD;
+  --color-ink-50:  #F2F0EB;
 
-  /* Paper — the page ground. Not pure white; bone is warmer and calmer. */
-  --color-paper: #FBF9F3;
+  /* Paper — the page ground. Warm bone, never pure white. */
+  --color-paper: #F8F7F4;
 
-  /* Brass — one accent, used sparingly. Muted on purpose: a bright gold
-     reads as a luxury template, a brass reads as a real brand. */
-  --color-brand-700: #7C5F1C;
-  --color-brand-600: #997625;
-  --color-brand-500: #B98C2C;
-  --color-brand-400: #CFA850;
-  --color-brand-300: #E0C689;
-  --color-brand-200: #EEDCB4;
-  --color-brand-100: #F5EBD6;
-  --color-brand-50:  #FAF4E8;
+  /* Pewter — silver carrying a warm cast. It is a value, not a hue, so it
+     reads on dark surfaces and stays a quiet tint on light ones. The dark
+     ink does the heavy lifting; pewter marks and accents. */
+  --color-brand-700: #5E594F;
+  --color-brand-600: #6B655C;
+  --color-brand-500: #7A736A;
+  --color-brand-400: #9A9285;
+  --color-brand-300: #BDB5A9;
+  --color-brand-200: #D3CCC0;
+  --color-brand-100: #E5E0D7;
+  --color-brand-50:  #F1EEE8;
 
-  /* Signals, deliberately desaturated to sit inside the palette */
+  /* Signals, desaturated to sit inside the palette */
   --color-win-600: #4F6B43;
   --color-win-100: #E6EDE1;
 
@@ -119,14 +119,12 @@
   }
   .btn-primary:hover { background: var(--color-ink-800); }
 
-  /* Brass is the accent, not the workhorse — reserved for the one CTA
-     that should catch the eye, and small marks. */
-  .btn-brass {
-    background: var(--color-brand-500);
+  /* Pewter reads only against dark. On light grounds ink is the CTA. */
+  .btn-accent {
+    background: var(--color-brand-300);
     color: var(--color-ink-950);
-    box-shadow: 0 8px 22px -12px rgb(18 16 12 / 0.4);
   }
-  .btn-brass:hover { background: var(--color-brand-600); color: var(--color-paper); }
+  .btn-accent:hover { background: var(--color-brand-200); }
 
   .btn-dark { background: var(--color-ink-900); color: #fff; }
   .btn-dark:hover { background: var(--color-ink-800); }
