@@ -6,34 +6,37 @@
    Palette taken from the logo PNG: navy #1C1D46, violet #6F64EA
    ============================================================ */
 @theme {
-  /* Ink — the logo navy, extended */
-  --color-ink-950: #101128;
-  --color-ink-900: #1C1D46; /* logo navy */
-  --color-ink-800: #2A2C5E;
-  --color-ink-700: #3D4076;
-  --color-ink-600: #565A92;
-  --color-ink-500: #6E72A6;
-  --color-ink-400: #8C90BC;
-  --color-ink-300: #B4B7D4;
-  --color-ink-200: #D8DAE9;
-  --color-ink-100: #EAEBF4;
-  --color-ink-50:  #F5F6FB;
+  /* Ink — warm near-black through to bone. Warm neutrals read classic;
+     cool greys read like a SaaS template. */
+  --color-ink-950: #12100C;
+  --color-ink-900: #1C1913;
+  --color-ink-800: #2C2820;
+  --color-ink-700: #3B362C;
+  --color-ink-600: #5A5347;
+  --color-ink-500: #7A7264;
+  --color-ink-400: #9C9484;
+  --color-ink-300: #C3BBA9;
+  --color-ink-200: #DED7C6;
+  --color-ink-100: #EDE8DC;
+  --color-ink-50:  #F6F3EA;
 
-  /* Violet — the logo accent */
-  --color-brand-700: #4A3FD0;
-  --color-brand-600: #5B4FE0;
-  --color-brand-500: #6F64EA; /* logo violet */
-  --color-brand-400: #8B80FF;
-  --color-brand-300: #ADA5FF;
-  --color-brand-200: #D2CDFF;
-  --color-brand-100: #EBE9FF;
-  --color-brand-50:  #F5F4FF;
+  /* Paper — the page ground. Not pure white; bone is warmer and calmer. */
+  --color-paper: #FBF9F3;
 
-  /* Signal colors, used sparingly on proof numbers */
-  --color-win-600: #0E9F6E;
-  --color-win-100: #DEF7EC;
-  --color-flame-500: #F2760C;
-  --color-flame-100: #FEF0E3;
+  /* Brass — one accent, used sparingly. Muted on purpose: a bright gold
+     reads as a luxury template, a brass reads as a real brand. */
+  --color-brand-700: #7C5F1C;
+  --color-brand-600: #997625;
+  --color-brand-500: #B98C2C;
+  --color-brand-400: #CFA850;
+  --color-brand-300: #E0C689;
+  --color-brand-200: #EEDCB4;
+  --color-brand-100: #F5EBD6;
+  --color-brand-50:  #FAF4E8;
+
+  /* Signals, deliberately desaturated to sit inside the palette */
+  --color-win-600: #4F6B43;
+  --color-win-100: #E6EDE1;
 
   --font-sans: "Rubik Variable", ui-sans-serif, system-ui, sans-serif;
 
@@ -55,7 +58,7 @@
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
   body {
-    background: #fff;
+    background: var(--color-paper);
     color: var(--color-ink-700);
     font-family: var(--font-sans);
     font-synthesis-weight: none;
@@ -73,10 +76,10 @@
   h4, h5, h6 { color: var(--color-ink-900); font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
   p { line-height: 1.7; }
 
-  ::selection { background: var(--color-brand-200); color: var(--color-ink-900); }
+  ::selection { background: var(--color-brand-200); color: var(--color-ink-950); }
 
   :focus-visible {
-    outline: 3px solid var(--color-brand-500);
+    outline: 3px solid var(--color-ink-900);
     outline-offset: 2px;
     border-radius: 6px;
   }
@@ -110,39 +113,55 @@
   .btn:active { transform: scale(0.97); }
 
   .btn-primary {
-    background: var(--color-brand-500);
-    color: #fff;
-    box-shadow: 0 10px 30px -10px rgb(111 100 234 / 0.75);
+    background: var(--color-ink-900);
+    color: var(--color-paper);
+    box-shadow: 0 8px 22px -12px rgb(18 16 12 / 0.45);
   }
-  .btn-primary:hover { background: var(--color-brand-600); }
+  .btn-primary:hover { background: var(--color-ink-800); }
+
+  /* Brass is the accent, not the workhorse — reserved for the one CTA
+     that should catch the eye, and small marks. */
+  .btn-brass {
+    background: var(--color-brand-500);
+    color: var(--color-ink-950);
+    box-shadow: 0 8px 22px -12px rgb(18 16 12 / 0.4);
+  }
+  .btn-brass:hover { background: var(--color-brand-600); color: var(--color-paper); }
 
   .btn-dark { background: var(--color-ink-900); color: #fff; }
   .btn-dark:hover { background: var(--color-ink-800); }
 
   .btn-ghost {
-    background: #fff;
+    background: transparent;
     color: var(--color-ink-900);
     border: 1.5px solid var(--color-ink-200);
   }
   .btn-ghost:hover { border-color: var(--color-ink-900); }
 
   .card {
-    background: #fff;
+    background: #FFFFFF;
     border: 1px solid var(--color-ink-100);
     border-radius: var(--radius-card);
   }
 
+  /* A rule and small caps instead of a pill — quieter, and it stops the
+     page from opening with a badge like every AI-generated landing page. */
   .eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    border-radius: 999px;
-    background: var(--color-brand-50);
-    border: 1px solid var(--color-brand-100);
-    color: var(--color-brand-600);
-    font-size: 0.8125rem;
-    font-weight: 600;
-    padding: 0.4rem 0.9rem;
+    gap: 0.6rem;
+    color: var(--color-brand-700);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .eyebrow::before,
+  .eyebrow::after {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: var(--color-brand-300);
   }
 
   /* Reveal is gated on .js so a blocked script never leaves the page blank */
@@ -161,7 +180,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .lift { transition: transform 260ms var(--ease-out-strong), box-shadow 260ms var(--ease-out-strong); }
-  .lift:hover { transform: translateY(-4px); box-shadow: 0 22px 50px -24px rgb(28 29 70 / 0.32); }
+  .lift:hover { transform: translateY(-4px); box-shadow: 0 22px 50px -26px rgb(18 16 12 / 0.34); }
 }
 
 /* ============================================================
