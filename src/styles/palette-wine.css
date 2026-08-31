@@ -1,0 +1,36 @@
+/* wine — יין.
+   Each vertical owns a hue so colour is taxonomy, not decoration. */
+@theme {
+  --color-ink-950: #1A1114;
+  --color-ink-900: #271F22;
+  --color-ink-800: #3E3638;
+  --color-ink-700: #595153;
+  --color-ink-600: #7D7677;
+  --color-ink-500: #979192;
+  --color-ink-400: #B2ADAD;
+  --color-ink-300: #CDC8C8;
+  --color-ink-200: #E1DDDC;
+  --color-ink-100: #EEE9E9;
+  --color-ink-50: #F4F0EF;
+
+  --color-paper: #FAF6F5;
+
+  --color-brand-700: #6F1E32;
+  --color-brand-600: #7E2339;
+  --color-brand-500: #8E2740;
+  --color-brand-400: #AC6173;
+  --color-brand-300: #C48E9A;
+  --color-brand-200: #DAB8BF;
+  --color-brand-100: #EAD7DA;
+  --color-brand-50: #F4EAEA;
+
+  --color-win-600: #604666;
+  --color-win-100: #E6DEE3;
+}
+
+:root {
+  --v-construction: #8E2740;
+  --v-roofing: #6B4E71;
+  --v-chimney: #B5763A;
+  --v-locksmith: #4F6B58;
+}

@@ -1,0 +1,36 @@
+/* graphite — גרפיט.
+   Each vertical owns a hue so colour is taxonomy, not decoration. */
+@theme {
+  --color-ink-950: #141414;
+  --color-ink-900: #222222;
+  --color-ink-800: #383838;
+  --color-ink-700: #535353;
+  --color-ink-600: #777777;
+  --color-ink-500: #939392;
+  --color-ink-400: #AEAEAD;
+  --color-ink-300: #C9C9C8;
+  --color-ink-200: #DDDDDC;
+  --color-ink-100: #EAEAE9;
+  --color-ink-50: #F0F0EF;
+
+  --color-paper: #F6F6F5;
+
+  --color-brand-700: #313131;
+  --color-brand-600: #383838;
+  --color-brand-500: #3F3F3F;
+  --color-brand-400: #727272;
+  --color-brand-300: #9A9A9A;
+  --color-brand-200: #BFBFBE;
+  --color-brand-100: #DBDBDA;
+  --color-brand-50: #EBEBEA;
+
+  --color-win-600: #4E4E4E;
+  --color-win-100: #E0E0DF;
+}
+
+:root {
+  --v-construction: #2B2B2B;
+  --v-roofing: #575757;
+  --v-chimney: #7E7E7E;
+  --v-locksmith: #A5A5A5;
+}

@@ -1,0 +1,36 @@
+/* teal — טורקיז ופחם.
+   Each vertical owns a hue so colour is taxonomy, not decoration. */
+@theme {
+  --color-ink-950: #10201F;
+  --color-ink-900: #1E2D2C;
+  --color-ink-800: #344242;
+  --color-ink-700: #505C5B;
+  --color-ink-600: #747F7E;
+  --color-ink-500: #8F9898;
+  --color-ink-400: #AAB2B2;
+  --color-ink-300: #C6CCCC;
+  --color-ink-200: #DADFDF;
+  --color-ink-100: #E7EBEB;
+  --color-ink-50: #EDF2F2;
+
+  --color-paper: #F3F7F7;
+
+  --color-brand-700: #0C5B56;
+  --color-brand-600: #0E6862;
+  --color-brand-500: #10756E;
+  --color-brand-400: #509994;
+  --color-brand-300: #82B6B2;
+  --color-brand-200: #AFD0CE;
+  --color-brand-100: #D1E4E2;
+  --color-brand-50: #E5EFEF;
+
+  --color-win-600: #29638C;
+  --color-win-100: #D7E4EA;
+}
+
+:root {
+  --v-construction: #10756E;
+  --v-roofing: #2E6E9B;
+  --v-chimney: #C6871E;
+  --v-locksmith: #B24447;
+}

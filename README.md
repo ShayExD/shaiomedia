@@ -3,9 +3,7 @@
 עמוד נחיתה בעברית לעסקי שירות בארצות הברית: בנייה ושיפוצים, גגות, ארובות ומנעולנות.
 Astro 7 + Tailwind 4, סטטי לגמרי, מיועד ל-Cloudflare Pages.
 
-**השוואת פאלטות:** https://shayexd.github.io/shaiomedia/
-· K1 ספקטרום חם: https://shayexd.github.io/shaiomedia/k1/
-· K2 משפחת גוגל: https://shayexd.github.io/shaiomedia/k2/
+**עשר פאלטות להשוואה:** https://shayexd.github.io/shaiomedia/
 
 > זו תצוגת ביניים לקבלת חוות דעת. היא מסומנת `noindex` כדי שלא תתחרה בדומיין האמיתי.
 
@@ -33,22 +31,27 @@ npm run preview    # תצוגה מקדימה של הבילד
 
 ## עיצוב
 
-שתי פאלטות מועמדות, שתיהן בנויות על אותו רעיון: **לכל תחום צבע משלו**.
-הצבע הוא טקסונומיה, לא קישוט — הפילטרים, תוויות הכרטיסים והסימונים כולם
-שואבים מ-`--v` שנקבע לפי התחום.
+עשר פאלטות מועמדות. כולן בנויות על אותו רעיון: **לכל תחום צבע משלו**.
+הצבע הוא טקסונומיה ולא קישוט — הפילטרים, תוויות הכרטיסים והסימונים
+כולם שואבים מ-`--v` שנקבע לפי התחום.
 
-| | K1 ספקטרום חם | K2 משפחת גוגל |
-|---|---|---|
-| דיו | `#1B1A18` | `#17181B` |
-| נייר | `#FAF7F2` | `#F8F9FA` |
-| מוביל | `#E4572E` | `#EA4335` |
-| בנייה | `#E4572E` | `#1A73E8` |
-| גגות | `#2E7D5B` | `#188038` |
-| ארובות | `#D98A04` | `#E8890C` |
-| מנעולנות | `#C6303A` | `#EA4335` |
+| # | שם | קישור חי | דיו | מוביל |
+|---|---|---|---|---|
+| 01 | יער | [forest](https://shayexd.github.io/shaiomedia/forest/) | `#0F1F19` | `#1E7A55` |
+| 02 | זית ואדמה | [olive](https://shayexd.github.io/shaiomedia/olive/) | `#1D1C15` | `#6E7F3C` |
+| 03 | יין | [wine](https://shayexd.github.io/shaiomedia/wine/) | `#1A1114` | `#8E2740` |
+| 04 | אדום עז | [crimson](https://shayexd.github.io/shaiomedia/crimson/) | `#161413` | `#D12E32` |
+| 05 | נייבי קלאסי | [navy](https://shayexd.github.io/shaiomedia/navy/) | `#0D1A2B` | `#1B4F8A` |
+| 06 | פלדה כחולה | [steel](https://shayexd.github.io/shaiomedia/steel/) | `#14191E` | `#35708C` |
+| 07 | טורקיז ופחם | [teal](https://shayexd.github.io/shaiomedia/teal/) | `#10201F` | `#10756E` |
+| 08 | חמרה | [clay](https://shayexd.github.io/shaiomedia/clay/) | `#1E1714` | `#B4552D` |
+| 09 | גרפיט | [graphite](https://shayexd.github.io/shaiomedia/graphite/) | `#141414` | `#3F3F3F` |
+| 10 | שחור ולבן חד | [onyx](https://shayexd.github.io/shaiomedia/onyx/) | `#0A0A0A` | `#0A0A0A` |
 
-הפאלטה יושבת ב-`src/styles/palette.css`, שהוא עותק של `palette-k1.css` או
-`palette-k2.css`. `./build-variants.sh` בונה את שתיהן ומעלה אותן זו לצד זו.
+`palettes.py` הוא המפרט היחיד. ממנו נגזרים קבצי ה-CSS, הלוגואים, הפאביקונים
+ותמונות השיתוף. `./build-variants.sh` בונה את כולן ומעלה אותן זו לצד זו.
+כדי לקבע אחת: להעתיק את `palette-<id>.css` ל-`palette.css` ואת קבצי
+`public/variants/<id>/` ל-`public/`.
 
 הלוגו נצבע מחדש לאותם שני צבעים. המקור בנייבי/סגול נשמר ב-`public/logo-original.png`
 כדי שאפשר יהיה לשנות פאלטה שוב בלי לאבד אותו.

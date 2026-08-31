@@ -1,0 +1,36 @@
+/* navy — נייבי קלאסי.
+   Each vertical owns a hue so colour is taxonomy, not decoration. */
+@theme {
+  --color-ink-950: #0D1A2B;
+  --color-ink-900: #1B2737;
+  --color-ink-800: #323D4C;
+  --color-ink-700: #4E5865;
+  --color-ink-600: #737B86;
+  --color-ink-500: #8E969F;
+  --color-ink-400: #AAB0B8;
+  --color-ink-300: #C6CBD1;
+  --color-ink-200: #DBDFE3;
+  --color-ink-100: #E7EBEF;
+  --color-ink-50: #EEF1F5;
+
+  --color-paper: #F4F7FA;
+
+  --color-brand-700: #153E6C;
+  --color-brand-600: #18467B;
+  --color-brand-500: #1B4F8A;
+  --color-brand-400: #587EA9;
+  --color-brand-300: #88A3C2;
+  --color-brand-200: #B3C5D8;
+  --color-brand-100: #D3DEE9;
+  --color-brand-50: #E7EDF3;
+
+  --color-win-600: #297060;
+  --color-win-100: #D8E6E6;
+}
+
+:root {
+  --v-construction: #1B4F8A;
+  --v-roofing: #2E7D6B;
+  --v-chimney: #C98A1B;
+  --v-locksmith: #B33A46;
+}

@@ -1,0 +1,36 @@
+/* clay — חמרה.
+   Each vertical owns a hue so colour is taxonomy, not decoration. */
+@theme {
+  --color-ink-950: #1E1714;
+  --color-ink-900: #2B2421;
+  --color-ink-800: #413B37;
+  --color-ink-700: #5C5552;
+  --color-ink-600: #7F7975;
+  --color-ink-500: #999490;
+  --color-ink-400: #B4AFAA;
+  --color-ink-300: #CEC9C5;
+  --color-ink-200: #E2DDD9;
+  --color-ink-100: #EEEAE5;
+  --color-ink-50: #F4F0EB;
+
+  --color-paper: #FAF6F1;
+
+  --color-brand-700: #8C4223;
+  --color-brand-600: #A04C28;
+  --color-brand-500: #B4552D;
+  --color-brand-400: #C88264;
+  --color-brand-300: #D7A68F;
+  --color-brand-200: #E5C6B6;
+  --color-brand-100: #F0DED4;
+  --color-brand-50: #F6ECE5;
+
+  --color-win-600: #556E51;
+  --color-win-100: #E4E5DC;
+}
+
+:root {
+  --v-construction: #B4552D;
+  --v-roofing: #5E7A5A;
+  --v-chimney: #D19A2B;
+  --v-locksmith: #9C3B44;
+}

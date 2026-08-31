@@ -1,0 +1,29 @@
+# One spec drives the CSS, the logos, the OG images and the chooser page.
+PALETTES = [
+ dict(id="forest",   he="יער",              ink="#0F1F19", paper="#F4F7F4", lead="#1E7A55",
+      v=["#1E7A55","#3E7C9B","#C98A1B","#B4433F"]),
+ dict(id="olive",    he="זית ואדמה",         ink="#1D1C15", paper="#F7F5EC", lead="#6E7F3C",
+      v=["#6E7F3C","#4C6B52","#C08A2E","#A9483C"]),
+ dict(id="wine",     he="יין",               ink="#1A1114", paper="#FAF6F5", lead="#8E2740",
+      v=["#8E2740","#6B4E71","#B5763A","#4F6B58"]),
+ dict(id="crimson",  he="אדום עז",           ink="#161413", paper="#FAF8F6", lead="#D12E32",
+      v=["#D12E32","#2F6F5E","#DE8611","#3B5C8A"]),
+ dict(id="navy",     he="נייבי קלאסי",       ink="#0D1A2B", paper="#F4F7FA", lead="#1B4F8A",
+      v=["#1B4F8A","#2E7D6B","#C98A1B","#B33A46"]),
+ dict(id="steel",    he="פלדה כחולה",        ink="#14191E", paper="#F4F6F8", lead="#35708C",
+      v=["#35708C","#4A7C6B","#B98A3C","#A8474E"]),
+ dict(id="teal",     he="טורקיז ופחם",       ink="#10201F", paper="#F3F7F7", lead="#10756E",
+      v=["#10756E","#2E6E9B","#C6871E","#B24447"]),
+ dict(id="clay",     he="חמרה",              ink="#1E1714", paper="#FAF6F1", lead="#B4552D",
+      v=["#B4552D","#5E7A5A","#D19A2B","#9C3B44"]),
+ dict(id="graphite", he="גרפיט",             ink="#141414", paper="#F6F6F5", lead="#3F3F3F",
+      v=["#2B2B2B","#575757","#7E7E7E","#A5A5A5"]),
+ dict(id="onyx",     he="שחור ולבן חד",      ink="#0A0A0A", paper="#FFFFFF", lead="#0A0A0A",
+      v=["#0A0A0A","#3D3D3D","#707070","#A3A3A3"]),
+]
+VERTS = ["construction","roofing","chimney","locksmith"]
+
+def mix(hex_a, hex_b, t):
+    a = [int(hex_a[i:i+2],16) for i in (1,3,5)]
+    b = [int(hex_b[i:i+2],16) for i in (1,3,5)]
+    return "#%02X%02X%02X" % tuple(round(a[i]+(b[i]-a[i])*t) for i in range(3))

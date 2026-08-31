@@ -1,0 +1,36 @@
+/* olive — זית ואדמה.
+   Each vertical owns a hue so colour is taxonomy, not decoration. */
+@theme {
+  --color-ink-950: #1D1C15;
+  --color-ink-900: #2A2922;
+  --color-ink-800: #403F37;
+  --color-ink-700: #5A5951;
+  --color-ink-600: #7D7B74;
+  --color-ink-500: #97968D;
+  --color-ink-400: #B1B0A7;
+  --color-ink-300: #CBCAC1;
+  --color-ink-200: #DFDDD4;
+  --color-ink-100: #EBE9E0;
+  --color-ink-50: #F2F0E7;
+
+  --color-paper: #F7F5EC;
+
+  --color-brand-700: #56632F;
+  --color-brand-600: #627135;
+  --color-brand-500: #6E7F3C;
+  --color-brand-400: #94A06D;
+  --color-brand-300: #B2BA94;
+  --color-brand-200: #CED2B7;
+  --color-brand-100: #E2E3D2;
+  --color-brand-50: #EFEEE1;
+
+  --color-win-600: #44604A;
+  --color-win-100: #DFE2D6;
+}
+
+:root {
+  --v-construction: #6E7F3C;
+  --v-roofing: #4C6B52;
+  --v-chimney: #C08A2E;
+  --v-locksmith: #A9483C;
+}
