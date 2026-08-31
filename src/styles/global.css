@@ -5,39 +5,9 @@
    Shaio Media — light sales page
    Palette taken from the logo PNG: navy #1C1D46, violet #6F64EA
    ============================================================ */
+@import "./palette.css";
+
 @theme {
-  /* Ink — warm near-black through to bone. */
-  --color-ink-950: #121110;
-  --color-ink-900: #1B1A18;
-  --color-ink-800: #2A2822;
-  --color-ink-700: #3B3831;
-  --color-ink-600: #57524A;
-  --color-ink-500: #6B655C;
-  --color-ink-400: #8E8879;
-  --color-ink-300: #B5AFA3;
-  --color-ink-200: #D5D0C6;
-  --color-ink-100: #E7E4DD;
-  --color-ink-50:  #F2F0EB;
-
-  /* Paper — the page ground. Warm bone, never pure white. */
-  --color-paper: #F8F7F4;
-
-  /* Pewter — silver carrying a warm cast. It is a value, not a hue, so it
-     reads on dark surfaces and stays a quiet tint on light ones. The dark
-     ink does the heavy lifting; pewter marks and accents. */
-  --color-brand-700: #5E594F;
-  --color-brand-600: #6B655C;
-  --color-brand-500: #7A736A;
-  --color-brand-400: #9A9285;
-  --color-brand-300: #BDB5A9;
-  --color-brand-200: #D3CCC0;
-  --color-brand-100: #E5E0D7;
-  --color-brand-50:  #F1EEE8;
-
-  /* Signals, desaturated to sit inside the palette */
-  --color-win-600: #4F6B43;
-  --color-win-100: #E6EDE1;
-
   --font-sans: "Rubik Variable", ui-sans-serif, system-ui, sans-serif;
 
   /* Strong curves; the CSS built-ins are too weak */

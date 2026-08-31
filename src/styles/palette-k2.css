@@ -1,0 +1,41 @@
+/* K2 — Google family, deepened a step so it reads as a brand rather than an
+   icon set. The hues are the ones every business owner already associates
+   with Google, which is exactly what we sell. */
+@theme {
+  --color-ink-950: #101114;
+  --color-ink-900: #17181B;
+  --color-ink-800: #262930;
+  --color-ink-700: #3A3F48;
+  --color-ink-600: #545B66;
+  --color-ink-500: #6B7280;
+  --color-ink-400: #8E96A3;
+  --color-ink-300: #B4BAC4;
+  --color-ink-200: #D5D9E0;
+  --color-ink-100: #E7EAEF;
+  --color-ink-50:  #F2F4F7;
+
+  --color-paper: #F8F9FA;
+
+  --color-brand-700: #A31710;
+  --color-brand-600: #C5221A;
+  --color-brand-500: #EA4335;
+  --color-brand-400: #F06B60;
+  --color-brand-300: #F5A19A;
+  --color-brand-200: #FACBC7;
+  --color-brand-100: #FDE5E3;
+  --color-brand-50:  #FEF3F2;
+
+  --color-win-600: #188038;
+  --color-win-100: #E1F0E6;
+}
+
+:root {
+  --v-construction: #1A73E8;
+  --v-roofing:      #188038;
+  --v-chimney:      #E8890C;
+  --v-locksmith:    #EA4335;
+  --v-construction-soft: #E3EDFD;
+  --v-roofing-soft:      #E1F0E6;
+  --v-chimney-soft:      #FCEBD6;
+  --v-locksmith-soft:    #FDE5E3;
+}
