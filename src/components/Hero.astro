@@ -5,23 +5,21 @@ import { stats, cities, heroTiles, phoneStrip } from "../data/site";
 <section id="top" class="relative overflow-hidden px-5 pt-28 pb-16 lg:px-8 lg:pt-36">
   {/* Soft brand wash behind the fold */}
   <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-    <div class="absolute inset-0 bg-ink-950"></div>
-    {/* One soft pool of brand light, low and wide, so the ground has depth
-        without turning into a glow effect. */}
+    <div class="absolute inset-0 bg-paper"></div>
     <div class="absolute -top-1/3 start-1/2 h-[52rem] w-[52rem] -translate-x-1/2 rounded-full opacity-70"
-         style="background:radial-gradient(circle, rgb(46 111 184/0.22) 0%, rgb(27 79 138/0.08) 45%, transparent 70%)"></div>
+         style="background:radial-gradient(circle, rgb(46 111 184/0.10) 0%, rgb(27 79 138/0.04) 45%, transparent 70%)"></div>
 
     {/* Small screens: two tiles peeking from the top corners. A full scatter
         would crowd the headline at 390px. */}
     <div class="absolute inset-x-0 top-0 h-72 overflow-hidden lg:hidden">
       <img src={asset("images/tiles/primework-0.webp")} alt="" width="420" height="280"
            loading="lazy" fetchpriority="low" decoding="async"
-           class="tile absolute -start-16 top-2 w-44 rounded-xl object-cover shadow-[0_18px_40px_-18px_rgb(0_0_0/0.8)] ring-1 ring-white/10"
-           style="--rot:-9deg; --delay:0" />
+           class="tile absolute -start-16 top-2 w-44 rounded-xl object-cover shadow-[0_16px_36px_-16px_rgb(5_10_19/0.35)] ring-1 ring-ink-900/10"
+           style="--rot:-9deg; --delay:0; --fx:16px; --fy:-20px; --fdur:18s" />
       <img src={asset("images/tiles/vita-design-0.webp")} alt="" width="420" height="280"
            loading="lazy" fetchpriority="low" decoding="async"
-           class="tile absolute -end-14 top-10 w-40 rounded-xl object-cover shadow-[0_18px_40px_-18px_rgb(0_0_0/0.8)] ring-1 ring-white/10"
-           style="--rot:7deg; --delay:1.2" />
+           class="tile absolute -end-14 top-10 w-40 rounded-xl object-cover shadow-[0_16px_36px_-16px_rgb(5_10_19/0.35)] ring-1 ring-ink-900/10"
+           style="--rot:7deg; --delay:1.2; --fx:-18px; --fy:22px; --fdur:21s" />
     </div>
 
     {/* Wide screens: the full scatter beside the headline */}
@@ -30,8 +28,8 @@ import { stats, cities, heroTiles, phoneStrip } from "../data/site";
         <img
           src={asset(`images/tiles/${t.src}.webp`)} alt="" width="420" height="280"
           loading="lazy" fetchpriority="low" decoding="async"
-          class:list={["tile parallax absolute rounded-xl object-cover shadow-[0_26px_60px_-24px_rgb(0_0_0/0.85)] ring-1 ring-white/10", t.wide && "hidden 2xl:block"]}
-          style={`top:${t.top}; inset-inline-${t.side}:${t.offset}; width:${t.w}; --rot:${t.rot}deg; --delay:${t.delay}s`}
+          class:list={["tile parallax absolute rounded-xl object-cover shadow-[0_22px_50px_-22px_rgb(5_10_19/0.4)] ring-1 ring-ink-900/10", t.wide && "hidden 2xl:block"]}
+          style={`top:${t.top}; inset-inline-${t.side}:${t.offset}; width:${t.w}; --rot:${t.rot}deg; --delay:${t.delay}s; --fx:${t.fx}; --fy:${t.fy}; --fdur:${t.dur}s`}
         />
       ))}
     </div>
@@ -39,34 +37,34 @@ import { stats, cities, heroTiles, phoneStrip } from "../data/site";
     {/* Scrim: keeps the headline column clean white and fades the tiles out
         toward the centre and the bottom seam. */}
     <div class="absolute inset-0"
-         style="background:radial-gradient(ellipse 52% 66% at 50% 44%, rgb(5 10 19/0.94) 0%, rgb(5 10 19/0.88) 42%, rgb(5 10 19/0.62) 66%, rgb(5 10 19/0.3) 100%)"></div>
-    <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-ink-950"></div>
+         style="background:radial-gradient(ellipse 50% 64% at 50% 44%, rgb(244 247 250/0.95) 0%, rgb(244 247 250/0.9) 42%, rgb(244 247 250/0.66) 66%, rgb(244 247 250/0.34) 100%)"></div>
+    <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-paper"></div>
   </div>
 
   <div class="mx-auto max-w-6xl">
     <div class="flex justify-center">
-      <p data-hero="0" class="eyebrow !text-brand-300">אתרים וקידום אורגני לעסקי שירות בארה״ב</p>
+      <p data-hero="0" class="eyebrow">אתרים וקידום אורגני לעסקי שירות בארה״ב</p>
     </div>
 
-    <h1 class="mx-auto mt-7 max-w-5xl text-balance text-center text-[clamp(1.95rem,4.8vw,3.75rem)] !text-white">
+    <h1 class="mx-auto mt-7 max-w-5xl text-balance text-center text-[clamp(1.95rem,4.8vw,3.75rem)]">
       <span class="rise" data-rise style="--rise-delay:420ms"><span>הלקוחות שלכם מחפשים בגוגל עכשיו.</span></span>
-      <span class="rise mt-2 !text-brand-300" data-rise style="--rise-delay:560ms"><span>השאלה היא את מי הם מוצאים.</span></span>
+      <span class="rise mt-2 !text-brand-600" data-rise style="--rise-delay:560ms"><span>השאלה היא את מי הם מוצאים.</span></span>
     </h1>
 
-    <p data-hero="2" class="mx-auto mt-6 max-w-2xl text-balance text-center text-[clamp(1.0625rem,2.1vw,1.3125rem)] leading-relaxed text-ink-300">
+    <p data-hero="2" class="mx-auto mt-6 max-w-2xl text-balance text-center text-[clamp(1.0625rem,2.1vw,1.3125rem)] leading-relaxed text-ink-600">
       אנחנו בונים אתרים לקבלנים, גגנים, מנקי ארובות ומנעולנים בארצות הברית,
       ומקדמים אותם אורגנית עד שהטלפון מצלצל.
     </p>
 
     <div data-hero="3" class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-      <a href="#contact" class="btn btn-accent w-full px-8 py-4 text-[1.0625rem] sm:w-auto">קבעו שיחת ייעוץ חינם</a>
-      <a href="#work" class="btn btn-glass w-full px-8 py-4 text-[1.0625rem] sm:w-auto">
+      <a href="#contact" class="btn btn-primary w-full px-8 py-4 text-[1.0625rem] sm:w-auto">קבעו שיחת ייעוץ חינם</a>
+      <a href="#work" class="btn btn-ghost w-full px-8 py-4 text-[1.0625rem] sm:w-auto">
         לראות אתרים שבנינו
         <svg viewBox="0 0 16 16" class="h-4 w-4 rotate-90" fill="none" aria-hidden="true"><path d="M9.5 3.5 14 8l-4.5 4.5M14 8H2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
 
-    <p data-hero="4" class="mt-4 text-center text-sm text-ink-400">
+    <p data-hero="4" class="mt-4 text-center text-sm text-ink-500">
       שיחה של 20 דקות. נגיד לכם מה לתקן קודם, גם אם לא תעבדו איתנו.
     </p>
 
@@ -77,7 +75,7 @@ import { stats, cities, heroTiles, phoneStrip } from "../data/site";
         <ul dir="ltr" class="marquee-track flex w-max items-end gap-4 py-2" role="list">
           {[...phoneStrip, ...phoneStrip].map((ph) => (
             <li class="shrink-0 text-center">
-              <div class="mx-auto w-[6.5rem] overflow-hidden rounded-[1.1rem] border-[4px] border-ink-700 bg-white shadow-[0_14px_30px_-14px_rgb(18_16_12/0.45)]">
+              <div class="mx-auto w-[6.5rem] overflow-hidden rounded-[1.1rem] border-[4px] border-ink-900 bg-white shadow-[0_14px_30px_-14px_rgb(18_16_12/0.45)]">
                 <img src={asset(`images/phones/${ph.slug}.webp`)} alt="" aria-hidden="true"
                      width="260" height="520" loading="lazy" decoding="async"
                      class="block aspect-[1/2] w-full object-cover object-top" />
@@ -87,27 +85,27 @@ import { stats, cities, heroTiles, phoneStrip } from "../data/site";
           ))}
         </ul>
       </div>
-      <p class="mt-3 text-center text-xs font-semibold text-ink-400">אתרים אמיתיים שבנינו, בנייד</p>
+      <p class="mt-3 text-center text-xs font-semibold text-ink-500">אתרים אמיתיים שבנינו, בנייד</p>
     </div>
 
     {/* Where the clients actually are */}
     <div data-hero="6" class="mt-14 lg:mt-16">
-      <p class="text-center text-xs font-bold uppercase tracking-[0.16em] text-ink-500">הלקוחות שלנו נמצאים ב</p>
+      <p class="text-center text-xs font-bold uppercase tracking-[0.16em] text-ink-400">הלקוחות שלנו נמצאים ב</p>
       <ul class="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-2.5" role="list">
         {cities.map((c) => (
-          <li class="rounded-full border border-white/12 bg-white/[0.05] px-4 py-2 text-[0.9375rem] font-semibold text-ink-100 backdrop-blur-sm">{c}</li>
+          <li class="rounded-full border border-ink-200 bg-white px-4 py-2 text-[0.9375rem] font-semibold text-ink-800">{c}</li>
         ))}
       </ul>
     </div>
 
     {/* Proof strip */}
-    <dl data-hero="7" class="mx-auto mt-12 grid max-w-lg grid-cols-2 gap-x-10 border-t border-white/10 pt-10">
+    <dl data-hero="7" class="mx-auto mt-12 grid max-w-lg grid-cols-2 gap-x-10 border-t border-ink-100 pt-10">
       {stats.map((s) => (
         <div class="text-center">
-          <dd class="num text-[clamp(1.9rem,4.4vw,2.75rem)] font-extrabold text-white">
+          <dd class="num text-[clamp(1.9rem,4.4vw,2.75rem)] font-extrabold text-ink-900">
             <span data-count>{s.value}</span>{s.suffix}
           </dd>
-          <dt class="mt-1 text-[0.8125rem] font-medium text-ink-400">{s.label}</dt>
+          <dt class="mt-1 text-[0.8125rem] font-medium text-ink-500">{s.label}</dt>
         </div>
       ))}
     </dl>
@@ -130,22 +128,35 @@ import { stats, cities, heroTiles, phoneStrip } from "../data/site";
     rotate: calc(var(--rot) * 2.4);
     translate: 0 -190px;
     scale: 1.09;
-    animation: tile-drop 1250ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: calc(var(--delay) * 0.13s + 240ms);
+    /* Falls in once, then drifts forever. Both write `translate`; the drift is
+       listed second so it takes over the moment it starts, picking up exactly
+       where the drop settled. Each tile has its own vector and period, so the
+       group never falls into step. */
+    animation:
+      tile-drop 1250ms cubic-bezier(0.16, 1, 0.3, 1) forwards,
+      tile-drift var(--fdur, 19s) ease-in-out infinite alternate;
+    animation-delay:
+      calc(var(--delay) * 0.13s + 240ms),
+      calc(var(--delay) * 0.13s + 1490ms);
+  }
+
+  @keyframes tile-drift {
+    from { translate: 0 0; }
+    to   { translate: var(--fx, 16px) var(--fy, -20px); }
   }
   @keyframes tile-drop {
-    60%  { opacity: 0.42; }
-    to   { opacity: 0.42; rotate: var(--rot); translate: 0 0; scale: 1; }
+    60%  { opacity: 0.55; }
+    to   { opacity: 0.55; rotate: var(--rot); translate: 0 0; scale: 1; }
   }
   @media (max-width: 1023px) {
     @keyframes tile-drop {
-      60% { opacity: 0.3; }
-      to  { opacity: 0.3; rotate: var(--rot); translate: 0 0; scale: 1; }
+      60% { opacity: 0.42; }
+      to  { opacity: 0.42; rotate: var(--rot); translate: 0 0; scale: 1; }
     }
   }
   @media (prefers-reduced-motion: reduce) {
     [data-hero] { animation: none; opacity: 1; transform: none; }
-    .tile { animation: none; opacity: 0.42; rotate: var(--rot); translate: 0 0; scale: 1; }
+    .tile { animation: none; opacity: 0.55; rotate: var(--rot); translate: 0 0; scale: 1; }
   }
 </style>
 

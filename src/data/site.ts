@@ -38,15 +38,16 @@ export const verticals: Vertical[] = [
 /* ---------- Hero backdrop: scattered crops from the real client sites.
    Positions are hand-placed to stay clear of the headline column. ---------- */
 export const heroTiles = [
-  { src: "primework-0",      top: "3%",  side: "start", offset: "-9%", w: "17rem", rot: -7, delay: 0,   wide: false },
-  { src: "wcoasthome-1",     top: "36%", side: "start", offset: "-4%", w: "13rem", rot: 5,  delay: 1.4, wide: false },
-  { src: "pwcroofing-2",     top: "66%", side: "start", offset: "-8%", w: "16rem", rot: -4, delay: 2.6, wide: false },
-  { src: "vita-design-0",    top: "2%",  side: "end",   offset: "-8%", w: "18rem", rot: 6,  delay: 0.7, wide: false },
-  { src: "247locksmith-1",   top: "38%", side: "end",   offset: "-3%", w: "12rem", rot: -6, delay: 2.0, wide: false },
-  { src: "wcoasthome-2",     top: "68%", side: "end",   offset: "-9%", w: "15rem", rot: 4,  delay: 3.1, wide: false },
+  //                                                                                          drift target      loop
+  { src: "primework-0",      top: "3%",  side: "start", offset: "-9%", w: "17rem", rot: -7, delay: 0,   wide: false, fx: "18px",  fy: "-26px", dur: 17 },
+  { src: "wcoasthome-1",     top: "36%", side: "start", offset: "-4%", w: "13rem", rot: 5,  delay: 1.4, wide: false, fx: "-22px", fy: "20px",  dur: 21 },
+  { src: "pwcroofing-2",     top: "66%", side: "start", offset: "-8%", w: "16rem", rot: -4, delay: 2.6, wide: false, fx: "16px",  fy: "24px",  dur: 19 },
+  { src: "vita-design-0",    top: "2%",  side: "end",   offset: "-8%", w: "18rem", rot: 6,  delay: 0.7, wide: false, fx: "-19px", fy: "-22px", dur: 23 },
+  { src: "247locksmith-1",   top: "38%", side: "end",   offset: "-3%", w: "12rem", rot: -6, delay: 2.0, wide: false, fx: "20px",  fy: "18px",  dur: 16 },
+  { src: "wcoasthome-2",     top: "68%", side: "end",   offset: "-9%", w: "15rem", rot: 4,  delay: 3.1, wide: false, fx: "-17px", fy: "-20px", dur: 20 },
   // Inner pair only appears where there is genuinely room beside the headline
-  { src: "svchimneysweep-1", top: "14%", side: "start", offset: "7%",  w: "11rem", rot: 8,  delay: 3.4, wide: true },
-  { src: "primework-2",      top: "12%", side: "end",   offset: "8%",  w: "10rem", rot: -9, delay: 4.2, wide: true },
+  { src: "svchimneysweep-1", top: "14%", side: "start", offset: "7%",  w: "11rem", rot: 8,  delay: 3.4, wide: true,  fx: "-14px", fy: "22px",  dur: 18 },
+  { src: "primework-2",      top: "12%", side: "end",   offset: "8%",  w: "10rem", rot: -9, delay: 4.2, wide: true,  fx: "15px",  fy: "-18px", dur: 22 },
 ];
 
 /** Phone mockups for the mobile strip. A portrait phone reads as "a website"
