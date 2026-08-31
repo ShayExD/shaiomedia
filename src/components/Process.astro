@@ -1,0 +1,27 @@
+---
+import { process } from "../data/site";
+import SectionHead from "./SectionHead.astro";
+---
+<section id="process" class="scroll-mt-20 px-5 py-24 lg:px-8 lg:py-32">
+  <SectionHead
+    kicker="תהליך"
+    title="לא בונים לפני שאישרתם את העיצוב"
+    sub="אתם רואים בדיוק איך האתר ייראה, משנים עד שזה מדויק, ורק אז אנחנו כותבים שורת קוד."
+  />
+  <ol class="mx-auto mt-14 grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-5">
+    {process.map((p, i) => (
+      <li data-reveal style={`--reveal-delay:${i * 70}ms`}>
+        <div class={`h-full rounded-[var(--radius-card)] p-7 ${p.optional ? "border border-dashed border-ink-300 bg-ink-50" : "card"}`}>
+          <div class="flex items-start justify-between gap-2">
+            <span class={`num text-4xl font-extrabold ${p.optional ? "text-ink-300" : "text-brand-200"}`}>{p.n}</span>
+            {p.optional && (
+              <span class="rounded-full bg-ink-200 px-2.5 py-1 text-[0.6875rem] font-bold text-ink-700">לא חובה</span>
+            )}
+          </div>
+          <h3 class="mt-2 text-xl">{p.title}</h3>
+          <p class="mt-2.5 text-[0.9375rem] leading-relaxed text-ink-600">{p.body}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>

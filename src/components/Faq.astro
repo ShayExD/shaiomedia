@@ -1,0 +1,30 @@
+---
+import { faq } from "../data/site";
+import SectionHead from "./SectionHead.astro";
+---
+<section id="faq" class="scroll-mt-20 px-5 py-24 lg:px-8 lg:py-32">
+  <SectionHead kicker="שאלות" title="מה שבדרך כלל שואלים אותנו" />
+  <div class="mx-auto mt-12 max-w-3xl divide-y divide-ink-100 border-y border-ink-100">
+    {faq.map((f, i) => (
+      <details data-reveal style={`--reveal-delay:${i * 50}ms`} class="faq group">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-start">
+          <h3 class="text-[1.0625rem] sm:text-lg">{f.q}</h3>
+          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-ink-50 transition-colors duration-200 group-hover:bg-brand-100">
+            <svg viewBox="0 0 16 16" class="chev h-3.5 w-3.5 text-brand-600" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </summary>
+        <div class="faq-body"><p class="pb-6 pe-14 text-[0.9375rem] leading-relaxed text-ink-600">{f.a}</p></div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+  .faq summary::-webkit-details-marker { display: none; }
+  .chev { transition: transform 240ms var(--ease-out-strong); }
+  .faq[open] .chev { transform: rotate(180deg); }
+  .faq-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 260ms var(--ease-out-strong); }
+  .faq[open] .faq-body { grid-template-rows: 1fr; }
+  .faq-body > p { overflow: hidden; }
+  @media (prefers-reduced-motion: reduce) { .faq-body, .chev { transition-duration: 1ms; } }
+</style>

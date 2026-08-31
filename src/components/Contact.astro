@@ -1,0 +1,193 @@
+---
+import { site, verticals } from "../data/site";
+---
+<section id="contact" class="scroll-mt-20 bg-ink-900 px-5 py-24 lg:px-8 lg:py-32">
+  <div class="mx-auto max-w-5xl">
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+      <div>
+        <p data-reveal class="eyebrow !border-white/15 !bg-white/10 !text-brand-200">בואו נדבר</p>
+        <h2 data-reveal style="--reveal-delay:60ms" class="mt-4 text-balance text-[clamp(2rem,4.6vw,3.25rem)] !text-white">
+          נדבר עשרים דקות על העסק שלכם
+        </h2>
+        <p data-reveal style="--reveal-delay:120ms" class="mt-5 text-[1.0625rem] leading-relaxed text-ink-300">
+          השאירו פרטים ונחזור אליכם היום לשיחת ייעוץ. נעבור על מה שיש היום, נגיד לכם מה
+          היינו מתקנים ראשון, ומה זה אומר מבחינת לוחות זמנים ותקציב. בלי התחייבות.
+        </p>
+
+        <ul data-reveal style="--reveal-delay:180ms" class="mt-9 space-y-4">
+          <li>
+            <a href={`tel:${site.phone}`} class="group flex items-center gap-4">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/10 transition-colors group-hover:bg-brand-500">
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-white" fill="none" aria-hidden="true"><path d="M2.5 5.5c0-1.1.9-2 2-2h2.2c.9 0 1.6.6 1.8 1.4l.8 3c.2.7-.1 1.5-.7 1.9l-1.4 1a13 13 0 0 0 6 6l1-1.4c.4-.6 1.2-.9 1.9-.7l3 .8c.8.2 1.4 1 1.4 1.8v2.2c0 1.1-.9 2-2 2h-1C9.6 21.5 2.5 14.4 2.5 6.5v-1Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+              </span>
+              <span><span class="block text-xs text-ink-400">טלפון</span><span class="num block font-bold text-white">{site.phoneDisplay}</span></span>
+            </a>
+          </li>
+          <li>
+            <a href={site.whatsapp} target="_blank" rel="noopener" class="group flex items-center gap-4">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/10 transition-colors group-hover:bg-[#25D366]">
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-white" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.06c-.24.68-1.42 1.32-1.96 1.36-.5.05-.98.22-3.3-.7-2.77-1.1-4.53-3.94-4.67-4.13-.13-.19-1.11-1.48-1.11-2.83s.7-2 .95-2.28c.25-.27.55-.34.73-.34l.52.01c.17.01.4-.06.62.48.24.57.8 1.97.87 2.11.07.14.12.31.02.5-.09.19-.14.31-.28.47l-.42.49c-.14.14-.28.29-.12.57.16.27.72 1.19 1.55 1.93 1.07.95 1.97 1.25 2.25 1.39.27.14.43.12.59-.07.16-.19.68-.79.86-1.07.18-.27.36-.22.61-.13.25.09 1.6.75 1.87.89.27.14.46.2.53.32.07.11.07.65-.17 1.33Z"/></svg>
+              </span>
+              <span><span class="block text-xs text-ink-400">וואטסאפ</span><span class="block font-bold text-white">שלחו הודעה</span></span>
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${site.email}`} class="group flex items-center gap-4">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/10 transition-colors group-hover:bg-brand-500">
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-white" fill="none" aria-hidden="true"><rect x="2.75" y="4.75" width="18.5" height="14.5" rx="2.5" stroke="currentColor" stroke-width="1.7"/><path d="m3.5 7.5 8.5 5.5 8.5-5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </span>
+              <span><span class="block text-xs text-ink-400">אימייל</span><span class="iso block font-bold text-white">{site.email}</span></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <form id="lead-form" method="POST" action="/api/lead" novalidate data-reveal style="--reveal-delay:100ms"
+            class="relative rounded-3xl bg-white p-6 sm:p-8">
+        {/* Honeypot. Hidden with the clip technique, NOT an off-canvas offset —
+            a -9999px absolute child blows out the containing block in RTL. */}
+        <div class="hp" aria-hidden="true">
+          <label>אל תמלאו שדה זה<input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="field">
+            <label for="f-name">שם מלא</label>
+            <input id="f-name" name="name" type="text" required autocomplete="name" placeholder="ישראל ישראלי" />
+            <p class="err" data-err="name"></p>
+          </div>
+          <div class="field">
+            <label for="f-phone">טלפון</label>
+            <input id="f-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel" dir="ltr" placeholder="050-000-0000" />
+            <p class="err" data-err="phone"></p>
+          </div>
+        </div>
+
+        <div class="field mt-4">
+          <label for="f-email">אימייל</label>
+          <input id="f-email" name="email" type="email" required autocomplete="email" dir="ltr" placeholder="you@company.com" />
+          <p class="err" data-err="email"></p>
+        </div>
+
+        <div class="field mt-4">
+          <label for="f-service">התחום שלכם</label>
+          <select id="f-service" name="service" required>
+            <option value="">בחרו תחום</option>
+            {verticals.map((v) => <option value={v.label}>{v.label}</option>)}
+            <option value="דלתות גראז׳">דלתות גראז׳</option>
+            <option value="עסק שירות אחר">עסק שירות אחר</option>
+          </select>
+          <p class="err" data-err="service"></p>
+        </div>
+
+        <div class="field mt-4">
+          <label for="f-msg">האתר הנוכחי או כמה מילים <span class="text-ink-400">(לא חובה)</span></label>
+          <textarea id="f-msg" name="message" rows="3" placeholder="הכתובת של האתר הקיים, או מה הכי דחוף לכם"></textarea>
+        </div>
+
+        <button type="submit" id="lead-submit" class="btn btn-primary mt-6 w-full py-4 text-[1.0625rem]">
+          <span data-label>שלחו, נחזור אליכם היום</span>
+        </button>
+
+        <p class="mt-4 text-center text-xs leading-relaxed text-ink-400">הפרטים נשמרים אצלנו בלבד. אפשר להסיר בכל רגע.</p>
+        <p id="lead-status" role="status" aria-live="polite" class="min-h-5 text-center text-sm"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hp {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0; border: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .field { display: flex; flex-direction: column; gap: 0.35rem; }
+  .field label { font-size: 0.875rem; font-weight: 600; color: var(--color-ink-800); }
+  .field input, .field select, .field textarea {
+    width: 100%; border-radius: 12px;
+    border: 1.5px solid var(--color-ink-200);
+    background: #fff; padding: 0.8rem 1rem;
+    color: var(--color-ink-900); font-size: 1rem; font-family: inherit;
+    transition: border-color 180ms var(--ease-out-strong), box-shadow 180ms var(--ease-out-strong);
+  }
+  .field textarea { resize: vertical; min-height: 5.5rem; }
+  .field ::placeholder { color: var(--color-ink-400); }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; border-color: var(--color-brand-500);
+    box-shadow: 0 0 0 4px rgb(111 100 234 / 0.14);
+  }
+  .field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 6 8 10.5 12.5 6' stroke='%236F64EA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: left 1rem center; background-size: 1rem;
+    padding-left: 2.75rem;
+  }
+  .field[data-invalid] input, .field[data-invalid] select { border-color: #E02D3C; }
+  .err { min-height: 1rem; font-size: 0.8125rem; color: #C81E2B; }
+</style>
+
+<script>
+  const form = document.getElementById("lead-form") as HTMLFormElement;
+  const status = document.getElementById("lead-status")!;
+  const btn = document.getElementById("lead-submit") as HTMLButtonElement;
+  const label = btn.querySelector("[data-label]")!;
+
+  const rules: Record<string, (v: string) => string | null> = {
+    name: (v) => (v.trim().length >= 2 ? null : "נא למלא שם"),
+    phone: (v) => {
+      const d = v.replace(/[\s-()]/g, "").replace(/^\+?972/, "0");
+      return /^0\d{8,9}$/.test(d) || /^\+?\d{10,15}$/.test(v.replace(/[\s-()]/g, "")) ? null : "מספר טלפון לא תקין";
+    },
+    email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? null : "כתובת אימייל לא תקינה"),
+    service: (v) => (v ? null : "נא לבחור תחום"),
+  };
+
+  function validate(el: HTMLInputElement | HTMLSelectElement) {
+    const rule = rules[el.name];
+    if (!rule) return true;
+    const msg = rule(el.value);
+    const field = el.closest(".field")!;
+    field.querySelector(`[data-err="${el.name}"]`)!.textContent = msg ?? "";
+    field.toggleAttribute("data-invalid", Boolean(msg));
+    return !msg;
+  }
+
+  form.querySelectorAll<HTMLInputElement>("input[name], select[name]").forEach((el) => {
+    el.addEventListener("blur", () => validate(el));
+    el.addEventListener("input", () => { if (el.closest(".field")?.hasAttribute("data-invalid")) validate(el); });
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const fields = [...form.querySelectorAll<HTMLInputElement>("input[name], select[name]")].filter((f) => rules[f.name]);
+    if (!fields.map(validate).every(Boolean)) {
+      fields.find((f) => f.closest(".field")?.hasAttribute("data-invalid"))?.focus();
+      return;
+    }
+    btn.disabled = true;
+    label.textContent = "שולח...";
+    status.textContent = "";
+    status.className = "min-h-5 text-center text-sm";
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      label.textContent = "נשלח";
+      status.textContent = "קיבלנו. נחזור אליכם היום.";
+      status.className = "min-h-5 text-center text-sm font-semibold text-win-600";
+    } catch {
+      label.textContent = "שלחו, נחזור אליכם היום";
+      btn.disabled = false;
+      status.innerHTML = 'לא הצלחנו לשלוח. נסו שוב, או <a class="underline" href="https://wa.link/h5ltox" target="_blank" rel="noopener">בוואטסאפ</a>.';
+      status.className = "min-h-5 text-center text-sm font-semibold text-[#C81E2B]";
+    }
+  });
+</script>

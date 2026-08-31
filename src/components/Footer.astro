@@ -1,0 +1,48 @@
+---
+import { site, verticals } from "../data/site";
+import Logo from "./Logo.astro";
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-ink-100 px-5 py-14 lg:px-8">
+  <div class="mx-auto max-w-7xl">
+    <div class="flex flex-col items-start justify-between gap-10 md:flex-row">
+      <div class="max-w-sm">
+        <Logo class="h-8" />
+        <p class="mt-5 text-[0.9375rem] leading-relaxed text-ink-600">{site.description}</p>
+        <div class="mt-6 flex flex-wrap gap-2.5">
+          <a href={`tel:${site.phone}`} class="num btn btn-ghost px-4 py-2 text-sm">{site.phoneDisplay}</a>
+          <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-ghost px-4 py-2 text-sm">וואטסאפ</a>
+          <a href={`mailto:${site.email}`} class="iso btn btn-ghost px-4 py-2 text-sm">{site.email}</a>
+        </div>
+      </div>
+      <div class="flex gap-14">
+        <div>
+          <h2 class="text-sm">תחומים</h2>
+          <ul class="mt-4 space-y-2.5">
+            {verticals.map((v) => <li class="text-[0.9375rem] text-ink-600">{v.label}</li>)}
+            <li class="text-[0.9375rem] text-ink-600">דלתות גראז׳</li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-sm">קישורים</h2>
+          <ul class="mt-4 space-y-2.5">
+            <li><a href="#work" class="text-[0.9375rem] text-ink-600 transition-colors hover:text-ink-900">עבודות</a></li>
+            <li><a href="#includes" class="text-[0.9375rem] text-ink-600 transition-colors hover:text-ink-900">מה כלול</a></li>
+            <li><a href="/privacy-policy" class="text-[0.9375rem] text-ink-600 transition-colors hover:text-ink-900">מדיניות פרטיות</a></li>
+            <li><a href="/accessibility-statement" class="text-[0.9375rem] text-ink-600 transition-colors hover:text-ink-900">הצהרת נגישות</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-ink-100 pt-7 text-sm text-ink-500 sm:flex-row">
+      <p>© <span class="num">{year}</span> {site.nameHe}. כל הזכויות שמורות.</p>
+      <p>נבנה בישראל, עובד בארצות הברית</p>
+    </div>
+  </div>
+</footer>
+
+<div class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-ink-100 bg-white/95 p-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] backdrop-blur-lg sm:hidden">
+  <a href={`tel:${site.phone}`} class="btn btn-ghost py-3 text-[0.9375rem]">התקשרו</a>
+  <a href="#contact" class="btn btn-primary py-3 text-[0.9375rem]">רוצה אתר כזה</a>
+</div>
+<div class="h-16 sm:hidden" aria-hidden="true"></div>

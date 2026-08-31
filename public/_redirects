@@ -1,0 +1,16 @@
+# --- Migration from the WordPress site -------------------------------
+# The Hebrew subfolder becomes the root.
+/he                                                                       /                          301
+/he/                                                                      /                          301
+/he/%d7%9e%d7%93%d7%99%d7%a0%d7%99%d7%95%d7%aa-%d7%a4%d7%a8%d7%98%d7%99%d7%95%d7%aa   /privacy-policy            301
+/he/%d7%94%d7%a6%d7%94%d7%a8%d7%aa-%d7%a0%d7%92%d7%99%d7%a9%d7%95%d7%aa               /accessibility-statement   301
+/he/*                                                                     /:splat                    301
+
+# Yoast sitemap paths people and tools still request
+/sitemap_index.xml                                                        /sitemap-index.xml         301
+/page-sitemap.xml                                                         /sitemap-index.xml         301
+
+# Convenience aliases for campaign URLs
+/seo-israel                                                               /seo                       301
+/facebook-ads                                                             /meta-ads                  301
+/websites                                                                 /web-systems               301

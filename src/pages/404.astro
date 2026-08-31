@@ -1,0 +1,15 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+---
+<Base title="הדף לא נמצא | שיו מדיה" description="הדף שחיפשתם לא קיים." path="/404" noindex>
+  <section class="mx-auto flex min-h-[70vh] max-w-2xl flex-col items-center justify-center px-5 text-center">
+    <p class="num text-[clamp(5rem,18vw,10rem)] font-extrabold leading-none text-brand-200">404</p>
+    <h1 class="mt-2 text-3xl">הדף הזה לא קיים</h1>
+    <p class="mt-4 text-[1.0625rem] text-ink-600">יכול להיות שהקישור השתנה.</p>
+    <div class="mt-9 flex flex-wrap justify-center gap-2.5">
+      <a href="/" class="btn btn-primary px-6 py-3">לעמוד הבית</a>
+      <a href={`tel:${site.phone}`} class="btn btn-ghost px-6 py-3">התקשרו אלינו</a>
+    </div>
+  </section>
+</Base>

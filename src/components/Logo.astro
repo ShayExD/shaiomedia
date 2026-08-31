@@ -1,0 +1,13 @@
+---
+import { asset } from "../lib/asset";
+interface Props { class?: string; white?: boolean }
+const { class: cls = "h-9", white = false } = Astro.props;
+---
+{/* The real wordmark, pulled from the 1000x1000 original upload on shaiomedia.com */}
+<img
+  src={white ? asset("logo-white.webp") : asset("logo.webp")}
+  alt="שיו מדיה"
+  width="668" height="151"
+  class={`w-auto ${cls}`}
+  decoding="async"
+/>

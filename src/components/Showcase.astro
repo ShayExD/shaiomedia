@@ -1,0 +1,179 @@
+---
+import { asset } from "../lib/asset";
+import { projects, verticals } from "../data/site";
+import SectionHead from "./SectionHead.astro";
+const filters = [{ id: "all", label: "הכל" }, ...verticals];
+---
+<section id="work" class="scroll-mt-20 bg-ink-950 px-5 py-24 lg:px-8 lg:py-32">
+  <SectionHead
+    light
+    kicker="הקטלוג"
+    title="אלה לא תמונות. אלה האתרים עצמם."
+    sub="כל מסך כאן נגלל מלמעלה למטה, בדיוק כמו האתר החי. עצרו עם העכבר כדי להסתכל."
+  />
+
+  <div id="sc" data-active="all" class="mx-auto mt-12 max-w-7xl">
+    <div role="tablist" aria-label="סינון לפי תחום" class="flex flex-wrap justify-center gap-2">
+      {filters.map((f) => (
+        <button type="button" role="tab" data-f={f.id} aria-selected={f.id === "all"}
+          class="rounded-full border border-white/12 bg-white/[0.06] px-5 py-2.5 text-[0.9375rem] font-bold text-ink-200 transition-[background-color,color,border-color,transform] duration-200 hover:bg-white/[0.12] hover:text-white active:scale-[0.97] aria-selected:border-transparent aria-selected:bg-white aria-selected:text-ink-900">
+          {f.label}
+        </button>
+      ))}
+    </div>
+
+    <ul id="sc-grid" class="mt-12 grid gap-x-6 gap-y-14 lg:grid-cols-2" role="list">
+      {projects.map((p, i) => (
+        <li data-v={p.vertical} data-reveal style={`--reveal-delay:${(i % 2) * 90}ms`}>
+          <article class="preview group h-full">
+            {/* Browser frame with the real page panning inside */}
+            <div class="relative">
+              <div class="overflow-hidden rounded-xl border border-white/12 bg-ink-900 shadow-[0_28px_70px_-28px_rgb(0_0_0/0.85)]">
+                <div class="flex h-8 items-center gap-1.5 border-b border-white/10 bg-white/[0.06] px-3">
+                  <span class="h-2.5 w-2.5 rounded-full bg-white/25"></span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-white/25"></span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-white/25"></span>
+                  <span class="ltr mx-auto max-w-[60%] truncate rounded bg-black/25 px-3 py-0.5 text-[11px] text-ink-300">
+                    {p.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+                  </span>
+                </div>
+                <div class="frame relative overflow-hidden bg-white">
+                  <img src={asset(`images/sites/${p.slug}-desktop.webp`)} alt={`האתר של ${p.name}`}
+                       width="1000" height="5000" loading="lazy" decoding="async"
+                       class="pan block w-full" style={`--pan-duration:${p.pan ?? 40}s`} />
+                </div>
+              </div>
+
+              {/* Phone tucked into the corner, panning on its own clock */}
+              <div class="absolute -bottom-8 end-4 w-[30%] max-w-[6.5rem] sm:end-7 sm:w-[22%] sm:max-w-[8rem]">
+                <div class="overflow-hidden rounded-[1.3rem] border-[5px] border-ink-800 bg-white shadow-[0_18px_40px_-14px_rgb(0_0_0/0.9)]">
+                  <div class="frame-m relative overflow-hidden bg-white">
+                    <img src={asset(`images/sites/${p.slug}-mobile.webp`)} alt="" aria-hidden="true"
+                         width="300" height="3600" loading="lazy" decoding="async"
+                         class="pan-phone block w-full" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-12 ps-2">
+              <p class="text-xs font-bold text-brand-300">{verticals.find((v) => v.id === p.vertical)?.label}</p>
+              <h3 class="iso mt-1.5 text-2xl !text-white">{p.name}</h3>
+              <p class="mt-1 text-sm text-ink-400">{p.city}</p>
+              <p class="mt-4 max-w-xl text-[1rem] leading-relaxed text-ink-200">{p.brief}</p>
+
+              <p class="mt-6 text-xs font-bold text-ink-400">מה בנינו</p>
+              <ul class="mt-2.5 space-y-2.5">
+                {p.built.map((b) => (
+                  <li class="flex gap-2.5 text-[0.9375rem] leading-snug text-ink-200">
+                    <svg viewBox="0 0 20 20" class="mt-0.5 h-4 w-4 shrink-0 text-brand-400" fill="none" aria-hidden="true">
+                      <path d="m5 10.4 3 3 7-7.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="mt-7 flex flex-wrap gap-3">
+                <a href={p.url} target="_blank" rel="noopener" class="btn bg-white px-6 py-3 text-[0.9375rem] text-ink-900 hover:bg-ink-100">
+                  לאתר החי
+                  <svg viewBox="0 0 16 16" class="h-3.5 w-3.5" fill="none" aria-hidden="true">
+                    <path d="M10 3h3v3M13 3 8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 9.5V13H3V4h3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+                <a href="#contact" class="btn border border-white/20 px-6 py-3 text-[0.9375rem] text-white hover:bg-white/10">רוצה כזה</a>
+              </div>
+            </div>
+          </article>
+        </li>
+      ))}
+    </ul>
+
+    <p id="sc-empty" hidden class="mt-12 text-center text-ink-400">אין עבודות בתחום הזה עדיין.</p>
+
+    <div data-reveal class="mt-16 flex flex-col items-center justify-between gap-5 rounded-[var(--radius-card)] border border-white/12 bg-white/[0.04] p-8 text-center sm:flex-row sm:text-start">
+      <div>
+        <p class="text-xl font-bold text-white">התחום שלכם לא ברשימה?</p>
+        <p class="mt-1.5 text-[0.9375rem] text-ink-300">דלתות גראז׳, אינסטלציה, חשמל, גינון. אותו תהליך בדיוק.</p>
+      </div>
+      <a href="#contact" class="btn btn-primary shrink-0 px-7 py-3.5">דברו איתנו</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* The pan keyframe ends exactly at the image's bottom edge, so the frame
+     height must be a value CSS can read. */
+  .frame   { height: 17rem; --frame-h: 17rem; }
+  .frame-m { height: 8.5rem; --frame-h: 8.5rem; }
+  @media (min-width: 640px)  { .frame { height: 21rem; --frame-h: 21rem; } .frame-m { height: 8.5rem; --frame-h: 8.5rem; } }
+  @media (min-width: 1024px) { .frame { height: 23rem; --frame-h: 23rem; } .frame-m { height: 9.5rem; --frame-h: 9.5rem; } }
+
+  /* Desktop frame: paused unless the card is on screen, and pauses on hover so
+     you can actually read the page. Six tall layers never run at once. */
+  .pan { animation: screen-pan var(--pan-duration, 34s) linear infinite alternate; animation-play-state: paused; }
+  li[data-live] .pan { animation-play-state: running; }
+  .preview:hover .pan, .preview:focus-within .pan { animation-play-state: paused; }
+
+  /* Phone: always running, the whole time the visitor is on the page.
+     content-visibility below means off-screen cards still cost nothing. */
+  .pan-phone { animation: screen-pan 32s linear infinite alternate; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pan, .pan-phone { animation: none; }
+  }
+
+  #sc-grid > li[hidden] { display: none; }
+  #sc-grid > li[data-in] { animation: card-in 320ms var(--ease-out-strong) both; }
+  @keyframes card-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { #sc-grid > li[data-in] { animation: none; } }
+</style>
+
+<script>
+  const root = document.getElementById("sc");
+  if (root) {
+    const grid = document.getElementById("sc-grid")!;
+    const empty = document.getElementById("sc-empty")!;
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>("[data-f]")];
+    // Direct children only — the "מה בנינו" bullets are <li> as well
+    const cards = [...grid.querySelectorAll<HTMLLIElement>(":scope > li")];
+
+    // Run the pan only while a card is on screen
+    const live = new IntersectionObserver((entries) => {
+      for (const e of entries) e.target.toggleAttribute("data-live", e.isIntersecting);
+    }, { rootMargin: "120px 0px" });
+    cards.forEach((c) => live.observe(c));
+
+    function apply(kind: string) {
+      let shown = 0;
+      for (const li of cards) {
+        const match = kind === "all" || li.dataset.v === kind;
+        const wasHidden = li.hidden;
+        li.hidden = !match;
+        if (match) {
+          shown++;
+          if (wasHidden) {
+            li.setAttribute("data-in", "");
+            li.addEventListener("animationend", () => li.removeAttribute("data-in"), { once: true });
+          }
+        }
+      }
+      empty.hidden = shown > 0;
+      root.dataset.active = kind;
+      for (const t of tabs) t.setAttribute("aria-selected", String(t.dataset.f === kind));
+    }
+
+    for (const tab of tabs) {
+      tab.addEventListener("click", () => {
+        const kind = tab.dataset.f!;
+        if (root.dataset.active === kind) return;
+        if (document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.startViewTransition(() => apply(kind));
+        } else {
+          apply(kind);
+        }
+      });
+    }
+  }
+</script>

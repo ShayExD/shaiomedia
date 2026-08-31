@@ -1,0 +1,204 @@
+@import "tailwindcss";
+@import "@fontsource-variable/rubik";
+
+/* ============================================================
+   Shaio Media — light sales page
+   Palette taken from the logo PNG: navy #1C1D46, violet #6F64EA
+   ============================================================ */
+@theme {
+  /* Ink — the logo navy, extended */
+  --color-ink-950: #101128;
+  --color-ink-900: #1C1D46; /* logo navy */
+  --color-ink-800: #2A2C5E;
+  --color-ink-700: #3D4076;
+  --color-ink-600: #565A92;
+  --color-ink-500: #6E72A6;
+  --color-ink-400: #8C90BC;
+  --color-ink-300: #B4B7D4;
+  --color-ink-200: #D8DAE9;
+  --color-ink-100: #EAEBF4;
+  --color-ink-50:  #F5F6FB;
+
+  /* Violet — the logo accent */
+  --color-brand-700: #4A3FD0;
+  --color-brand-600: #5B4FE0;
+  --color-brand-500: #6F64EA; /* logo violet */
+  --color-brand-400: #8B80FF;
+  --color-brand-300: #ADA5FF;
+  --color-brand-200: #D2CDFF;
+  --color-brand-100: #EBE9FF;
+  --color-brand-50:  #F5F4FF;
+
+  /* Signal colors, used sparingly on proof numbers */
+  --color-win-600: #0E9F6E;
+  --color-win-100: #DEF7EC;
+  --color-flame-500: #F2760C;
+  --color-flame-100: #FEF0E3;
+
+  --font-sans: "Rubik Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /* Strong curves; the CSS built-ins are too weak */
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+
+  --radius-card: 18px;
+}
+
+@layer base {
+  :root { color-scheme: light; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    background: #fff;
+    color: var(--color-ink-700);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  /* Hebrew display type wants tight tracking and tight leading as it grows */
+  h1, h2, h3, .display {
+    color: var(--color-ink-900);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+  }
+  h4, h5, h6 { color: var(--color-ink-900); font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
+  p { line-height: 1.7; }
+
+  ::selection { background: var(--color-brand-200); color: var(--color-ink-900); }
+
+  :focus-visible {
+    outline: 3px solid var(--color-brand-500);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  /* Latin runs and numbers stay LTR inside Hebrew copy */
+  /* Flips direction — for URLs and standalone Latin blocks */
+  .ltr { direction: ltr; unicode-bidi: isolate; }
+  /* Isolates a Latin run WITHOUT changing alignment — for names inside RTL copy */
+  .iso { unicode-bidi: isolate; }
+  .num { direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+}
+
+/* ============================================================
+   Components
+   ============================================================ */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    font-weight: 700;
+    line-height: 1;
+    transition: background-color 200ms var(--ease-out-strong),
+                color 200ms var(--ease-out-strong),
+                border-color 200ms var(--ease-out-strong),
+                transform 150ms var(--ease-out-strong),
+                box-shadow 200ms var(--ease-out-strong);
+  }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-primary {
+    background: var(--color-brand-500);
+    color: #fff;
+    box-shadow: 0 10px 30px -10px rgb(111 100 234 / 0.75);
+  }
+  .btn-primary:hover { background: var(--color-brand-600); }
+
+  .btn-dark { background: var(--color-ink-900); color: #fff; }
+  .btn-dark:hover { background: var(--color-ink-800); }
+
+  .btn-ghost {
+    background: #fff;
+    color: var(--color-ink-900);
+    border: 1.5px solid var(--color-ink-200);
+  }
+  .btn-ghost:hover { border-color: var(--color-ink-900); }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--color-ink-100);
+    border-radius: var(--radius-card);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    background: var(--color-brand-50);
+    border: 1px solid var(--color-brand-100);
+    color: var(--color-brand-600);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 0.4rem 0.9rem;
+  }
+
+  /* Reveal is gated on .js so a blocked script never leaves the page blank */
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 640ms var(--ease-out-strong), transform 640ms var(--ease-out-strong);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .js [data-reveal].is-in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js [data-reveal] { transform: none; transition: opacity 240ms ease; }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lift { transition: transform 260ms var(--ease-out-strong), box-shadow 260ms var(--ease-out-strong); }
+  .lift:hover { transform: translateY(-4px); box-shadow: 0 22px 50px -24px rgb(28 29 70 / 0.32); }
+}
+
+/* ============================================================
+   Site preview frames — the full screenshot scrolls inside
+   ============================================================ */
+@keyframes screen-pan {
+  from { transform: translateY(0); }
+  /* 100% is the image's own height, so this lands exactly at its bottom edge */
+  to   { transform: translateY(calc(-100% + var(--frame-h))); }
+}
+
+/* Logo marquee */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track { animation: marquee 42s linear infinite; }
+/* Second row travels the other way so the two don't read as one block */
+.marquee-rev { animation-direction: reverse; animation-duration: 36s; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .marquee { overflow-x: auto; }
+}
+
+/* Horizontal snap rails */
+@utility rail {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.rail::-webkit-scrollbar { display: none; }
+.rail > * { scroll-snap-align: center; flex: none; }
+
+/* Long-form copy */
+@layer components {
+  .prose-shaio h2 { font-size: 1.375rem; margin-bottom: 0.6rem; }
+  .prose-shaio p, .prose-shaio li { font-size: 1rem; line-height: 1.75; color: var(--color-ink-600); }
+  .prose-shaio ul { list-style: disc; padding-inline-start: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .prose-shaio a { color: var(--color-brand-600); text-decoration: underline; text-underline-offset: 3px; }
+}

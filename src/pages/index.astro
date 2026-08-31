@@ -1,0 +1,48 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import Showcase from "../components/Showcase.astro";
+import Includes from "../components/Includes.astro";
+import Edge from "../components/Edge.astro";
+import Process from "../components/Process.astro";
+import Faq from "../components/Faq.astro";
+import Contact from "../components/Contact.astro";
+import { faq, site, projects } from "../data/site";
+
+const schema = [
+  {
+    "@type": "FAQPage",
+    "@id": `${site.url}/#faq`,
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@type": "ItemList",
+    "@id": `${site.url}/#work`,
+    name: "אתרים שבנינו לעסקי שירות",
+    itemListElement: projects.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: p.name,
+      url: p.url,
+    })),
+  },
+];
+---
+<Base
+  title="בניית אתרים וקידום אורגני לעסקי שירות בארצות הברית | שיו מדיה"
+  description="בונים אתרים ומקדמים אורגנית קבלנים, גגנים, מנקי ארובות ומנעולנים בארצות הברית. תיכנסו לקטלוג וראו אתרים אמיתיים שבנינו."
+  path="/"
+  schema={schema}
+>
+  <Hero />
+  <Showcase />
+  <Includes />
+  <Edge />
+  <Process />
+  <Faq />
+  <Contact />
+</Base>

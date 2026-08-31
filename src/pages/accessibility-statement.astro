@@ -1,0 +1,36 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+---
+<Base title={`הצהרת נגישות | ${site.nameHe}`} description="הצהרת הנגישות של אתר שיו מדיה והדרכים ליצירת קשר בנושא." path="/accessibility-statement">
+  <article class="mx-auto max-w-3xl px-5 pt-32 pb-24 lg:px-8 lg:pt-40">
+    <h1 class="text-[clamp(2rem,5vw,3.25rem)] font-extrabold text-white">הצהרת נגישות</h1>
+    <p class="mt-4 text-sm text-mist-500">עודכן לאחרונה: <span class="num">30.08.2026</span></p>
+
+    <div class="prose-shaio mt-10 space-y-8">
+      <section>
+        <h2>המחויבות שלנו</h2>
+        <p>אנחנו רואים חשיבות בכך שהאתר יהיה שמיש עבור כל אדם, לרבות אנשים עם מוגבלות. האתר נבנה מתוך כוונה לעמוד בהנחיות <span class="latin">WCAG 2.2</span> ברמה <span class="latin">AA</span>.</p>
+      </section>
+      <section>
+        <h2>מה יושם באתר</h2>
+        <ul>
+          <li>מבנה כותרות היררכי ותקין וסימון אזורי עמוד</li>
+          <li>ניווט מלא באמצעות מקלדת, כולל סימון מיקוד ברור וקישור דילוג לתוכן</li>
+          <li>טקסט חלופי לתמונות שנושאות מידע</li>
+          <li>ניגודיות צבעים העומדת בתקן</li>
+          <li>כיבוד העדפת המערכת להפחתת תנועה, לשקיפות מופחתת ולניגודיות מוגברת</li>
+          <li>שדות טופס מתויגים והודעות שגיאה מוקראות</li>
+        </ul>
+      </section>
+      <section>
+        <h2>מגבלות ידועות</h2>
+        <p>ייתכן שתכנים המוטמעים מצדדים שלישיים אינם נגישים במלואם, שכן אין לנו שליטה מלאה עליהם. אנחנו פועלים לצמצם זאת.</p>
+      </section>
+      <section>
+        <h2>יצירת קשר בנושא נגישות</h2>
+        <p>נתקלתם בבעיה? נשמח לדעת ולתקן. אפשר לפנות במייל <a href={`mailto:${site.email}`} class="latin">{site.email}</a> או בטלפון <a href={`tel:${site.phone}`} class="num">{site.phoneDisplay}</a>.</p>
+      </section>
+    </div>
+  </article>
+</Base>
