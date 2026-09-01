@@ -4,6 +4,7 @@ import "../styles/global.css";
 import { site } from "../data/site";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import LandingChrome from "../components/LandingChrome.astro";
 
 interface Props {
   title: string;
@@ -12,6 +13,8 @@ interface Props {
   path?: string;
   ogImage?: string;
   noindex?: boolean;
+  /** "landing" renders standalone chrome with no route to the rest of the site. */
+  chrome?: "site" | "landing";
   /** Extra JSON-LD graph nodes for this page. */
   schema?: Record<string, unknown>[];
 }
@@ -22,6 +25,7 @@ const {
   path = "",
   ogImage = "/og/default.jpg",
   noindex = false,
+  chrome = "site",
   schema = [],
 } = Astro.props;
 
@@ -124,11 +128,11 @@ const jsonLd = { "@context": "https://schema.org", "@graph": graph };
       >דילוג לתוכן</a
     >
 
-    <Nav />
+    {chrome === "landing" ? <LandingChrome part="header" /> : <Nav />}
     <main id="main">
       <slot />
     </main>
-    <Footer />
+    {chrome === "landing" ? <LandingChrome part="footer" /> : <Footer />}
 
     <script>
       const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;

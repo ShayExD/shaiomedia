@@ -305,8 +305,8 @@ export const faq = [
 ];
 
 export const nav = [
-  { label: "עבודות", href: "/#work" },
-  { label: "מה כלול", href: "/#includes" },
-  { label: "קמפיינים במטא", href: "/meta" },
-  { label: "קמפיינים בגוגל", href: "/google-ads" },
+  { label: "עבודות", href: "#work" },
+  { label: "מה כלול", href: "#includes" },
+  { label: "תהליך", href: "#process" },
+  { label: "שאלות", href: "#faq" },
 ];

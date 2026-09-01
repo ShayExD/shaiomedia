@@ -31,17 +31,10 @@ const schema = [
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
   },
-  {
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "דף הבית", item: origin },
-      { "@type": "ListItem", position: 2, name: c.title, item: `${origin}/${c.slug}` },
-    ],
-  },
 ];
 ---
 
-<Base title={c.metaTitle} description={c.metaDescription} path={`/${c.slug}`} schema={schema}>
+<Base title={c.metaTitle} description={c.metaDescription} path={`/${c.slug}`} chrome="landing" schema={schema}>
   {/* Hero */}
   <section class="relative overflow-hidden px-5 pt-32 pb-32 lg:px-8 lg:pt-40 lg:pb-40">
     <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
@@ -52,12 +45,6 @@ const schema = [
     </div>
 
     <div class="mx-auto max-w-4xl text-center">
-      <nav aria-label="מסלול ניווט" class="mb-8 text-sm text-ink-400">
-        <a href="/" class="transition-colors hover:text-white">דף הבית</a>
-        <span class="mx-2" aria-hidden="true">/</span>
-        <span class="text-ink-200">{c.title}</span>
-      </nav>
-
       <p class="eyebrow !text-brand-300">{c.kicker}</p>
 
       <h1 class="mx-auto mt-6 max-w-4xl text-balance text-[clamp(2rem,4.8vw,3.6rem)] !text-white">
