@@ -1,0 +1,150 @@
+---
+import Base from "../layouts/Base.astro";
+import SectionHead from "../components/SectionHead.astro";
+import Faq from "../components/Faq.astro";
+import Contact from "../components/Contact.astro";
+import { campaigns } from "../data/campaigns";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (() =>
+  campaigns.map((c) => ({ params: { campaign: c.slug }, props: { c } }))) satisfies GetStaticPaths;
+
+const { c } = Astro.props;
+const origin = Astro.site?.origin.replace(/\/$/, "") ?? "";
+const others = campaigns.filter((o) => o.slug !== c.slug);
+
+const schema = [
+  {
+    "@type": "Service",
+    "@id": `${origin}/${c.slug}#service`,
+    name: c.title,
+    description: c.metaDescription,
+    provider: { "@id": `${origin}/#org` },
+    areaServed: { "@type": "Country", name: "ישראל" },
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${origin}/${c.slug}#faq`,
+    mainEntity: c.faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "דף הבית", item: origin },
+      { "@type": "ListItem", position: 2, name: c.title, item: `${origin}/${c.slug}` },
+    ],
+  },
+];
+---
+
+<Base title={c.metaTitle} description={c.metaDescription} path={`/${c.slug}`} schema={schema}>
+  {/* Hero */}
+  <section class="relative overflow-hidden px-5 pt-32 pb-32 lg:px-8 lg:pt-40 lg:pb-40">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <div class="absolute inset-0 bg-ink-950"></div>
+      <div class="absolute -top-1/3 start-1/2 h-[46rem] w-[46rem] -translate-x-1/2 rounded-full opacity-70"
+           style="background:radial-gradient(circle, rgb(46 111 184/0.22) 0%, rgb(27 79 138/0.07) 46%, transparent 70%)"></div>
+      <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-paper"></div>
+    </div>
+
+    <div class="mx-auto max-w-4xl text-center">
+      <nav aria-label="מסלול ניווט" class="mb-8 text-sm text-ink-400">
+        <a href="/" class="transition-colors hover:text-white">דף הבית</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <span class="text-ink-200">{c.title}</span>
+      </nav>
+
+      <p class="eyebrow !text-brand-300">{c.kicker}</p>
+
+      <h1 class="mx-auto mt-6 max-w-4xl text-balance text-[clamp(2rem,4.8vw,3.6rem)] !text-white">
+        <span class="rise" data-rise><span>{c.h1}</span></span>
+        <span class="rise mt-1 !text-brand-300" data-rise style="--rise-delay:120ms"><span>{c.h1Accent}</span></span>
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-balance text-[1.0625rem] leading-relaxed text-ink-300 sm:text-[1.1875rem]">
+        {c.lede}
+      </p>
+
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="#contact" class="btn btn-accent w-full px-8 py-4 text-[1.0625rem] sm:w-auto">קבעו שיחת ייעוץ חינם</a>
+        <a href="#doing" class="btn btn-glass w-full px-8 py-4 text-[1.0625rem] sm:w-auto">מה בדיוק עושים</a>
+      </div>
+      <p class="mt-4 text-sm text-ink-400">שיחה של 20 דקות. אם זה לא מתאים לכם, נגיד לכם.</p>
+    </div>
+  </section>
+
+  {/* The actual work */}
+  <section id="doing" class="scroll-mt-20 px-5 py-24 lg:px-8 lg:py-32">
+    <SectionHead kicker="מה עושים" title="העבודה עצמה, בלי כותרות" />
+    <div class="mx-auto mt-14 grid max-w-6xl gap-5 lg:grid-cols-3">
+      {c.doing.map((g, i) => (
+        <div data-reveal style={`--reveal-delay:${i * 90}ms`} class="card lift flex flex-col p-8">
+          <h3 class="text-xl">{g.title}</h3>
+          <ul class="mt-5 flex-1 space-y-3.5">
+            {g.items.map((it) => (
+              <li class="flex gap-3 text-[0.9375rem] leading-snug text-ink-600">
+                <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-100">
+                  <svg viewBox="0 0 20 20" class="h-3 w-3 text-brand-600" fill="none" aria-hidden="true">
+                    <path d="m5 10.4 3 3 7-7.2" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>{it}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* Why us */}
+  <section data-rise class="sheen lit bg-ink-900 px-5 py-24 lg:px-8 lg:py-32">
+    <SectionHead light kicker="למה אנחנו" title="מה שבאמת עושה את ההבדל" />
+    <div class="mx-auto mt-14 grid max-w-5xl gap-5 md:grid-cols-2">
+      {c.edge.map((e, i) => (
+        <div data-reveal style={`--reveal-delay:${i * 80}ms`}
+             class="rounded-[var(--radius-card)] border border-white/10 bg-white/[0.035] p-8">
+          <h3 class="text-xl !text-white">{e.title}</h3>
+          <p class="mt-3 text-[0.9375rem] leading-relaxed text-ink-300">{e.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* Process */}
+  <section class="px-5 py-24 lg:px-8 lg:py-32">
+    <SectionHead kicker="תהליך" title="איך זה מתחיל" />
+    <ol class="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-2 lg:grid-cols-4">
+      {c.process.map((p, i) => (
+        <li data-reveal style={`--reveal-delay:${i * 70}ms`}>
+          <div class="card h-full p-7">
+            <span class="num text-4xl font-extrabold text-brand-200">{p.n}</span>
+            <h3 class="mt-2 text-xl">{p.title}</h3>
+            <p class="mt-2.5 text-[0.9375rem] leading-relaxed text-ink-600">{p.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div data-reveal class="mx-auto mt-12 max-w-6xl">
+      <div class="flex flex-col items-center justify-between gap-5 rounded-[var(--radius-card)] border border-ink-200 bg-white p-8 text-center sm:flex-row sm:text-start">
+        <div>
+          <p class="text-xl font-bold text-ink-900">מחפשים גם את השני?</p>
+          <p class="mt-1.5 text-[0.9375rem] text-ink-600">
+            {others.map((o, i) => (
+              <>{i > 0 && " · "}<a href={`/${o.slug}`} class="font-bold text-brand-600 underline underline-offset-4">{o.title}</a></>
+            ))}
+          </p>
+        </div>
+        <a href="#contact" class="btn btn-primary shrink-0 px-7 py-3.5">דברו איתנו</a>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={c.faq} title="שאלות שחוזרות" />
+  <Contact />
+</Base>

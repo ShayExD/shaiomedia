@@ -1,11 +1,17 @@
 ---
-import { faq } from "../data/site";
+import { faq as defaultFaq } from "../data/site";
 import SectionHead from "./SectionHead.astro";
+
+interface Props {
+  items?: { q: string; a: string }[];
+  title?: string;
+}
+const { items = defaultFaq, title = "מה שבדרך כלל שואלים אותנו" } = Astro.props;
 ---
 <section id="faq" class="scroll-mt-20 px-5 py-24 lg:px-8 lg:py-32">
-  <SectionHead kicker="שאלות" title="מה שבדרך כלל שואלים אותנו" />
+  <SectionHead kicker="שאלות" title={title} />
   <div class="mx-auto mt-12 max-w-3xl divide-y divide-ink-100 border-y border-ink-100">
-    {faq.map((f, i) => (
+    {items.map((f, i) => (
       <details data-reveal style={`--reveal-delay:${i * 50}ms`} class="faq group">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-start">
           <h3 class="text-[1.0625rem] sm:text-lg">{f.q}</h3>
