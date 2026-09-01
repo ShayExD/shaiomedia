@@ -7,12 +7,14 @@ import Edge from "../components/Edge.astro";
 import Process from "../components/Process.astro";
 import Faq from "../components/Faq.astro";
 import Contact from "../components/Contact.astro";
-import { faq, site, projects } from "../data/site";
+import { faq, projects } from "../data/site";
+
+const origin = Astro.site?.origin.replace(/\/$/, "") ?? "";
 
 const schema = [
   {
     "@type": "FAQPage",
-    "@id": `${site.url}/#faq`,
+    "@id": `${origin}/#faq`,
     mainEntity: faq.map((f) => ({
       "@type": "Question",
       name: f.q,
@@ -21,7 +23,7 @@ const schema = [
   },
   {
     "@type": "ItemList",
-    "@id": `${site.url}/#work`,
+    "@id": `${origin}/#work`,
     name: "אתרים שבנינו לעסקי שירות",
     itemListElement: projects.map((p, i) => ({
       "@type": "ListItem",

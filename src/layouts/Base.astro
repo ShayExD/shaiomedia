@@ -25,22 +25,26 @@ const {
   schema = [],
 } = Astro.props;
 
-const canonical = new URL(path || "/", site.url).href.replace(/\/$/, "") || site.url;
-const ogUrl = new URL(ogImage, site.url).href;
+/* Origin comes from the build (astro.config `site`), never from a constant.
+   A hardcoded origin here would make every page on a subdomain declare itself
+   a duplicate of the main domain. */
+const origin = (Astro.site?.origin ?? site.url).replace(/\/$/, "");
+const canonical = new URL(path || "/", origin).href.replace(/\/$/, "") || origin;
+const ogUrl = new URL(ogImage, origin).href;
 
 /* Organization + WebSite are global; pages append their own nodes. */
 const graph = [
   {
     "@type": "ProfessionalService",
-    "@id": `${site.url}/#org`,
+    "@id": `${origin}/#org`,
     name: site.nameHe,
     alternateName: site.name,
-    url: site.url,
+    url: origin,
     description: site.description,
     email: site.email,
     telephone: site.phone,
-    image: `${site.url}/og/default.jpg`,
-    logo: { "@type": "ImageObject", url: `${site.url}/logo.png` },
+    image: `${origin}/og/default.jpg`,
+    logo: { "@type": "ImageObject", url: `${origin}/logo.png` },
     areaServed: { "@type": "Country", name: "ישראל" },
     knowsLanguage: ["he", "en"],
     priceRange: "$$",
@@ -60,11 +64,11 @@ const graph = [
   },
   {
     "@type": "WebSite",
-    "@id": `${site.url}/#website`,
-    url: site.url,
+    "@id": `${origin}/#website`,
+    url: origin,
     name: site.nameHe,
     inLanguage: "he-IL",
-    publisher: { "@id": `${site.url}/#org` },
+    publisher: { "@id": `${origin}/#org` },
   },
   ...schema,
 ];

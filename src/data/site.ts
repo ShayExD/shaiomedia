@@ -10,7 +10,7 @@
 export const site = {
   name: "Shaio Media",
   nameHe: "שיו מדיה",
-  url: "https://shaiomedia.com",
+  url: "https://service.shaiomedia.com",
   phone: "+972542192619",
   phoneDisplay: "054-219-2619",
   email: "contact@shaiomedia.com",

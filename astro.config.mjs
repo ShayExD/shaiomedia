@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // A GitHub Pages preview serves from /<repo>/ and must not be indexed;
 // production ships to the domain root. Both come from env so the source is one build.
-const SITE = process.env.SITE_URL ?? 'https://shaiomedia.com';
+const SITE = process.env.SITE_URL ?? 'https://service.shaiomedia.com';
 const BASE = process.env.BASE_PATH ?? '/';
 
 export default defineConfig({

@@ -1,11 +1,15 @@
-name = "shaiomedia"
-compatibility_date = "2026-08-30"
+name = "shaiomedia-service"
+compatibility_date = "2026-09-01"
 pages_build_output_dir = "dist"
 
-# Set real values in the Pages dashboard (Settings → Environment variables),
-# or with: wrangler pages secret put <NAME> --project-name=shaiomedia
-# LEAD_TO           contact@shaiomedia.com
-# LEAD_FROM         site@shaiomedia.com      (must be on a domain you control)
-# RESEND_API_KEY    optional
-# CRM_WEBHOOK_URL   optional
-# CRM_WEBHOOK_TOKEN optional
+# Secrets are NOT set here. Put them in the Pages dashboard under
+# Settings -> Variables and Secrets, or with:
+#   npx wrangler pages secret put <NAME> --project-name=shaiomedia-service
+#
+#   LEAD_TO            contact@shaiomedia.com
+#   LEAD_FROM          site@shaiomedia.com          (must be a domain you control)
+#   ALLOWED_ORIGIN     https://service.shaiomedia.com
+#   RESEND_API_KEY     optional
+#   TURNSTILE_SECRET   optional, pairs with PUBLIC_TURNSTILE_KEY at build time
+#   CRM_WEBHOOK_URL    optional
+#   CRM_WEBHOOK_TOKEN  optional
