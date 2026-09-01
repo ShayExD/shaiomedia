@@ -11,8 +11,9 @@ export const site = {
   name: "Shaio Media",
   nameHe: "שיו מדיה",
   url: "https://service.shaiomedia.com",
-  phone: "+972542192619",
-  phoneDisplay: "054-219-2619",
+  /* No phone entry point on the site: leads come in by WhatsApp or the form.
+     The number below is only used to build a prefilled wa.me link. */
+  whatsappNumber: "972542192619",
   email: "contact@shaiomedia.com",
   whatsapp: "https://wa.link/h5ltox",
   description:

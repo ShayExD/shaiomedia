@@ -10,7 +10,6 @@ const year = new Date().getFullYear();
         <Logo class="h-8" />
         <p class="mt-5 text-[0.9375rem] leading-relaxed text-ink-600">{site.description}</p>
         <div class="mt-6 flex flex-wrap gap-2.5">
-          <a href={`tel:${site.phone}`} class="num btn btn-ghost px-4 py-2 text-sm">{site.phoneDisplay}</a>
           <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-ghost px-4 py-2 text-sm">וואטסאפ</a>
           <a href={`mailto:${site.email}`} class="iso btn btn-ghost px-4 py-2 text-sm">{site.email}</a>
         </div>
@@ -42,7 +41,7 @@ const year = new Date().getFullYear();
 </footer>
 
 <div class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-ink-100 bg-white/95 p-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] backdrop-blur-lg sm:hidden">
-  <a href={`tel:${site.phone}`} class="btn btn-ghost py-3 text-[0.9375rem]">התקשרו</a>
+  <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-ghost py-3 text-[0.9375rem]">וואטסאפ</a>
   <a href="#contact" class="btn btn-primary py-3 text-[0.9375rem]">רוצה אתר כזה</a>
 </div>
 <div class="h-16 sm:hidden" aria-hidden="true"></div>

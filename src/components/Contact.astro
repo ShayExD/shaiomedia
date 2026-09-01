@@ -4,6 +4,7 @@ import { site, verticals } from "../data/site";
 /* Set PUBLIC_TURNSTILE_KEY to switch on Cloudflare's bot check. Without it the
    form still works and the server simply does not require a token. */
 const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_KEY;
+const waBase = `https://wa.me/${site.whatsappNumber}?text=`;
 ---
 <section id="contact" data-rise class="sheen lit scroll-mt-20 bg-ink-950 px-5 py-24 lg:px-8 lg:py-32">
   <div class="mx-auto max-w-5xl">
@@ -19,14 +20,6 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_KEY;
         </p>
 
         <ul data-reveal style="--reveal-delay:180ms" class="mt-9 space-y-4">
-          <li>
-            <a href={`tel:${site.phone}`} class="group flex items-center gap-4">
-              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/10 transition-colors group-hover:bg-brand-500">
-                <svg viewBox="0 0 24 24" class="h-5 w-5 text-white" fill="none" aria-hidden="true"><path d="M2.5 5.5c0-1.1.9-2 2-2h2.2c.9 0 1.6.6 1.8 1.4l.8 3c.2.7-.1 1.5-.7 1.9l-1.4 1a13 13 0 0 0 6 6l1-1.4c.4-.6 1.2-.9 1.9-.7l3 .8c.8.2 1.4 1 1.4 1.8v2.2c0 1.1-.9 2-2 2h-1C9.6 21.5 2.5 14.4 2.5 6.5v-1Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
-              </span>
-              <span><span class="block text-xs text-ink-400">טלפון</span><span class="num block font-bold text-white">{site.phoneDisplay}</span></span>
-            </a>
-          </li>
           <li>
             <a href={site.whatsapp} target="_blank" rel="noopener" class="group flex items-center gap-4">
               <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/10 transition-colors group-hover:bg-[#25D366]">
@@ -46,7 +39,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_KEY;
         </ul>
       </div>
 
-      <form id="lead-form" method="POST" action="/api/lead" novalidate autocomplete="on" data-reveal style="--reveal-delay:100ms"
+      <form id="lead-form" method="POST" action="/api/lead" novalidate autocomplete="on" data-wa={waBase} data-reveal style="--reveal-delay:100ms"
             class="relative rounded-3xl bg-white p-6 sm:p-8">
         {/* Honeypot. Two things matter here beyond hiding it:
             the name must not look like a real field, or password managers
@@ -222,7 +215,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_KEY;
       status.textContent = "פותח וואטסאפ עם הפרטים...";
       status.className = "min-h-5 text-center text-sm font-semibold text-ink-600";
 
-      const wa = "https://wa.me/972542192619?text=" + encodeURIComponent(lines.join("\n"));
+      const wa = (form.dataset.wa ?? "") + encodeURIComponent(lines.join("\n"));
       const win = window.open(wa, "_blank", "noopener");
       if (!win) {
         status.textContent = "";
