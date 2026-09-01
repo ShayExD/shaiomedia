@@ -46,12 +46,19 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_KEY;
         </ul>
       </div>
 
-      <form id="lead-form" method="POST" action="/api/lead" novalidate data-reveal style="--reveal-delay:100ms"
+      <form id="lead-form" method="POST" action="/api/lead" novalidate autocomplete="on" data-reveal style="--reveal-delay:100ms"
             class="relative rounded-3xl bg-white p-6 sm:p-8">
-        {/* Honeypot. Hidden with the clip technique, NOT an off-canvas offset —
-            a -9999px absolute child blows out the containing block in RTL. */}
+        {/* Honeypot. Two things matter here beyond hiding it:
+            the name must not look like a real field, or password managers
+            autofill it and the submission gets treated as a bot; and readonly
+            stops browser autofill outright while a script setting .value still
+            trips it. Hidden with the clip technique, not an off-canvas offset,
+            because a -9999px child blows out the containing block in RTL. */}
         <div class="hp" aria-hidden="true">
-          <label>אל תמלאו שדה זה<input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
+          <label>
+            אל תמלאו שדה זה
+            <input type="text" name="hp_field" tabindex="-1" autocomplete="off" readonly />
+          </label>
         </div>
 
         <div class="grid gap-4 sm:grid-cols-2">

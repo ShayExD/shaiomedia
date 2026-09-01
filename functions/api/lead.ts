@@ -53,12 +53,28 @@ const clean = (v: unknown, max: number): string =>
   typeof v === "string" ? v.replace(CTRL, " ").trim().slice(0, max) : "";
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
-  // 1. Only accept the form from our own origin, so a script elsewhere cannot
+  // 1. Only accept the form from our own origins, so a script elsewhere cannot
   //    simply POST in a loop and flood the inbox.
-  const allowed = env.ALLOWED_ORIGIN;
-  if (allowed) {
-    const origin = request.headers.get("origin");
-    if (origin && origin !== allowed) return json({ error: "bad_origin" }, 403);
+  //
+  //    Cloudflare Pages always serves the project on <project>.pages.dev and on
+  //    a per-deployment subdomain as well as the custom domain, so pinning a
+  //    single origin silently rejects legitimate traffic. ALLOWED_ORIGIN takes
+  //    a comma separated list, and any *.pages.dev host is accepted too.
+  const origin = request.headers.get("origin");
+  if (origin) {
+    const list = (env.ALLOWED_ORIGIN ?? "")
+      .split(",")
+      .map((o) => o.trim().replace(/\/$/, ""))
+      .filter(Boolean);
+    let ok = list.length === 0 || list.includes(origin.replace(/\/$/, ""));
+    if (!ok) {
+      try {
+        ok = new URL(origin).hostname.endsWith(".pages.dev");
+      } catch {
+        ok = false;
+      }
+    }
+    if (!ok) return json({ error: "bad_origin" }, 403);
   }
 
   // 2. Refuse oversized bodies before parsing them.
@@ -76,8 +92,12 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   }
   if (typeof lead !== "object" || lead === null) return json({ error: "bad_json" }, 400);
 
-  // 3. Honeypot. Answer 200 so a bot learns nothing from the response.
-  if (clean(lead.company_website, 200)) return json({ ok: true });
+  // 3. Honeypot. Deliberately NOT a silent drop: browser autofill has already
+  //    tripped this once, and quietly discarding a real lead while telling the
+  //    visitor "received" is the worst failure this form can have. Suspicious
+  //    submissions are delivered with a marked subject instead, so the cost of
+  //    a false positive is a little noise rather than a lost customer.
+  const suspicious = Boolean(clean(lead.hp_field, 200) || clean(lead.company_website, 200));
 
   const name = clean(lead.name, LIMITS.name);
   const email = clean(lead.email, LIMITS.email);
@@ -140,7 +160,9 @@ ${rows.map(([k, v]) => `<tr><td style="border:1px solid #e5e5ef;background:#fafa
 </table></div>`;
 
   // Already control-stripped, so this cannot carry a newline into a header.
-  const subject = `ליד חדש: ${name}${service ? ` - ${service}` : ""}`;
+  const subject = suspicious
+    ? `[ייתכן ספאם] ליד חדש: ${name}${service ? ` - ${service}` : ""}`
+    : `ליד חדש: ${name}${service ? ` - ${service}` : ""}`;
 
   let emailOk = false;
   try {
@@ -170,7 +192,7 @@ ${rows.map(([k, v]) => `<tr><td style="border:1px solid #e5e5ef;background:#fafa
   }
 
   let crmOk: boolean | null = null;
-  if (env.CRM_WEBHOOK_URL) {
+  if (env.CRM_WEBHOOK_URL && !suspicious) {
     try {
       const r = await fetch(env.CRM_WEBHOOK_URL, {
         method: "POST",
