@@ -118,36 +118,25 @@ Pages Functions לא שומרות מצב, אז הגבלת קצב אמיתית נ
 
 ---
 
-## מצב המייל (עודכן 01.09.2026)
+## מצב המייל
 
-**עובד**, אבל בהגדרה זמנית:
+**מחובר ועובד.** Resend שולח, הדומיין `shaiomedia.com` מאומת.
 
-| משתנה | ערך נוכחי | למה |
-|---|---|---|
-| `RESEND_API_KEY` | מוגדר | הטוקן מוגבל לשליחה בלבד, וזו הגדרה נכונה |
-| `LEAD_FROM` | `onboarding@resend.dev` | אין עדיין דומיין מאומת ב-Resend |
-| `LEAD_TO` | `info@shaiomedia.com` | שולח הבדיקה של Resend מורשה לשלוח רק לבעל החשבון |
+| משתנה | ערך |
+|---|---|
+| `RESEND_API_KEY` | מוגדר (טוקן שליחה בלבד) |
+| `LEAD_FROM` | `leads@shaiomedia.com` |
+| `LEAD_TO` | `contact@shaiomedia.com` |
 
-### כדי לעבור ל-contact@shaiomedia.com
+`reply_to` נקבע אוטומטית לכתובת של הפונה, אז לחיצה על "השב" פותחת מייל אליו.
 
-צריך דומיין מאומת אחד. **תאמת תת-דומיין, לא את הדומיין הראשי.**
+### נקודה אחת לשיפור מסירה
 
-הסיבה: ל-`shaiomedia.com` יש דואר חי (`MX mail.shaiomedia.com`) ו-SPF
-`v=spf1 a mx ~all`. אימות הדומיין הראשי דורש נגיעה ב-SPF של דומיין שמטפל
-בדואר האמיתי שלך. תת-דומיין מבודד לחלוטין ואפס סיכון לדואר הקיים.
+ה-SPF של הדומיין הוא `v=spf1 a mx ~all` והוא **לא כולל את Resend**.
+המיילים כן מגיעים, כי DKIM חתום ותקין ו-DMARC מיושר דרכו, אבל חלק
+מהשרתים מסתכלים גם על SPF.
 
-1. **resend.com/domains → Add Domain →** `service.shaiomedia.com`
-2. Resend ייתן שלוש רשומות. תוסיף אותן בפאנל של servers24
-3. לחץ **Verify**
-4. אז מריצים:
-
-```bash
-cd ~/shaiomedia
-set -a && . ./.cfenv && set +a
-W=./node_modules/.bin/wrangler
-printf "noreply@service.shaiomedia.com" | $W pages secret put LEAD_FROM --project-name=shaiomedia-service
-printf "contact@shaiomedia.com"          | $W pages secret put LEAD_TO   --project-name=shaiomedia-service
-npm run deploy
-```
-
-מרגע שדומיין אחד מאומת, אפשר לשלוח לכל כתובת, כולל `contact@shaiomedia.com`.
+Resend משתמש ב-`send.shaiomedia.com` כנתיב חזרה, ושם ה-SPF שלהם כבר קיים.
+זה מספיק לרוב המקרים. אם תראה מיילים נופלים לספאם, שווה להוסיף לרשומת
+ה-SPF הראשית את ה-include ש-Resend נותנים בפאנל שלהם. **אל תשנה את ה-SPF
+בלי לגבות אותו קודם** — הוא משרת גם את הדואר הרגיל שלך דרך `mail.shaiomedia.com`.
