@@ -164,13 +164,18 @@ ${rows.map(([k, v]) => `<tr><td style="border:1px solid #e5e5ef;background:#fafa
     ? `[ייתכן ספאם] ליד חדש: ${name}${service ? ` - ${service}` : ""}`
     : `ליד חדש: ${name}${service ? ` - ${service}` : ""}`;
 
+  const recipients = (env.LEAD_TO ?? "")
+    .split(",")
+    .map((a) => a.trim())
+    .filter(Boolean);
+
   let emailOk = false;
   try {
     if (env.RESEND_API_KEY) {
       const r = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, "content-type": "application/json" },
-        body: JSON.stringify({ from: env.LEAD_FROM, to: [env.LEAD_TO], reply_to: email, subject, html }),
+        body: JSON.stringify({ from: env.LEAD_FROM, to: recipients, reply_to: email, subject, html }),
       });
       emailOk = r.ok;
     } else {
@@ -178,7 +183,7 @@ ${rows.map(([k, v]) => `<tr><td style="border:1px solid #e5e5ef;background:#fafa
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          personalizations: [{ to: [{ email: env.LEAD_TO }] }],
+          personalizations: [{ to: recipients.map((a) => ({ email: a })) }],
           from: { email: env.LEAD_FROM, name: "shaiomedia" },
           reply_to: { email, name },
           subject,
