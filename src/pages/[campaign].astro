@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import SectionHead from "../components/SectionHead.astro";
 import Faq from "../components/Faq.astro";
+import Proof from "../components/Proof.astro";
 import Contact from "../components/Contact.astro";
 import { campaigns } from "../data/campaigns";
 import type { GetStaticPaths } from "astro";
@@ -131,6 +132,8 @@ const schema = [
       </div>
     </div>
   </section>
+
+  <Proof proof={c.proof} />
 
   <Faq items={c.faq} title="שאלות שחוזרות" />
   <Contact />

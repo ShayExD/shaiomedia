@@ -1,0 +1,58 @@
+---
+/**
+ * A redacted account export beside the figures it contains.
+ *
+ * The screenshots are wide table rows: at 360px they would be six pixels tall
+ * and unreadable, so the stats carry the meaning and the image sits in its own
+ * horizontal scroller at a legible minimum width. The image is evidence for
+ * the numbers, not the way they are read.
+ */
+import { asset } from "../lib/asset";
+
+interface Props {
+  proof: {
+    kicker: string;
+    title: string;
+    lede: string;
+    image: string;
+    alt: string;
+    stats: { v: string; l: string }[];
+    note: string;
+  };
+}
+const { proof } = Astro.props;
+---
+
+<section class="border-t border-ink-100 bg-white py-20 lg:py-28" aria-labelledby="proof-title">
+  <div class="mx-auto max-w-5xl px-5">
+    <p class="text-sm font-semibold tracking-wide text-brand-500" data-reveal>{proof.kicker}</p>
+    <h2 id="proof-title" class="mt-3 text-3xl font-bold text-ink-900 sm:text-4xl" data-reveal>
+      {proof.title}
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-600" data-reveal>{proof.lede}</p>
+
+    <dl class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3" data-reveal>
+      {proof.stats.map((s) => (
+        <div class="rounded-2xl border border-ink-100 bg-paper p-6">
+          <dt class="text-sm text-ink-500">{s.l}</dt>
+          <dd class="mt-1 text-3xl font-bold tabular-nums text-ink-900">{s.v}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <figure class="mt-8" data-reveal>
+      <div class="overflow-x-auto rounded-2xl border border-ink-100 bg-white shadow-sm" dir="ltr">
+        <img
+          src={asset(`images/proof/${proof.image}.webp`)}
+          alt={proof.alt}
+          width="1826"
+          height="288"
+          loading="lazy"
+          decoding="async"
+          class="block h-auto w-full min-w-[720px]"
+        />
+      </div>
+      <figcaption class="mt-4 text-sm leading-relaxed text-ink-500">{proof.note}</figcaption>
+    </figure>
+  </div>
+</section>
