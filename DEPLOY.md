@@ -114,3 +114,40 @@ Pages Functions לא שומרות מצב, אז הגבלת קצב אמיתית נ
 ```
 
 זה מגן על תיבת המייל ועל המכסה ב-Resend.
+
+
+---
+
+## מצב המייל (עודכן 01.09.2026)
+
+**עובד**, אבל בהגדרה זמנית:
+
+| משתנה | ערך נוכחי | למה |
+|---|---|---|
+| `RESEND_API_KEY` | מוגדר | הטוקן מוגבל לשליחה בלבד, וזו הגדרה נכונה |
+| `LEAD_FROM` | `onboarding@resend.dev` | אין עדיין דומיין מאומת ב-Resend |
+| `LEAD_TO` | `info@shaiomedia.com` | שולח הבדיקה של Resend מורשה לשלוח רק לבעל החשבון |
+
+### כדי לעבור ל-contact@shaiomedia.com
+
+צריך דומיין מאומת אחד. **תאמת תת-דומיין, לא את הדומיין הראשי.**
+
+הסיבה: ל-`shaiomedia.com` יש דואר חי (`MX mail.shaiomedia.com`) ו-SPF
+`v=spf1 a mx ~all`. אימות הדומיין הראשי דורש נגיעה ב-SPF של דומיין שמטפל
+בדואר האמיתי שלך. תת-דומיין מבודד לחלוטין ואפס סיכון לדואר הקיים.
+
+1. **resend.com/domains → Add Domain →** `service.shaiomedia.com`
+2. Resend ייתן שלוש רשומות. תוסיף אותן בפאנל של servers24
+3. לחץ **Verify**
+4. אז מריצים:
+
+```bash
+cd ~/shaiomedia
+set -a && . ./.cfenv && set +a
+W=./node_modules/.bin/wrangler
+printf "noreply@service.shaiomedia.com" | $W pages secret put LEAD_FROM --project-name=shaiomedia-service
+printf "contact@shaiomedia.com"          | $W pages secret put LEAD_TO   --project-name=shaiomedia-service
+npm run deploy
+```
+
+מרגע שדומיין אחד מאומת, אפשר לשלוח לכל כתובת, כולל `contact@shaiomedia.com`.
