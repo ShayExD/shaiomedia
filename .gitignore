@@ -7,3 +7,4 @@ dist/
 .env
 .env.*
 _assets/
+.cfenv

@@ -198,10 +198,36 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_KEY;
       status.textContent = "קיבלנו. נחזור אליכם היום.";
       status.className = "min-h-5 text-center text-sm font-semibold text-win-600";
     } catch {
+      // Email delivery is down. Rather than lose the lead, hand it to WhatsApp
+      // with everything already typed out.
+      const f = new FormData(form);
+      const lines = [
+        `שם: ${f.get("name") ?? ""}`,
+        `טלפון: ${f.get("phone") ?? ""}`,
+        `אימייל: ${f.get("email") ?? ""}`,
+        `תחום: ${f.get("service") ?? ""}`,
+      ];
+      const msg = String(f.get("message") ?? "").trim();
+      if (msg) lines.push(`הודעה: ${msg}`);
+
       label.textContent = "שלחו, נחזור אליכם היום";
       btn.disabled = false;
-      status.innerHTML = 'לא הצלחנו לשלוח. נסו שוב, או <a class="underline" href="https://wa.link/h5ltox" target="_blank" rel="noopener">בוואטסאפ</a>.';
-      status.className = "min-h-5 text-center text-sm font-semibold text-[#C81E2B]";
+      status.textContent = "פותח וואטסאפ עם הפרטים...";
+      status.className = "min-h-5 text-center text-sm font-semibold text-ink-600";
+
+      const wa = "https://wa.me/972542192619?text=" + encodeURIComponent(lines.join("\n"));
+      const win = window.open(wa, "_blank", "noopener");
+      if (!win) {
+        status.textContent = "";
+        const a = document.createElement("a");
+        a.href = wa;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.className = "underline font-bold";
+        a.textContent = "להמשך בוואטסאפ";
+        status.append("לא הצלחנו לשלוח. ", a);
+        status.className = "min-h-5 text-center text-sm font-semibold text-[#C81E2B]";
+      }
     }
   });
 </script>
