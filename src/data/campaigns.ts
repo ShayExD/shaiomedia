@@ -27,6 +27,9 @@ export type Campaign = {
   edge: { title: string; body: string }[];
   process: { n: string; title: string; body: string }[];
   faq: { q: string; a: string }[];
+  /** Shown on the *other* page, to name this one. "Also the other" says nothing. */
+  siblingPrompt: string;
+  siblingCta: string;
   /**
    * A real account export. The client is not named and never will be, so the
    * numbers have to carry it alone: every figure in `stats` is legible in the
@@ -63,6 +66,8 @@ const SHARED_EDGE = [
 export const campaigns: Campaign[] = [
   {
     slug: "meta",
+    siblingPrompt: "מחפשים ניהול קמפיינים ממומנים במטא?",
+    siblingCta: "לעמוד הקמפיינים במטא",
     nav: "קמפיינים במטא",
     title: "ניהול קמפיינים במטא",
     metaTitle: "ניהול קמפיינים בפייסבוק ואינסטגרם לעסקי שירות | שיו מדיה",
@@ -164,6 +169,8 @@ export const campaigns: Campaign[] = [
   },
   {
     slug: "google-ads",
+    siblingPrompt: "מחפשים ניהול קמפיינים של PPC בגוגל?",
+    siblingCta: "לעמוד הקמפיינים בגוגל",
     nav: "קמפיינים בגוגל",
     title: "ניהול קמפיינים בגוגל",
     metaTitle: "ניהול קמפיינים ממומנים בגוגל לעסקי שירות | שיו מדיה",
