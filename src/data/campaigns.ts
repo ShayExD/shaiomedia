@@ -40,6 +40,9 @@ export type Campaign = {
     /** Intrinsic size, so the browser reserves the right box before decode. */
     w: number;
     h: number;
+    /** A taller crop of the same export, for phones. Same pixels, less width. */
+    nw: number;
+    nh: number;
     alt: string;
     stats: { v: string; l: string }[];
     note: string;
@@ -114,6 +117,8 @@ export const campaigns: Campaign[] = [
       image: "meta-campaigns",
       w: 1526,
       h: 288,
+      nw: 715,
+      nh: 288,
       alt: "שלוש שורות ממנהל המודעות של מטא: 13 פניות בעלות 12.03 שקלים, 77 פניות בעלות 9.08 שקלים ו-799 פניות בעלות 10.25 שקלים",
       stats: [
         { v: "889", l: "פניות" },
@@ -218,6 +223,8 @@ export const campaigns: Campaign[] = [
       image: "google-performance",
       w: 1804,
       h: 435,
+      nw: 890,
+      nh: 435,
       alt: "מסך ביצועים של גוגל אדס: 27.8 אלף קליקים, 349 אלף חשיפות, עלות ממוצעת לקליק 0.48 שקלים",
       stats: [
         { v: "27.8K", l: "קליקים" },
