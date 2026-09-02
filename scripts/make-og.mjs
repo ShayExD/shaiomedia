@@ -19,8 +19,12 @@ const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..');
 
 const fontDir = join(root, 'node_modules/@fontsource-variable/rubik/files');
-const font = readdirSync(fontDir).find(f => f.includes('hebrew') && f.endsWith('.woff2'))
-  || readdirSync(fontDir).find(f => f.endsWith('.woff2'));
+/* fontsource ships an italic cut of every subset, and it sorts before the
+   upright one. Matching on "hebrew" alone picked the italic file and rendered
+   the whole card on a slant, which reads as a styling choice rather than a
+   bug, so the upright cut is named explicitly and the pick is asserted. */
+const font = readdirSync(fontDir).find(f => f === 'rubik-hebrew-wght-normal.woff2');
+if (!font) throw new Error('upright Hebrew Rubik not found in ' + fontDir);
 /* Both assets are inlined as data URIs. setContent leaves the page on
    about:blank, and Chromium refuses to pull file:// subresources into that
    origin, so a linked font or logo silently does not arrive and the card
