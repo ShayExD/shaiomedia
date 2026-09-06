@@ -17,7 +17,6 @@
         --dim: #3D6187;    --card: #FFFFFF;  --edge: rgba(11,20,36,.10);
         --logo-violet: #6F64EA;   /* both taken from the wordmark */
         --logo-navy:   #1C1D46;
-        --accent: #DFA33A;  --accent-ink: #8A5E0C;
       }
 
       #ground { position: absolute; inset: 0; background: var(--paper); }
@@ -36,21 +35,22 @@
       .on-paper { color: var(--ink); }   .on-paper .setup { color: var(--dim); }
       .on-navy  { color: #fff; }         .on-navy .setup  { color: #8AA6C6; }
       .violet { color: var(--logo-violet); }
-      .amber-ink { color: var(--accent-ink); }
 
-      /* ---------- shared header ---------- */
+      /* ---------- header ---------- */
       #head { position: absolute; z-index: 5; top: 58px; left: 68px; right: 68px; direction: rtl;
               display: flex; align-items: flex-start; justify-content: space-between; }
       .hl { position: relative; }
-      .hl h1 { font-size: 74px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.0; }
-      .hl p  { font-size: 28px; font-weight: 600; letter-spacing: .02em; margin-bottom: 10px; }
-      #hA, #hB, #hC, #hD { position: absolute; top: 0; right: 0; white-space: nowrap; }
-      #hA { position: relative; }
+      .hl h1 { font-size: 74px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.0;
+               color: var(--ink); }
+      .hl p  { font-size: 28px; font-weight: 600; letter-spacing: .02em; margin-bottom: 10px;
+               color: var(--logo-violet); }
+      #hB, #hC, #hD { position: absolute; top: 0; right: 0; white-space: nowrap; }
+      #hA { position: relative; white-space: nowrap; }
       #mark { text-align: left; flex: none; }
       #mark img { height: 38px; width: auto; display: block; }
-      #mark > span { width: 240px; }   /* wide enough for the domain, which is right-anchored */
+      #mark > span { width: 240px; }
       .dm { position: absolute; top: 0; right: 0; direction: ltr; unicode-bidi: isolate;
-            white-space: nowrap; font-size: 21px; font-weight: 500; }
+            white-space: nowrap; font-size: 21px; font-weight: 500; color: #3D6187; }
 
       /* ---------- the wall ---------- */
       #wall { position: absolute; z-index: 3; top: 230px; left: 50%; margin-left: -906px;
@@ -64,6 +64,20 @@
              border-radius: 47px; overflow: hidden; background: #fff; }
       .scr img { display: block; width: 556px; }
 
+      .mcall { position: absolute; z-index: 4; left: 15px; right: 15px; bottom: 30px; direction: rtl;
+               background: #0B0C0F; border: 1px solid rgba(255,255,255,.16); border-radius: 30px;
+               padding: 20px 18px; box-shadow: 0 30px 60px -18px rgba(0,0,0,.6);
+               display: flex; align-items: center; gap: 14px; color: #fff; opacity: 0; }
+      .mwho { flex: 1; min-width: 0; }
+      .mlbl { display: block; font-size: 26px; color: #9BA6B8; font-weight: 500; }
+      .mnm  { display: block; font-size: 34px; font-weight: 700; letter-spacing: -0.02em;
+              direction: ltr; unicode-bidi: isolate; text-align: right; margin-top: 2px;
+              white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .mans { width: 74px; height: 74px; border-radius: 999px; background: #2ECC71; flex: none;
+              display: flex; align-items: center; justify-content: center;
+              box-shadow: 0 0 0 10px rgba(46,204,113,.18); }
+      .mans svg { width: 36px; height: 36px; fill: #06210F; }
+
       /* ---------- callouts ---------- */
       #callouts { position: absolute; z-index: 6; bottom: 96px; left: 110px; right: 110px; height: 86px; }
       .co { position: absolute; inset: 0; display: flex; align-items: center; gap: 16px;
@@ -74,31 +88,20 @@
       .co::before { content: ""; width: 14px; height: 14px; border-radius: 999px;
                     background: var(--logo-violet); flex: none; }
 
-      /* ---------- payoff ---------- */
-      #call { position: absolute; z-index: 7; bottom: 78px; left: 96px; right: 96px; direction: rtl;
-              background: #0B0C0F; border: 1px solid rgba(255,255,255,.14); border-radius: 30px;
-              padding: 24px 28px; box-shadow: 0 34px 70px -20px rgba(11,20,36,.55);
-              display: flex; align-items: center; gap: 22px; color: #fff; }
-      #call .who { flex: 1; }
-      #call .lbl { font-size: 27px; color: #9BA6B8; font-weight: 500; display: block; }
-      #call .nm  { font-size: 38px; font-weight: 700; letter-spacing: -0.02em; direction: ltr;
-                   unicode-bidi: isolate; display: block; margin-top: 2px; text-align: right; }
-      #answer { width: 84px; height: 84px; border-radius: 999px; background: #2ECC71;
-                display: flex; align-items: center; justify-content: center; flex: none;
-                box-shadow: 0 0 0 11px rgba(46,204,113,.18); }
-      #answer svg { width: 40px; height: 40px; fill: #06210F; }
-
-      /* ---------- the SEO wrapper, everything on the table ---------- */
-      #chips { position: absolute; z-index: 4; direction: rtl; top: 330px; left: 72px; right: 72px;
-               display: flex; flex-wrap: wrap; gap: 16px; align-content: flex-start; }
-      .chip { font-size: 32px; font-weight: 600; color: #fff; padding: 16px 28px;
-              border-radius: 999px; background: #13233A; border: 1px solid rgba(255,255,255,.14);
-              opacity: 0; }
+      /* ---------- end card ---------- */
+      #end { position: absolute; z-index: 7; inset: 0; direction: rtl;
+             display: flex; flex-direction: column; align-items: center; justify-content: center;
+             gap: 4px; opacity: 0; }
+      #endName { direction: ltr; unicode-bidi: isolate; font-size: 96px; font-weight: 800;
+                 letter-spacing: -0.035em; color: #fff; }
+      #endLine { font-size: 54px; font-weight: 600; color: var(--logo-violet); margin-top: 14px; }
+      #endDom  { direction: ltr; unicode-bidi: isolate; font-size: 28px; font-weight: 500;
+                 color: #8AA6C6; margin-top: 34px; }
     </style>
   </head>
   <body>
-    <div data-hf-id="hf-2sqz" id="root" data-composition-id="main" data-start="0" data-duration="24" data-width="1080" data-height="1350">
-      <div data-hf-id="hf-ip61" id="scene" class="clip" data-start="0" data-duration="24" data-track-index="1">
+    <div data-hf-id="hf-eiym" id="root" data-composition-id="main" data-start="0" data-duration="19.5" data-width="1080" data-height="1350">
+      <div data-hf-id="hf-2upu" id="scene" class="clip" data-start="0" data-duration="19.5" data-track-index="1">
         <div data-hf-id="hf-wua0" class="scene">
           <div data-hf-id="hf-7hg0" id="ground"></div>
           <span data-hf-id="hf-wnoc" id="rule"></span>
@@ -107,62 +110,62 @@
 
           <div data-hf-id="hf-rtmb" class="beat on-paper" id="b1"><p data-hf-id="hf-obol" class="big">בעל עסק שירות<br data-hf-id="hf-x5px">באמריקה?</p></div>
           <div data-hf-id="hf-etwm" class="beat on-navy" id="b2"><p data-hf-id="hf-400w" class="setup">מרגיש שהאתר שלך</p><p data-hf-id="hf-y9z3" class="punch">לא עובד?</p></div>
-          <div data-hf-id="hf-hpsh" class="beat on-paper" id="b3"><p data-hf-id="hf-sbk1" class="setup">משלם על לידים כל חודש</p><p data-hf-id="hf-ll6e" class="punch amber-ink">ולא רואה?</p></div>
-          <div data-hf-id="hf-mq4o" class="beat on-navy" id="b4"><p data-hf-id="hf-ze19" class="big">הגעת<br data-hf-id="hf-rsrt"><span data-hf-id="hf-avem" class="violet">למקום הנכון.</span></p></div>
+          <div data-hf-id="hf-91wm" class="beat on-paper" id="b4"><p data-hf-id="hf-ze19" class="big">הגעת<br data-hf-id="hf-rsrt"><span data-hf-id="hf-avem" class="violet">למקום הנכון.</span></p></div>
 
           <div data-hf-id="hf-z8f3" id="head">
             <span data-hf-id="hf-l9hl" class="hl">
-              <span data-hf-id="hf-rqkf" id="hA"><p data-hf-id="hf-96tx" style="color:var(--logo-violet)">מה שאנחנו בונים</p><h1 data-hf-id="hf-gx02" style="color:var(--ink)">אתר שממיר.</h1></span>
-              <span data-hf-id="hf-j2ok" id="hB"><p data-hf-id="hf-d8gg" style="color:var(--logo-violet)">והחלק שאף אחד לא רואה</p><h1 data-hf-id="hf-na65" style="color:var(--ink)">גוגל קורא אותו.</h1></span>
-              <span data-hf-id="hf-jucd" id="hC"><p data-hf-id="hf-mtpt" style="color:var(--logo-violet)">בכל מקצוע שירות</p><h1 data-hf-id="hf-seo3" style="color:var(--ink)">וזה לא אתר אחד.</h1></span>
-              <span data-hf-id="hf-2m22" id="hD"><p data-hf-id="hf-u6o7" style="color:var(--logo-violet)">מעטפת SEO מלאה</p><h1 data-hf-id="hf-lno9" style="color:#fff">ומכאן ממריאים.</h1></span>
+              <span data-hf-id="hf-rqkf" id="hA"><p data-hf-id="hf-xa54">מה שאנחנו בונים</p><h1 data-hf-id="hf-aadg">אתרים שממירים.</h1></span>
+              <span data-hf-id="hf-j2ok" id="hB"><p data-hf-id="hf-u44h">והחלק שאף אחד לא רואה</p><h1 data-hf-id="hf-69ur">גוגל קורא אותם.</h1></span>
+              <span data-hf-id="hf-jucd" id="hC"><p data-hf-id="hf-ke6s">בכל מקצוע שירות</p><h1 data-hf-id="hf-cmvf">והטלפון מצלצל.</h1></span>
+              <span data-hf-id="hf-2m22" id="hD"><p data-hf-id="hf-ahf8">מעטפת SEO מלאה</p><h1 data-hf-id="hf-r8bm">ומכאן ממריאים.</h1></span>
             </span>
             <span data-hf-id="hf-r5gp" id="mark">
               <span data-hf-id="hf-8gaq" style="position:relative;display:block;height:38px">
-                <img data-hf-id="hf-m0oh" id="markDark" src="assets/logo.webp" alt="" style="position:absolute;top:0;right:0">
-                <img data-hf-id="hf-o7v9" id="markLight" src="assets/logo-white.webp" alt="" style="position:absolute;top:0;right:0;opacity:0">
+                <img data-hf-id="hf-h1dq" src="assets/logo.webp" alt="" style="position:absolute;top:0;right:0">
               </span>
               <span data-hf-id="hf-wfu0" style="position:relative;display:block;margin-top:8px;height:26px">
-                <span data-hf-id="hf-ndtd" id="domDark" class="dm" style="color:#3D6187">service.shaiomedia.com</span>
-                <span data-hf-id="hf-pten" id="domLight" class="dm" style="color:#8AA6C6;opacity:0">service.shaiomedia.com</span>
+                <span data-hf-id="hf-nygi" class="dm">service.shaiomedia.com</span>
               </span>
             </span>
           </div>
 
           <div data-hf-id="hf-271o" id="wall" data-layout-allow-overflow="">
-            <div data-hf-id="hf-st4i" class="ph" data-layout-allow-overflow="" id="p1"><div data-hf-id="hf-zn7g" class="scr"><img data-hf-id="hf-kd9b" id="s1" src="assets/locksmith-wall.png" alt="" data-layout-allow-overflow=""></div></div>
-            <div data-hf-id="hf-ov0h" class="ph" data-layout-allow-overflow="" id="p2"><div data-hf-id="hf-fvlg" class="scr"><img data-hf-id="hf-8p52" id="site" src="assets/svchimney-long.png" alt="" data-layout-allow-overflow=""></div></div>
-            <div data-hf-id="hf-o3co" class="ph" data-layout-allow-overflow="" id="p3"><div data-hf-id="hf-eood" class="scr"><img data-hf-id="hf-itm1" id="s3" src="assets/pwcroofing-wall.png" alt="" data-layout-allow-overflow=""></div></div>
+            <div data-hf-id="hf-st4i" class="ph" data-layout-allow-overflow="" id="p1">
+              <div data-hf-id="hf-zn7g" class="scr"><img data-hf-id="hf-521r" id="s1" src="assets/primework-wall.png" alt="" data-layout-allow-overflow=""></div>
+              <div data-hf-id="hf-macg" class="mcall" id="mc1">
+                <span data-hf-id="hf-4522" class="mans"><svg data-hf-id="hf-y9f5" viewBox="0 0 24 24"><path data-hf-id="hf-ppe4" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4.5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.7z" /></svg></span>
+                <span data-hf-id="hf-xieu" class="mwho"><span data-hf-id="hf-xdkd" class="mlbl">שיחה נכנסת</span><span data-hf-id="hf-h9ra" class="mnm">Primework Construction</span></span>
+              </div>
+            </div>
+            <div data-hf-id="hf-ov0h" class="ph" data-layout-allow-overflow="" id="p2">
+              <div data-hf-id="hf-fvlg" class="scr"><img data-hf-id="hf-8p52" id="site" src="assets/svchimney-long.png" alt="" data-layout-allow-overflow=""></div>
+              <div data-hf-id="hf-x5u3" class="mcall" id="mc2">
+                <span data-hf-id="hf-uabi" class="mans"><svg data-hf-id="hf-svtx" viewBox="0 0 24 24"><path data-hf-id="hf-d1pg" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4.5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.7z" /></svg></span>
+                <span data-hf-id="hf-hjoa" class="mwho"><span data-hf-id="hf-zush" class="mlbl">שיחה נכנסת</span><span data-hf-id="hf-u6kq" class="mnm">Silicon Valley Chimney</span></span>
+              </div>
+            </div>
+            <div data-hf-id="hf-o3co" class="ph" data-layout-allow-overflow="" id="p3">
+              <div data-hf-id="hf-eood" class="scr"><img data-hf-id="hf-cwdv" id="s3" src="assets/wcoasthome-wall.png" alt="" data-layout-allow-overflow=""></div>
+              <div data-hf-id="hf-t7q2" class="mcall" id="mc3">
+                <span data-hf-id="hf-uomj" class="mans"><svg data-hf-id="hf-u2r0" viewBox="0 0 24 24"><path data-hf-id="hf-busd" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4.5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.7z" /></svg></span>
+                <span data-hf-id="hf-hxzb" class="mwho"><span data-hf-id="hf-11pk" class="mlbl">שיחה נכנסת</span><span data-hf-id="hf-ah27" class="mnm">West Coast Home</span></span>
+              </div>
+            </div>
           </div>
 
           <div data-hf-id="hf-ya4a" id="callouts">
             <div data-hf-id="hf-n1kr" class="co" id="co1">כפתור חיוג והזמנת תור בכל מסך</div>
-            <div data-hf-id="hf-e56y" class="co" id="co2">אותות אמון בראש: רישיון, ביטוח, דירוג</div>
-            <div data-hf-id="hf-uagh" class="co" id="co3">עמוד נפרד לכל שירות ולכל עיר</div>
-            <div data-hf-id="hf-6oro" class="co" id="co4">ביקורות גוגל מחוברות לאתר</div>
-            <div data-hf-id="hf-24c4" class="co" id="co5">ארובות, גגות, מנעולנות, שיפוצים</div>
+            <div data-hf-id="hf-e3q0" class="co" id="co2">עמוד נפרד לכל שירות ולכל עיר</div>
+            <div data-hf-id="hf-5htp" class="co" id="co3">ביקורות גוגל מחוברות לאתר</div>
+            <div data-hf-id="hf-sbvc" class="co" id="co4">ארובות, שיפוצים, בנייה, גגות, מנעולנות</div>
+            <div data-hf-id="hf-vi8r" class="co" id="co5">תוכן, קישורים, מפות ומעקב דירוגים</div>
           </div>
 
-          <div data-hf-id="hf-f8d2" id="chips">
-              <span data-hf-id="hf-ui75" class="chip">עיצוב מותאם אישית</span>
-              <span data-hf-id="hf-2vl1" class="chip">עמוד לכל שירות</span>
-              <span data-hf-id="hf-pxnz" class="chip">עמוד לכל עיר</span>
-              <span data-hf-id="hf-v1j9" class="chip">גלריית עבודות</span>
-              <span data-hf-id="hf-hg6w" class="chip">מחקר מילות מפתח</span>
-              <span data-hf-id="hf-47hw" class="chip">סכמה ואופטימיזציה טכנית</span>
-              <span data-hf-id="hf-gdq7" class="chip">פרופיל העסק בגוגל</span>
-              <span data-hf-id="hf-hadb" class="chip">מיקום במפות</span>
-              <span data-hf-id="hf-4zp8" class="chip">תוכן חדש כל חודש</span>
-              <span data-hf-id="hf-pfcf" class="chip">בניית קישורים וציטוטים</span>
-              <span data-hf-id="hf-48cr" class="chip">מעקב דירוגים בגריד</span>
-              <span data-hf-id="hf-hlmk" class="chip">דוח חודשי בעברית</span>
-          </div>
-
-          <div data-hf-id="hf-2eil" id="call">
-            <span data-hf-id="hf-3wo5" id="answer" aria-hidden="true">
-              <svg data-hf-id="hf-y9f5" viewBox="0 0 24 24"><path data-hf-id="hf-ppe4" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4.5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.7z" /></svg>
-            </span>
-            <span data-hf-id="hf-af47" class="who"><span data-hf-id="hf-wys0" class="lbl">שיחה נכנסת</span><span data-hf-id="hf-gt4h" class="nm">Silicon Valley Chimney Sweep</span></span>
+          <div data-hf-id="hf-37xg" id="end">
+            <img data-hf-id="hf-43gt" id="endLogo" src="assets/logo-white.webp" alt="" style="height:64px;width:auto;margin-bottom:22px">
+            <span data-hf-id="hf-ckcu" id="endName">Shaio Media</span>
+            <span data-hf-id="hf-8e5p" id="endLine">המקום הנכון לעסקי שירות</span>
+            <span data-hf-id="hf-zma1" id="endDom">service.shaiomedia.com</span>
           </div>
         </div>
       </div>
@@ -173,13 +176,12 @@
       const tl = gsap.timeline({ paused: true });
       const PAPER = "#F4F7FA", NAVY = "#0B1424";
 
-      gsap.set(["#b1","#b2","#b3","#b4"], { opacity: 0 });
-      gsap.set(["#head","#wall","#chips"], { opacity: 0 });
+      gsap.set(["#b1","#b2","#b4"], { opacity: 0 });
+      gsap.set(["#head","#wall"], { opacity: 0 });
       gsap.set(["#hB","#hC","#hD"], { opacity: 0 });
       gsap.set(["#p1","#p3"], { opacity: 0 });
-      gsap.set("#call", { y: 170, opacity: 0, scale: 0.94 });
-      gsap.set([".co"], { opacity: 0, y: 24 });
-      gsap.set(".chip", { opacity: 0, y: 26 });
+      gsap.set(".mcall", { y: 130, scale: 0.92 });
+      gsap.set(".co", { y: 24 });
 
       function beat(id, at, ground, o1, o2) {
         tl.to("#ground", { backgroundColor: ground, duration: 0.18, ease: "power2.inOut" }, at);
@@ -188,15 +190,19 @@
         tl.to(id, { opacity: 1, duration: 0.01 }, at + 0.02);
       }
       const co = (id, at, hold) => {
-        tl.to(id, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, at);
-        tl.to(id, { opacity: 0, y: -24, duration: 0.26, ease: "power2.in" }, at + hold);
+        tl.to(id, { opacity: 1, y: 0, duration: 0.30, ease: "power3.out" }, at);
+        tl.to(id, { opacity: 0, y: -24, duration: 0.24, ease: "power2.in" }, at + hold);
       };
       const swapHead = (out, into, at) => {
-        tl.to(out,  { opacity: 0, y: -34, duration: 0.28, ease: "power2.in" }, at);
-        tl.fromTo(into, { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.38, ease: "power3.out" }, at + 0.20);
+        tl.to(out, { opacity: 0, y: -34, duration: 0.26, ease: "power2.in" }, at);
+        tl.fromTo(into, { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.36, ease: "power3.out" }, at + 0.18);
+      };
+      const ring = (id, at) => {
+        tl.to(id, { opacity: 1, y: 0, scale: 1, duration: 0.48, ease: "back.out(1.7)" }, at);
+        tl.to(id + " .mans", { scale: 1.10, duration: 0.15, yoyo: true, repeat: 3, ease: "power2.inOut" }, at + 0.44);
       };
 
-      /* ---- act one: four beats, the ground flips under each ---- */
+      /* ---- act one ---- */
       tl.from("#rule", { scaleX: 0, duration: 0.45, ease: "power3.out" }, 0);
       beat("#b1", 0.10, PAPER, { x: 0, y: 0, scale: 1 }, { x: 0, y: 0, scale: 1 });
       tl.from("#b1 .big", { opacity: 0, y: 46, duration: 0.45, ease: "power3.out" }, 0.14);
@@ -207,60 +213,51 @@
       tl.from("#b2 .punch", { opacity: 0, y: 60, duration: 0.45, ease: "back.out(1.4)" }, 2.18);
       tl.to("#b2", { opacity: 0, y: -50, duration: 0.28, ease: "power2.in" }, 3.55);
 
-      beat("#b3", 3.67, PAPER, { x: -60, y: 150, scale: 0.88 }, { x: 70, y: -120, scale: 1.05 });
-      tl.from("#b3 .setup", { opacity: 0, y: 30, duration: 0.35, ease: "power3.out" }, 3.73);
-      tl.from("#b3 .punch", { opacity: 0, y: 60, duration: 0.45, ease: "back.out(1.4)" }, 4.10);
-      tl.to("#b3", { opacity: 0, y: -50, duration: 0.28, ease: "power2.in" }, 5.30);
+      beat("#b4", 3.67, PAPER, { x: -60, y: 150, scale: 0.95 }, { x: 90, y: -110, scale: 1.15 });
+      tl.from("#b4 .big", { opacity: 0, y: 54, duration: 0.5, ease: "back.out(1.3)" }, 3.73);
+      tl.to("#b4", { opacity: 0, y: -50, duration: 0.3, ease: "power2.in" }, 4.70);
 
-      beat("#b4", 5.42, NAVY, { x: 190, y: -60, scale: 1.35 }, { x: -150, y: 90, scale: 1.4 });
-      tl.from("#b4 .big", { opacity: 0, y: 54, duration: 0.5, ease: "back.out(1.3)" }, 5.48);
-      tl.to("#b4", { opacity: 0, y: -50, duration: 0.3, ease: "power2.in" }, 6.55);
+      /* ---- act two: one site, tight. Enough to make the two claims, no longer. ---- */
+      tl.to("#orb1", { x: -260, y: -240, scale: 0.9, duration: 0.8, ease: "power3.out" }, 4.78);
+      tl.to("#orb2", { x: 190, y: 180, scale: 1.0, duration: 0.8, ease: "power3.out" }, 4.78);
+      tl.fromTo("#head", { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 4.86);
+      tl.fromTo("#wall", { opacity: 0, y: 150 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 4.92);
 
-      /* ---- act two: it converts ---- */
-      tl.to("#ground", { backgroundColor: PAPER, duration: 0.22, ease: "power2.inOut" }, 6.62);
-      tl.to("#orb1", { x: -260, y: -240, scale: 0.9, duration: 0.8, ease: "power3.out" }, 6.62);
-      tl.to("#orb2", { x: 190, y: 180, scale: 1.0, duration: 0.8, ease: "power3.out" }, 6.62);
-      tl.fromTo("#head", { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 6.74);
-      tl.fromTo("#wall", { opacity: 0, y: 150 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 6.82);
+      tl.fromTo("#site", { y: 0 }, { y: -1681, duration: 0.90, ease: "power1.in" }, 5.05);
+      co("#co1", 5.15, 1.10);
+      tl.to("#site", { y: -4267, duration: 1.48, ease: "none" }, 6.00);
+      swapHead("#hA", "#hB", 6.95);
+      co("#co2", 7.00, 1.20);
+      tl.to("#site", { y: -7629, duration: 0.85, ease: "none" }, 7.55);
+      tl.to("#site", { y: -8663, duration: 1.10, ease: "power4.out" }, 8.45);
+      co("#co3", 8.70, 1.20);
 
-      tl.fromTo("#site", { y: 0 }, { y: -1681, duration: 1.26, ease: "power1.in" }, 6.90);
-      co("#co1", 7.05, 1.35);
-      tl.to("#site", { y: -4267, duration: 3.0, ease: "none" }, 8.20);
-      co("#co2", 8.60, 1.60);
+      /* ---- act three: pull back. Three trades, three phones, all ringing. ---- */
+      swapHead("#hB", "#hC", 9.65);
+      tl.to("#wall", { scale: 0.62, y: -20, duration: 1.0, ease: "power3.inOut" }, 9.75);
+      tl.to(["#p1","#p3"], { opacity: 1, duration: 0.5, ease: "power2.out" }, 9.95);
+      tl.fromTo("#s1", { y: -200 }, { y: -2400, duration: 4.6, ease: "none" }, 9.90);
+      tl.fromTo("#s3", { y: -800 }, { y: -3000, duration: 4.6, ease: "none" }, 9.90);
+      tl.to("#site", { y: -8723, duration: 4.6, ease: "none" }, 9.90);
+      co("#co4", 10.35, 2.30);
+      ring("#mc2", 11.15);
+      ring("#mc1", 11.70);
+      ring("#mc3", 12.25);
 
-      /* ---- act three: and Google reads it ---- */
-      swapHead("#hA", "#hB", 10.60);
-      co("#co3", 10.60, 1.70);
-      tl.to("#site", { y: -7629, duration: 1.8, ease: "none" }, 11.20);
-      tl.to("#site", { y: -8663, duration: 1.5, ease: "power4.out" }, 13.00);
-      co("#co4", 13.30, 1.55);
+      /* ---- act four: and then the SEO layer ---- */
+      swapHead("#hC", "#hD", 13.75);
+      co("#co5", 13.90, 1.75);
 
-      /* the payoff for "it converts" */
-      tl.to("#call", { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, 15.15);
-      tl.to("#answer", { scale: 1.09, duration: 0.16, yoyo: true, repeat: 3, ease: "power2.inOut" }, 15.70);
-      tl.to("#call", { opacity: 0, y: 60, duration: 0.35, ease: "power2.in" }, 16.90);
-
-      /* ---- act four: pull back, it is not one site ---- */
-      swapHead("#hB", "#hC", 16.95);
-      tl.to("#wall", { scale: 0.55, duration: 1.0, ease: "power3.inOut" }, 17.05);
-      tl.to(["#p1","#p3"], { opacity: 1, duration: 0.5, ease: "power2.out" }, 17.25);
-      tl.fromTo("#s1", { y: -300 }, { y: -2100, duration: 3.4, ease: "none" }, 17.20);
-      tl.fromTo("#s3", { y: -900 }, { y: -2600, duration: 3.4, ease: "none" }, 17.20);
-      tl.to("#site", { y: -8663 - 1400, duration: 3.4, ease: "none" }, 17.20);
-      co("#co5", 17.60, 1.90);
-
-      /* ---- act five: the SEO wrapper, all of it ---- */
-      tl.to("#ground", { backgroundColor: NAVY, duration: 0.3, ease: "power2.inOut" }, 20.05);
-      tl.to("#wall", { opacity: 0, y: 120, duration: 0.45, ease: "power2.in" }, 20.05);
-      tl.to("#orb1", { x: -280, y: 980, scale: 1.25, duration: 0.9, ease: "power3.out" }, 20.05);
-      tl.to("#orb2", { x: 130, y: 70, scale: 1.3, duration: 0.9, ease: "power3.out" }, 20.05);
-      tl.to("#markDark",  { opacity: 0, duration: 0.25, ease: "power2.inOut" }, 20.10);
-      tl.to("#markLight", { opacity: 1, duration: 0.25, ease: "power2.inOut" }, 20.10);
-      tl.to("#domDark",  { opacity: 0, duration: 0.25, ease: "power2.inOut" }, 20.10);
-      tl.to("#domLight", { opacity: 1, duration: 0.25, ease: "power2.inOut" }, 20.10);
-      swapHead("#hC", "#hD", 20.10);
-      tl.to("#chips", { opacity: 1, duration: 0.01 }, 20.45);
-      tl.to(".chip", { opacity: 1, y: 0, duration: 0.34, stagger: 0.075, ease: "power3.out" }, 20.50);
+      /* ---- end card, held long enough to actually read ---- */
+      tl.to("#ground", { backgroundColor: NAVY, duration: 0.35, ease: "power2.inOut" }, 15.90);
+      tl.to(["#wall","#head"], { opacity: 0, y: 90, duration: 0.45, ease: "power2.in" }, 15.90);
+      tl.to("#orb1", { x: -300, y: 1020, scale: 1.3, duration: 1.0, ease: "power3.out" }, 15.90);
+      tl.to("#orb2", { x: 140, y: 80, scale: 1.35, duration: 1.0, ease: "power3.out" }, 15.90);
+      tl.to("#end", { opacity: 1, duration: 0.01 }, 16.40);
+      tl.from("#endLogo", { opacity: 0, y: 30, duration: 0.45, ease: "power3.out" }, 16.43);
+      tl.from("#endName", { opacity: 0, y: 40, duration: 0.55, ease: "power3.out" }, 16.53);
+      tl.from("#endLine", { opacity: 0, y: 34, duration: 0.55, ease: "power3.out" }, 16.71);
+      tl.from("#endDom",  { opacity: 0, duration: 0.5, ease: "power2.out" }, 16.95);
 
       window.__timelines["main"] = tl;
       tl.seek(0);

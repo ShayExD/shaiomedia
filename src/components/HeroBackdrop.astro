@@ -7,12 +7,18 @@
  * saying it, with a brand mark held far back so the platform is legible before
  * the headline is read.
  *
+ * The two sides deliberately do not share a shape. Google's surface is a list
+ * of queries, so those are search pills arriving at the pace queries actually
+ * do. Meta's surface is a feed, so those are notification cards with a sender
+ * on them, and reactions drifting up the way they do over a live video. A pill
+ * with a tick in it reads as a CRM, which is neither platform.
+ *
  * Pure CSS on purpose. This paints in the first frame, and a script that has to
  * arrive, parse and start before anything moves would leave the hero dead for
  * exactly as long as a visitor from an ad is deciding whether to stay.
  *
- * No figure here is a claim. The chips carry no counts, because a number in a
- * background loop reads as a promise nobody made.
+ * No figure here is a claim. Nothing in the loop carries a count, because a
+ * number in a background animation reads as a promise nobody made.
  */
 interface Props {
   slug: string;
@@ -21,27 +27,53 @@ const { slug } = Astro.props;
 
 const isMeta = slug === "meta";
 
-/* Kept off the centre column so nothing drifts under the headline. */
-const chips = isMeta
-  ? [
-      { t: "פנייה חדשה", side: "start", pos: "6%", delay: "0s", dur: "17s" },
-      { t: "טופס מולא", side: "end", pos: "8%", delay: "3.2s", dur: "19s" },
-      { t: "הודעה בוואטסאפ", side: "start", pos: "17%", delay: "6.5s", dur: "18s" },
-      { t: "ליד מאינסטגרם", side: "end", pos: "19%", delay: "9.4s", dur: "20s" },
-      { t: "פנייה חדשה", side: "start", pos: "2%", delay: "12.8s", dur: "18s" },
-      { t: "בקשה להצעת מחיר", side: "end", pos: "3%", delay: "15.1s", dur: "19s" },
-    ]
-  : [
-      { t: "מנעולן בתל אביב", side: "start", pos: "6%", delay: "0s", dur: "17s" },
-      { t: "שיפוצים בשרון", side: "end", pos: "8%", delay: "3.2s", dur: "19s" },
-      { t: "קליניקה לפיזיותרפיה", side: "start", pos: "17%", delay: "6.5s", dur: "18s" },
-      { t: "ריטריט בצפון", side: "end", pos: "19%", delay: "9.4s", dur: "20s" },
-      { t: "אינסטלטור עכשיו", side: "start", pos: "2%", delay: "12.8s", dur: "18s" },
-      { t: "מאמן אישי בחיפה", side: "end", pos: "3%", delay: "15.1s", dur: "19s" },
-    ];
+/* Kept out of the centre column so nothing drifts under the headline. */
+const metaCards = [
+  { t: "פנייה חדשה", via: "fb", side: "start", pos: "0.5rem", delay: "0s", dur: "16s" },
+  { t: "טופס מולא", via: "ig", side: "end", pos: "0.5rem", delay: "2.7s", dur: "18s" },
+  { t: "הודעה חדשה", via: "fb", side: "start", pos: "2rem", delay: "5.6s", dur: "17s" },
+  { t: "ליד מאינסטגרם", via: "ig", side: "end", pos: "2rem", delay: "8.3s", dur: "19s" },
+  { t: "הצעת מחיר", via: "fb", side: "start", pos: "1.75rem", delay: "11.4s", dur: "17s" },
+  { t: "פנייה חדשה", via: "ig", side: "end", pos: "1.75rem", delay: "13.9s", dur: "18s" },
+];
+
+/* Reactions rise smaller and quicker than the cards, the way they do over a
+   live video: the cards are the substance, these are the pulse. */
+const reactions = [
+  { k: "heart", side: "start", pos: "0.75rem", delay: "1.4s", dur: "7s" },
+  { k: "like", side: "end", pos: "0.75rem", delay: "3.1s", dur: "8s" },
+  { k: "heart", side: "end", pos: "1.5rem", delay: "5.2s", dur: "7.5s" },
+  { k: "like", side: "start", pos: "1.5rem", delay: "6.8s", dur: "8.5s" },
+  { k: "heart", side: "start", pos: "2rem", delay: "9.1s", dur: "7s" },
+];
+
+/* Searches happen constantly, so these run about three times the pace of the
+   cards: one arriving roughly every second, ten in rotation. */
+const queries = [
+  { t: "מנעולן בתל אביב", side: "start", pos: "0.5rem", delay: "0s", dur: "6.5s" },
+  { t: "שיפוצים בשרון", side: "end", pos: "0.5rem", delay: "0.9s", dur: "7s" },
+  { t: "אינסטלטור עכשיו", side: "start", pos: "2rem", delay: "1.8s", dur: "6s" },
+  { t: "קליניקת פיזיותרפיה", side: "end", pos: "2rem", delay: "2.7s", dur: "7.5s" },
+  { t: "ריטריט בצפון", side: "start", pos: "1.75rem", delay: "3.6s", dur: "6.5s" },
+  { t: "מאמן אישי בחיפה", side: "end", pos: "1.75rem", delay: "4.4s", dur: "7s" },
+  { t: "חשמלאי בראשון", side: "start", pos: "0.75rem", delay: "5.2s", dur: "6.5s" },
+  { t: "סדנת בישול", side: "end", pos: "1.75rem", delay: "6.1s", dur: "7s" },
+  { t: "הדברה דחוף", side: "start", pos: "2rem", delay: "7s", dur: "6s" },
+  { t: "יועץ משכנתאות", side: "end", pos: "2rem", delay: "7.9s", dur: "7.5s" },
+];
+
+/* Everything is rendered inside a side gutter that is clipped to the space
+   outside the headline column, so nothing can drift under the copy at any
+   width. Percent offsets could not guarantee that: a chip positioned at 20%
+   still extends inward by its own width, and whether it overlapped depended on
+   where it happened to be when you looked. */
+const bySide = (list: { side: string }[], side: string) => list.filter((c) => c.side === side);
 ---
 
-<div class="hb pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+<div
+  class:list={["hb", "pointer-events-none absolute inset-0 -z-10 overflow-hidden", !isMeta && "hb--fast"]}
+  aria-hidden="true"
+>
   <div class="absolute inset-0 bg-ink-950"></div>
 
   {/* Held well back: a watermark, not a logo placement. */}
@@ -69,29 +101,124 @@ const chips = isMeta
   >
   </div>
 
-  {chips.map((c) => (
-    <span
-      class="hb-chip"
-      style={`--x:${c.pos};--d:${c.delay};--t:${c.dur};${c.side === "start" ? "inset-inline-start:var(--x)" : "inset-inline-end:var(--x)"}`}
-    >
-      {isMeta ? (
-        <svg viewBox="0 0 20 20" class="hb-ic" fill="none">
-          <path d="m5 10.4 3 3 7-7.2" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      ) : (
-        <svg viewBox="0 0 20 20" class="hb-ic" fill="none">
-          <circle cx="9" cy="9" r="5.4" stroke="currentColor" stroke-width="2" />
-          <path d="m13.2 13.2 3.4 3.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-      )}
-      <span>{c.t}</span>
-    </span>
-  ))}
+  <div class:list={["hb-side", "hb-side--start"]}>
+    {isMeta && (
+      <>
+        {bySide(metaCards, "start").map((c: any) => (
+        <span class="hb-card" style={`--x:${c.pos};--d:${c.delay};--t:${c.dur}`}>
+          <span class:list={["hb-av", `hb-av--${c.via}`]}>
+            {c.via === "fb" ? (
+              <svg viewBox="0 0 24 24" class="hb-avic">
+                <path fill="#fff" d="M15.12 24v-8.44h2.8l.53-3.49h-3.33V9.82c0-.96.47-1.89 1.96-1.89h1.51V4.96s-1.37-.24-2.68-.24c-2.74 0-4.53 1.67-4.53 4.69v2.66H8.33v3.49h3.05V24h3.74Z" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" class="hb-avic" fill="none">
+                <rect x="5.4" y="5.4" width="13.2" height="13.2" rx="4.1" stroke="#fff" stroke-width="1.9" />
+                <circle cx="12" cy="12" r="3.2" stroke="#fff" stroke-width="1.9" />
+                <circle cx="17.2" cy="6.8" r="1.2" fill="#fff" />
+              </svg>
+            )}
+          </span>
+          <span class="hb-txt">{c.t}</span>
+        </span>
+        ))}
+        {bySide(reactions, "start").map((r: any) => (
+        <span class:list={["hb-react", `hb-react--${r.k}`]} style={`--x:${r.pos};--d:${r.delay};--t:${r.dur}`}>
+          {r.k === "heart" ? (
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-7.8-4.9-9.6-9.2C1 8.4 2.8 5 6.2 5c2 0 3.3 1.1 4 2 .7-.9 2-2 4-2 3.4 0 5.2 3.4 3.8 6.8C20.2 16.1 12 21 12 21Z" /></svg>
+          ) : (
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M2 9.9h3.4V21H2V9.9Zm5.2 0h3.3l2-5.4c.3-.9 1.2-1.4 2.1-1.2.9.2 1.5 1 1.4 1.9l-.5 4.7h4.6c1.1 0 1.9 1 1.7 2l-1.4 6.6c-.2.9-1 1.5-1.9 1.5H7.2V9.9Z" /></svg>
+          )}
+        </span>
+        ))}
+      </>
+    )}
+    {!isMeta && bySide(queries, "start").map((q: any) => (
+        <span class="hb-chip" style={`--x:${q.pos};--d:${q.delay};--t:${q.dur}`}>
+          <svg viewBox="0 0 20 20" class="hb-ic" fill="none">
+            <circle cx="9" cy="9" r="5.4" stroke="currentColor" stroke-width="2" />
+            <path d="m13.2 13.2 3.4 3.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <span>{q.t}</span>
+        </span>
+    ))}
+  </div>
+
+  <div class:list={["hb-side", "hb-side--end"]}>
+    {isMeta && (
+      <>
+        {bySide(metaCards, "end").map((c: any) => (
+        <span class="hb-card" style={`--x:${c.pos};--d:${c.delay};--t:${c.dur}`}>
+          <span class:list={["hb-av", `hb-av--${c.via}`]}>
+            {c.via === "fb" ? (
+              <svg viewBox="0 0 24 24" class="hb-avic">
+                <path fill="#fff" d="M15.12 24v-8.44h2.8l.53-3.49h-3.33V9.82c0-.96.47-1.89 1.96-1.89h1.51V4.96s-1.37-.24-2.68-.24c-2.74 0-4.53 1.67-4.53 4.69v2.66H8.33v3.49h3.05V24h3.74Z" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" class="hb-avic" fill="none">
+                <rect x="5.4" y="5.4" width="13.2" height="13.2" rx="4.1" stroke="#fff" stroke-width="1.9" />
+                <circle cx="12" cy="12" r="3.2" stroke="#fff" stroke-width="1.9" />
+                <circle cx="17.2" cy="6.8" r="1.2" fill="#fff" />
+              </svg>
+            )}
+          </span>
+          <span class="hb-txt">{c.t}</span>
+        </span>
+        ))}
+        {bySide(reactions, "end").map((r: any) => (
+        <span class:list={["hb-react", `hb-react--${r.k}`]} style={`--x:${r.pos};--d:${r.delay};--t:${r.dur}`}>
+          {r.k === "heart" ? (
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-7.8-4.9-9.6-9.2C1 8.4 2.8 5 6.2 5c2 0 3.3 1.1 4 2 .7-.9 2-2 4-2 3.4 0 5.2 3.4 3.8 6.8C20.2 16.1 12 21 12 21Z" /></svg>
+          ) : (
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M2 9.9h3.4V21H2V9.9Zm5.2 0h3.3l2-5.4c.3-.9 1.2-1.4 2.1-1.2.9.2 1.5 1 1.4 1.9l-.5 4.7h4.6c1.1 0 1.9 1 1.7 2l-1.4 6.6c-.2.9-1 1.5-1.9 1.5H7.2V9.9Z" /></svg>
+          )}
+        </span>
+        ))}
+      </>
+    )}
+    {!isMeta && bySide(queries, "end").map((q: any) => (
+        <span class="hb-chip" style={`--x:${q.pos};--d:${q.delay};--t:${q.dur}`}>
+          <svg viewBox="0 0 20 20" class="hb-ic" fill="none">
+            <circle cx="9" cy="9" r="5.4" stroke="currentColor" stroke-width="2" />
+            <path d="m13.2 13.2 3.4 3.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <span>{q.t}</span>
+        </span>
+    ))}
+  </div>
 
   <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-paper"></div>
 </div>
 
 <style>
+  /* The gutter is the guarantee: it is clipped to the space outside the
+     headline column, so nothing inside it can reach the copy however far it
+     travels. Below the breakpoint there is no such space, and the gutter opens
+     to full width while the items switch to the short run along the bottom. */
+  .hb-side {
+    position: absolute;
+    inset-block: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .hb-side--start { inset-inline-start: 0; }
+  .hb-side--end { inset-inline-end: 0; }
+
+  .hb-side--end .hb-chip,
+  .hb-side--end .hb-card,
+  .hb-side--end .hb-react {
+    inset-inline-start: auto;
+    inset-inline-end: var(--x);
+  }
+
+  /* 1360 is where (viewport - the 56rem headline column) / 2 first clears the
+     widest item plus its offset. Below it the gutter cannot hold a card without
+     cutting one, so there is no side lane and the run moves to the bottom. */
+  @media (min-width: 1360px) {
+    .hb-side { width: max(0px, calc((100% - 57rem) / 2)); }
+  }
+
   .hb-mark {
     width: 38rem;
     height: 38rem;
@@ -102,11 +229,11 @@ const chips = isMeta
     animation: hb-breathe 26s ease-in-out infinite;
   }
 
-  /* An arrival, not a float: fast in at the bottom, slowing as it rises, gone
-     before it reaches the headline. */
+  /* Google: a query, so a search pill. */
   .hb-chip {
     position: absolute;
     bottom: -3rem;
+    inset-inline-start: var(--x);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -129,6 +256,77 @@ const chips = isMeta
     opacity: 0.8;
   }
 
+  /* Meta: a feed notification, so a card with a sender on it. */
+  .hb-card {
+    position: absolute;
+    bottom: -3rem;
+    inset-inline-start: var(--x);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.45rem 0.85rem 0.45rem 0.5rem;
+    border-radius: 0.9rem;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background: rgb(255 255 255 / 0.055);
+    box-shadow: 0 12px 30px -18px rgb(0 0 0 / 0.9);
+    opacity: 0;
+    animation: hb-rise var(--t) linear var(--d) infinite;
+  }
+
+  .hb-av {
+    display: grid;
+    place-items: center;
+    width: 1.55rem;
+    height: 1.55rem;
+    border-radius: 999px;
+    flex: none;
+  }
+
+  .hb-av--fb {
+    background: #1877f2;
+  }
+
+  .hb-av--ig {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 26%, #d6249f 60%, #285aeb 100%);
+  }
+
+  .hb-avic {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+
+  .hb-txt {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: rgb(214 228 246 / 0.82);
+  }
+
+  .hb-react {
+    position: absolute;
+    bottom: -2rem;
+    inset-inline-start: var(--x);
+    width: 1.15rem;
+    height: 1.15rem;
+    opacity: 0;
+    animation: hb-float var(--t) ease-out var(--d) infinite;
+  }
+
+  .hb-react svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hb-react--heart {
+    color: #f0426a;
+  }
+
+  .hb-react--like {
+    color: #1877f2;
+  }
+
+  /* An arrival, not a float: quick in at the bottom, slowing as it rises, gone
+     before it reaches the headline. */
   @keyframes hb-rise {
     0% { transform: translateY(0) scale(0.94); opacity: 0; }
     7% { opacity: 0.9; transform: translateY(-3rem) scale(1); }
@@ -137,26 +335,56 @@ const chips = isMeta
     100% { transform: translateY(-30rem) scale(0.97); opacity: 0; }
   }
 
+  /* Reactions drift rather than travel, and sway as they go. */
+  @keyframes hb-float {
+    0% { transform: translate(0, 0) scale(0.7); opacity: 0; }
+    12% { opacity: 0.7; }
+    35% { transform: translate(0.35rem, -6rem) scale(1); }
+    65% { transform: translate(-0.3rem, -11rem) scale(0.95); opacity: 0.4; }
+    100% { transform: translate(0.2rem, -17rem) scale(0.8); opacity: 0; }
+  }
+
   @keyframes hb-breathe {
     0%, 100% { opacity: 0.045; transform: scale(1) rotate(0deg); }
     50% { opacity: 0.08; transform: scale(1.05) rotate(2.5deg); }
   }
 
-  /* Narrow screens have no room beside the headline, so the chips run in the
-     empty band under the hero's own content instead of past it: a short travel,
-     three of them, staggered. Traffic from an ad lands here first, and a hero
-     with nothing moving in it is the one place that costs the most. */
-  @media (max-width: 767px) {
+  /* Narrow screens have no room beside the headline, so the run happens in the
+     padding under the hero's own content on a shorter travel. Traffic from an
+     ad lands here first, and a hero with nothing moving is what costs most. */
+  @media (max-width: 1359px) {
+    .hb-card,
     .hb-chip {
       font-size: 0.75rem;
-      padding: 0.4rem 0.75rem;
       animation-name: hb-rise-short;
-      animation-duration: 9s;
+      animation-duration: 5s;
     }
+
+    .hb-chip { padding: 0.4rem 0.75rem; }
+    .hb-txt { font-size: 0.75rem; }
+
+    /* Three per gutter, spread across the cycle so one is always partway up
+       and the band never sits empty. More than three and they stack, because
+       the travel is short and they all start from the same edge. */
+    .hb-card:nth-of-type(n + 4),
     .hb-chip:nth-of-type(n + 4) { display: none; }
-    .hb-chip:nth-of-type(1) { animation-delay: 0s; }
-    .hb-chip:nth-of-type(2) { animation-delay: 3s; }
-    .hb-chip:nth-of-type(3) { animation-delay: 6s; }
+    .hb-card:nth-of-type(1), .hb-chip:nth-of-type(1) { animation-delay: 0s; }
+    .hb-card:nth-of-type(2), .hb-chip:nth-of-type(2) { animation-delay: 1.7s; }
+    .hb-card:nth-of-type(3), .hb-chip:nth-of-type(3) { animation-delay: 3.4s; }
+
+    /* Searches keep their faster cadence here too. */
+    .hb--fast .hb-chip { animation-duration: 3.4s; }
+    .hb--fast .hb-chip:nth-of-type(1) { animation-delay: 0s; }
+    .hb--fast .hb-chip:nth-of-type(2) { animation-delay: 1.1s; }
+    .hb--fast .hb-chip:nth-of-type(3) { animation-delay: 2.2s; }
+
+    /* Reactions cost no width, but at full height they cross the line under
+       the buttons, so on a phone they stay inside the same band as the cards. */
+    .hb-react {
+      animation-name: hb-float-short;
+      animation-duration: 3.6s;
+    }
+
     .hb-mark {
       width: 26rem;
       height: 26rem;
@@ -164,6 +392,13 @@ const chips = isMeta
       margin-top: -13rem;
       opacity: 0.085;
     }
+  }
+
+  @keyframes hb-float-short {
+    0% { transform: translate(0, 0) scale(0.7); opacity: 0; }
+    15% { opacity: 0.7; }
+    50% { transform: translate(0.3rem, -3rem) scale(1); }
+    100% { transform: translate(-0.2rem, -6rem) scale(0.85); opacity: 0; }
   }
 
   /* Rises through the padding below the content and stops short of it. */
@@ -175,7 +410,9 @@ const chips = isMeta
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .hb-card,
     .hb-chip { animation: none; opacity: 0.5; bottom: auto; top: 30%; }
+    .hb-react { display: none; }
     .hb-mark { animation: none; }
   }
 </style>
