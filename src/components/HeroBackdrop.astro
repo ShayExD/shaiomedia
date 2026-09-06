@@ -187,6 +187,11 @@ const bySide = (list: { side: string }[], side: string) => list.filter((c) => c.
     ))}
   </div>
 
+  {/* Below the gutter breakpoint the run passes behind the copy rather than
+      beside it, so the middle of the hero gets a scrim: the cards stay visible
+      top and bottom and the headline keeps its contrast where they cross. */}
+  <div class="hb-veil"></div>
+
   <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-paper"></div>
 </div>
 
@@ -217,6 +222,19 @@ const bySide = (list: { side: string }[], side: string) => list.filter((c) => c.
      cutting one, so there is no side lane and the run moves to the bottom. */
   @media (min-width: 1360px) {
     .hb-side { width: max(0px, calc((100% - 57rem) / 2)); }
+  }
+
+  .hb-veil {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(5 10 19 / 0.42) 22%,
+      rgb(5 10 19 / 0.42) 66%,
+      transparent 88%
+    );
   }
 
   .hb-mark {
@@ -356,8 +374,8 @@ const bySide = (list: { side: string }[], side: string) => list.filter((c) => c.
     .hb-card,
     .hb-chip {
       font-size: 0.75rem;
-      animation-name: hb-rise-short;
-      animation-duration: 5s;
+      animation-name: hb-rise-tall;
+      animation-duration: 9s;
     }
 
     .hb-chip { padding: 0.4rem 0.75rem; }
@@ -381,9 +399,11 @@ const bySide = (list: { side: string }[], side: string) => list.filter((c) => c.
     /* Reactions cost no width, but at full height they cross the line under
        the buttons, so on a phone they stay inside the same band as the cards. */
     .hb-react {
-      animation-name: hb-float-short;
-      animation-duration: 3.6s;
+      animation-name: hb-float-tall;
+      animation-duration: 7s;
     }
+
+    .hb-veil { opacity: 1; }
 
     .hb-mark {
       width: 26rem;
@@ -392,6 +412,24 @@ const bySide = (list: { side: string }[], side: string) => list.filter((c) => c.
       margin-top: -13rem;
       opacity: 0.085;
     }
+  }
+
+  /* Below the gutter breakpoint the hero is tall and the run has to cross all
+     of it, not just the padding under the copy. 30rem stops around halfway. */
+  @keyframes hb-rise-tall {
+    0% { transform: translateY(0) scale(0.94); opacity: 0; }
+    5% { opacity: 0.9; transform: translateY(-3rem) scale(1); }
+    55% { opacity: 0.7; }
+    82% { opacity: 0.4; }
+    100% { transform: translateY(-58rem) scale(0.97); opacity: 0; }
+  }
+
+  @keyframes hb-float-tall {
+    0% { transform: translate(0, 0) scale(0.7); opacity: 0; }
+    10% { opacity: 0.75; }
+    40% { transform: translate(0.5rem, -16rem) scale(1); }
+    72% { transform: translate(-0.4rem, -30rem) scale(0.95); opacity: 0.45; }
+    100% { transform: translate(0.3rem, -46rem) scale(0.82); opacity: 0; }
   }
 
   @keyframes hb-float-short {

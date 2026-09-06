@@ -14,7 +14,9 @@
     "deploy": "npm run build && wrangler pages deploy dist --project-name=shaiomedia-service",
     "deploy:preview": "./deploy-preview.sh",
     "cf:dev": "npm run build && wrangler pages dev dist --compatibility-date=2026-09-01",
-    "test:agents": "node scripts/verify-agents.mjs"
+    "test:agents": "node scripts/verify-agents.mjs",
+    "test:hero": "node scripts/verify-hero.mjs",
+    "test": "npm run test:agents && npm run test:hero"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
