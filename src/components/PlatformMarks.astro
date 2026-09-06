@@ -1,0 +1,61 @@
+---
+/**
+ * The platform marks for a campaign hero.
+ *
+ * Inline SVG rather than files: the CSP is hash-pinned and the hero is the
+ * first paint, so a request for an icon would either be blocked or arrive late
+ * enough to shift the row.
+ *
+ * These are other companies' trademarks, used only to say which platforms the
+ * work runs on. Nothing here is a partner badge and nothing claims one.
+ */
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+
+const label = slug === "meta" ? "פייסבוק ואינסטגרם" : "רשת החיפוש של גוגל";
+---
+
+<div
+  class="mt-7 inline-flex items-center gap-3 rounded-full border border-white/12 bg-white/6 px-4 py-2 backdrop-blur-sm"
+  data-reveal
+>
+  <span class="flex items-center gap-2">
+    {slug === "meta" ? (
+      <>
+        <svg viewBox="0 0 24 24" class="h-5 w-5" role="img" aria-label="פייסבוק">
+          <path
+            fill="#1877F2"
+            d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.09 24 18.1 24 12.07Z"
+          />
+        </svg>
+        <svg viewBox="0 0 24 24" class="h-5 w-5" role="img" aria-label="אינסטגרם">
+          <defs>
+            <radialGradient id="pm-ig" cx="30%" cy="107%" r="150%">
+              <stop offset="0%" stop-color="#FDF497" />
+              <stop offset="26%" stop-color="#FD5949" />
+              <stop offset="60%" stop-color="#D6249F" />
+              <stop offset="100%" stop-color="#285AEB" />
+            </radialGradient>
+          </defs>
+          <rect x="1.6" y="1.6" width="20.8" height="20.8" rx="6" fill="url(#pm-ig)" />
+          <rect
+            x="5.6" y="5.6" width="12.8" height="12.8" rx="4"
+            fill="none" stroke="#fff" stroke-width="1.7"
+          />
+          <circle cx="12" cy="12" r="3.15" fill="none" stroke="#fff" stroke-width="1.7" />
+          <circle cx="17.1" cy="6.9" r="1.15" fill="#fff" />
+        </svg>
+      </>
+    ) : (
+      <svg viewBox="0 0 24 24" class="h-5 w-5" role="img" aria-label="גוגל">
+        <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82Z" />
+        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24Z" />
+        <path fill="#FBBC05" d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09Z" />
+        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09C6.22 6.86 8.87 4.75 12 4.75Z" />
+      </svg>
+    )}
+  </span>
+  <span class="text-sm font-semibold text-ink-200">{label}</span>
+</div>
