@@ -48,12 +48,37 @@ const graph = [
     email: site.email,
     image: `${origin}/og/default.jpg`,
     logo: { "@type": "ImageObject", url: `${origin}/logo.png` },
-    areaServed: { "@type": "Country", name: "ישראל" },
+    /* Two markets, not one: the paid work is sold in Israel and the websites
+       and organic work are sold in the United States. Collapsing them to one
+       country is what makes an agent describe the offer wrongly. */
+    areaServed: [
+      { "@type": "Country", name: "ישראל" },
+      { "@type": "Country", name: "United States" },
+    ],
     knowsLanguage: ["he", "en"],
     priceRange: "$$",
+    /* The only other property this business is known by. No invented social
+       profiles: a sameAs pointing nowhere is worse than a short list. */
+    sameAs: ["https://shaiomedia.com"],
     founder: [
-      { "@type": "Person", name: "שי אייני" },
-      { "@type": "Person", name: "שלו חג'ג'" },
+      {
+        "@type": "Person",
+        "@id": `${origin}/about#shay`,
+        name: "שי אייני",
+        alternateName: "Shay Aini",
+        jobTitle: "מייסד",
+        url: `${origin}/about`,
+        worksFor: { "@id": `${origin}/#org` },
+      },
+      {
+        "@type": "Person",
+        "@id": `${origin}/about#shalev`,
+        name: "שלו חג'ג'",
+        alternateName: "Shalev Hajaj",
+        jobTitle: "מייסד",
+        url: `${origin}/about`,
+        worksFor: { "@id": `${origin}/#org` },
+      },
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -70,6 +95,8 @@ const graph = [
     "@id": `${origin}/#website`,
     url: origin,
     name: site.nameHe,
+    alternateName: site.name,
+    description: site.description,
     inLanguage: "he-IL",
     publisher: { "@id": `${origin}/#org` },
   },

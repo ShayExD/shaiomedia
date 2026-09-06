@@ -14,3 +14,14 @@
 
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
+
+# Markdown twins of each page. Vary is set by functions/_middleware.ts on every
+# negotiated response; repeating it here keeps a direct .md hit consistent.
+/*.md
+  Content-Type: text/markdown; charset=utf-8
+  Vary: Accept, Accept-Encoding
+  Cache-Control: public, max-age=0, must-revalidate
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600

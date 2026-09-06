@@ -7,13 +7,14 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/csp.mjs",
+    "build": "astro build && node scripts/markdown.mjs && node scripts/csp.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
     "deploy": "npm run build && wrangler pages deploy dist --project-name=shaiomedia-service",
     "deploy:preview": "./deploy-preview.sh",
-    "cf:dev": "npm run build && wrangler pages dev dist --compatibility-date=2026-09-01"
+    "cf:dev": "npm run build && wrangler pages dev dist --compatibility-date=2026-09-01",
+    "test:agents": "node scripts/verify-agents.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

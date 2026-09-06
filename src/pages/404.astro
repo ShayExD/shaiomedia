@@ -11,5 +11,26 @@ import { site } from "../data/site";
       <a href="/" class="btn btn-primary px-6 py-3">לעמוד הבית</a>
       <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-ghost px-6 py-3">וואטסאפ</a>
     </div>
+
+    {/* The same recovery links the Markdown 404 carries, in the HTML body, so a
+        crawler that reads a rendered page finds them too. */}
+    <nav class="mt-14 w-full border-t border-ink-100 pt-8 text-start" aria-label="עמודי האתר">
+      <h2 class="text-sm font-bold text-ink-700">כל העמודים באתר</h2>
+      <ul class="mt-3 grid gap-2 text-[0.9375rem] sm:grid-cols-2">
+        <li><a href="/" class="text-brand-600 underline underline-offset-4">עמוד הבית</a> — אתרים וקידום אורגני לעסקי שירות בארצות הברית</li>
+        <li><a href="/meta" class="text-brand-600 underline underline-offset-4">קמפיינים במטא</a> — ניהול ממומן לעסקים בישראל</li>
+        <li><a href="/google-ads" class="text-brand-600 underline underline-offset-4">Google Ads</a> — ניהול קמפיינים בחיפוש לעסקים בישראל</li>
+        <li><a href="/about" class="text-brand-600 underline underline-offset-4">מי אנחנו</a></li>
+        <li><a href="/privacy-policy" class="text-brand-600 underline underline-offset-4">מדיניות פרטיות</a></li>
+        <li><a href="/accessibility-statement" class="text-brand-600 underline underline-offset-4">הצהרת נגישות</a></li>
+      </ul>
+      <p class="mt-5 text-sm text-ink-500">
+        לסוכנים אוטומטיים:
+        <a href="/llms.txt" class="latin text-brand-600 underline underline-offset-4">/llms.txt</a>,
+        <a href="/sitemap-index.xml" class="latin text-brand-600 underline underline-offset-4">/sitemap-index.xml</a>,
+        <a href="/robots.txt" class="latin text-brand-600 underline underline-offset-4">/robots.txt</a>.
+        כל עמוד זמין גם כ־Markdown עם סיומת <span class="latin">.md</span>.
+      </p>
+    </nav>
   </section>
 </Base>
