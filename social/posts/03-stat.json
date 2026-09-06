@@ -1,0 +1,11 @@
+{
+  "id": "03-stat",
+  "template": "stat",
+  "vertical": "construction",
+  "kicker": "מאז שהתחלנו",
+  "value": "100",
+  "suffix": "+",
+  "label": "אתרים לעסקי שירות בארצות הברית",
+  "sub": "לאס וגאס, לוס אנג׳לס, סיאטל, פורטלנד, סן חוזה וצפון קרוליינה.",
+  "sizes": ["feed", "square"]
+}

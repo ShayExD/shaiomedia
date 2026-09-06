@@ -1,0 +1,13 @@
+{
+  "id": "01-compare",
+  "template": "beforeAfter",
+  "vertical": "roofing",
+  "city": "אורנג׳ קאונטי",
+  "headline": "אותו גגן. שני אתרים. תנחשו למי מתקשרים.",
+  "sub": "בעל בית פותח את הטלפון, נותן לכם שלוש שניות, ועובר לבא בתור.",
+  "before": "@wcoasthome",
+  "after": "@pwcroofing",
+  "beforeTag": "האתר שלך היום",
+  "afterTag": "מה שאפשר",
+  "sizes": ["feed", "story"]
+}

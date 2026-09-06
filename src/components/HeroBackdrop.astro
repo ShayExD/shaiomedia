@@ -1,0 +1,181 @@
+---
+/**
+ * Live motion behind a campaign hero.
+ *
+ * The point of each page is that something arrives: enquiries on the Meta page,
+ * searches on the Google one. The backdrop shows that happening rather than
+ * saying it, with a brand mark held far back so the platform is legible before
+ * the headline is read.
+ *
+ * Pure CSS on purpose. This paints in the first frame, and a script that has to
+ * arrive, parse and start before anything moves would leave the hero dead for
+ * exactly as long as a visitor from an ad is deciding whether to stay.
+ *
+ * No figure here is a claim. The chips carry no counts, because a number in a
+ * background loop reads as a promise nobody made.
+ */
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+
+const isMeta = slug === "meta";
+
+/* Kept off the centre column so nothing drifts under the headline. */
+const chips = isMeta
+  ? [
+      { t: "פנייה חדשה", side: "start", pos: "6%", delay: "0s", dur: "17s" },
+      { t: "טופס מולא", side: "end", pos: "8%", delay: "3.2s", dur: "19s" },
+      { t: "הודעה בוואטסאפ", side: "start", pos: "17%", delay: "6.5s", dur: "18s" },
+      { t: "ליד מאינסטגרם", side: "end", pos: "19%", delay: "9.4s", dur: "20s" },
+      { t: "פנייה חדשה", side: "start", pos: "2%", delay: "12.8s", dur: "18s" },
+      { t: "בקשה להצעת מחיר", side: "end", pos: "3%", delay: "15.1s", dur: "19s" },
+    ]
+  : [
+      { t: "מנעולן בתל אביב", side: "start", pos: "6%", delay: "0s", dur: "17s" },
+      { t: "שיפוצים בשרון", side: "end", pos: "8%", delay: "3.2s", dur: "19s" },
+      { t: "קליניקה לפיזיותרפיה", side: "start", pos: "17%", delay: "6.5s", dur: "18s" },
+      { t: "ריטריט בצפון", side: "end", pos: "19%", delay: "9.4s", dur: "20s" },
+      { t: "אינסטלטור עכשיו", side: "start", pos: "2%", delay: "12.8s", dur: "18s" },
+      { t: "מאמן אישי בחיפה", side: "end", pos: "3%", delay: "15.1s", dur: "19s" },
+    ];
+---
+
+<div class="hb pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+  <div class="absolute inset-0 bg-ink-950"></div>
+
+  {/* Held well back: a watermark, not a logo placement. */}
+  <div class="hb-mark absolute start-1/2 top-1/2">
+    {isMeta ? (
+      <svg viewBox="0 0 24 24" class="h-full w-full">
+        <path
+          fill="#1877F2"
+          d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.09 24 18.1 24 12.07Z"
+        />
+      </svg>
+    ) : (
+      <svg viewBox="0 0 24 24" class="h-full w-full">
+        <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82Z" />
+        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24Z" />
+        <path fill="#FBBC05" d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09Z" />
+        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09C6.22 6.86 8.87 4.75 12 4.75Z" />
+      </svg>
+    )}
+  </div>
+
+  <div
+    class="absolute -top-1/3 start-1/2 h-[46rem] w-[46rem] -translate-x-1/2 rounded-full opacity-70"
+    style="background:radial-gradient(circle, rgb(46 111 184/0.22) 0%, rgb(27 79 138/0.07) 46%, transparent 70%)"
+  >
+  </div>
+
+  {chips.map((c) => (
+    <span
+      class="hb-chip"
+      style={`--x:${c.pos};--d:${c.delay};--t:${c.dur};${c.side === "start" ? "inset-inline-start:var(--x)" : "inset-inline-end:var(--x)"}`}
+    >
+      {isMeta ? (
+        <svg viewBox="0 0 20 20" class="hb-ic" fill="none">
+          <path d="m5 10.4 3 3 7-7.2" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 20 20" class="hb-ic" fill="none">
+          <circle cx="9" cy="9" r="5.4" stroke="currentColor" stroke-width="2" />
+          <path d="m13.2 13.2 3.4 3.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      )}
+      <span>{c.t}</span>
+    </span>
+  ))}
+
+  <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-paper"></div>
+</div>
+
+<style>
+  .hb-mark {
+    width: 38rem;
+    height: 38rem;
+    margin-inline-start: -19rem;
+    margin-top: -19rem;
+    opacity: 0.055;
+    filter: blur(1px);
+    animation: hb-breathe 26s ease-in-out infinite;
+  }
+
+  /* An arrival, not a float: fast in at the bottom, slowing as it rises, gone
+     before it reaches the headline. */
+  .hb-chip {
+    position: absolute;
+    bottom: -3rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background: rgb(255 255 255 / 0.05);
+    color: rgb(200 220 245 / 0.75);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    animation: hb-rise var(--t) linear var(--d) infinite;
+  }
+
+  .hb-ic {
+    width: 0.9rem;
+    height: 0.9rem;
+    flex: none;
+    opacity: 0.8;
+  }
+
+  @keyframes hb-rise {
+    0% { transform: translateY(0) scale(0.94); opacity: 0; }
+    7% { opacity: 0.9; transform: translateY(-3rem) scale(1); }
+    62% { opacity: 0.55; }
+    88% { opacity: 0; }
+    100% { transform: translateY(-30rem) scale(0.97); opacity: 0; }
+  }
+
+  @keyframes hb-breathe {
+    0%, 100% { opacity: 0.045; transform: scale(1) rotate(0deg); }
+    50% { opacity: 0.08; transform: scale(1.05) rotate(2.5deg); }
+  }
+
+  /* Narrow screens have no room beside the headline, so the chips run in the
+     empty band under the hero's own content instead of past it: a short travel,
+     three of them, staggered. Traffic from an ad lands here first, and a hero
+     with nothing moving in it is the one place that costs the most. */
+  @media (max-width: 767px) {
+    .hb-chip {
+      font-size: 0.75rem;
+      padding: 0.4rem 0.75rem;
+      animation-name: hb-rise-short;
+      animation-duration: 9s;
+    }
+    .hb-chip:nth-of-type(n + 4) { display: none; }
+    .hb-chip:nth-of-type(1) { animation-delay: 0s; }
+    .hb-chip:nth-of-type(2) { animation-delay: 3s; }
+    .hb-chip:nth-of-type(3) { animation-delay: 6s; }
+    .hb-mark {
+      width: 26rem;
+      height: 26rem;
+      margin-inline-start: -13rem;
+      margin-top: -13rem;
+      opacity: 0.085;
+    }
+  }
+
+  /* Rises through the padding below the content and stops short of it. */
+  @keyframes hb-rise-short {
+    0% { transform: translateY(0) scale(0.94); opacity: 0; }
+    18% { opacity: 0.85; }
+    70% { opacity: 0.45; }
+    100% { transform: translateY(-7.5rem) scale(0.97); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hb-chip { animation: none; opacity: 0.5; bottom: auto; top: 30%; }
+    .hb-mark { animation: none; }
+  }
+</style>

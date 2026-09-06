@@ -1,0 +1,10 @@
+{
+  "id": "02-showcase",
+  "template": "showcase",
+  "vertical": "chimney",
+  "city": "סן חוזה",
+  "headline": "מנקה ארובות בסן חוזה. תשעה שירותים, תשעה עמודים.",
+  "after": "@svchimneysweep",
+  "chips": ["הזמנת תור אונליין", "עמוד לכל שירות", "הסמכה וביטוח בראש", "בלוג תחזוקה"],
+  "sizes": ["feed"]
+}
