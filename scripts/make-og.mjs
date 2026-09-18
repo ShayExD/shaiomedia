@@ -49,9 +49,20 @@ const CARDS = [
     sub: 'ניהול קמפיינים בחיפוש לעסקים בישראל, עם מעקב המרות ואופטימיזציה שבועית.',
     chips: [['27.8K', 'קליקים'], ['₪0.48', 'לקליק'], ['10+', 'חודשי ניהול רצוף']],
   },
+  {
+    out: 'chatgpt-ads.jpg',
+    kicker: 'ChatGPT Ads · חדש בישראל',
+    headline: 'הם שואלים את ChatGPT. <span>תהיו שם.</span>',
+    sub: 'ישראל נפתחה לפרסום בתוך ChatGPT. מי שנכנס עכשיו מפרסם כמעט בלי מתחרים.',
+    /* No performance figures here: the platform opened in Israel days ago and
+       nobody has history in it. A number on this card would be invented. */
+    chips: [['חדש', 'נפתח בישראל'], ['ישראל', 'מיקוד גיאוגרפי'], ['אישי', 'מי שמנהל, עונה']],
+  },
 ];
 
-const b = await chromium.launch();
+/* The full chromium build, not the headless shell: the shell is a separate
+   download and is often absent while chromium itself is present. */
+const b = await chromium.launch({ channel: 'chromium' });
 const p = await b.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 2 });
 
 for (const c of CARDS) {

@@ -127,17 +127,21 @@ const schema = [
     <div data-reveal class="mx-auto mt-12 max-w-6xl">
       <div class="flex flex-col items-center justify-between gap-5 rounded-[var(--radius-card)] border border-ink-200 bg-white p-8 text-center sm:flex-row sm:text-start">
         <div>
-          <p class="text-xl font-bold text-ink-900">{others[0].siblingPrompt}</p>
+          <p class="text-xl font-bold text-ink-900">מנהלים גם את הערוצים האחרים</p>
           <p class="mt-1.5 text-[0.9375rem] text-ink-600">
-            יש לזה עמוד נפרד, עם מה שנכנס לעבודה ומה עולה בנפרד.
+            לכל אחד עמוד נפרד, עם מה שנכנס לעבודה ומה עולה בנפרד.
           </p>
         </div>
-        <a href={`/${others[0].slug}`} class="btn btn-primary shrink-0 px-7 py-3.5">{others[0].siblingCta}</a>
+        <div class="flex flex-col gap-2.5 sm:flex-row">
+          {others.map((o) => (
+            <a href={`/${o.slug}`} class="btn btn-ghost shrink-0 px-6 py-3">{o.siblingCta}</a>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <Proof proof={c.proof} />
+  {c.proof && <Proof proof={c.proof} />}
 
   <Faq items={c.faq} title="שאלות שחוזרות" />
   <Contact />
