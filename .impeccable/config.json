@@ -11,6 +11,15 @@
         ],
         "createdAt": "2026-09-18T10:49:03.087Z",
         "reason": "Claude: this file is a 1080x1080 image canvas rendered by Playwright, not an interactive UI. The glow and rule layers are positioned to bleed past the frame and the clip is what crops them to the ad; there are no tooltips, menus or popovers to escape it."
+      },
+      {
+        "rule": "radial-spotlight-glow",
+        "value": "*",
+        "files": [
+          "scripts/ad-chatgpt.html"
+        ],
+        "createdAt": "2026-09-18T10:54:03.848Z",
+        "reason": "Claude: the creative deliberately mirrors the shipped hero on /chatgpt-ads, which uses the same radial field; someone who clicks the ad should land on a page that looks like it. Not asserting the pattern is good, only that the ad should not diverge from the page on its own. Raised with the user as a separate question about the site's hero treatment."
       }
     ]
   }
