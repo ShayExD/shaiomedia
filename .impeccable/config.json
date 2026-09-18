@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "scripts/ad-chatgpt.html"
+        ],
+        "createdAt": "2026-09-18T10:49:03.087Z",
+        "reason": "Claude: this file is a 1080x1080 image canvas rendered by Playwright, not an interactive UI. The glow and rule layers are positioned to bleed past the frame and the clip is what crops them to the ad; there are no tooltips, menus or popovers to escape it."
+      }
+    ]
+  }
+}

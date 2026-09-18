@@ -67,12 +67,12 @@ const p = await b.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleF
 
 for (const c of CARDS) {
   const html = tpl
-    .replaceAll('FONT_400', fontUrl).replaceAll('FONT_700', fontUrl).replaceAll('FONT_800', fontUrl)
-    .replace('LOGO_SRC', logo)
-    .replace('KICKER', c.kicker)
-    .replace('HEADLINE', c.headline)
-    .replace('SUB', c.sub)
-    .replace('CHIPS', c.chips.map(([v, l]) => `<div class="chip"><b>${v}</b><i>${l}</i></div>`).join(''));
+    .replaceAll('{{FONT_400}}', fontUrl).replaceAll('{{FONT_700}}', fontUrl).replaceAll('{{FONT_800}}', fontUrl)
+    .replace('{{LOGO_SRC}}', logo)
+    .replace('{{KICKER}}', c.kicker)
+    .replace('{{HEADLINE}}', c.headline)
+    .replace('{{SUB}}', c.sub)
+    .replace('{{CHIPS}}', c.chips.map(([v, l]) => `<div class="chip"><b>${v}</b><i>${l}</i></div>`).join(''));
   await p.setContent(html, { waitUntil: 'networkidle' });
   await p.evaluate(() => document.fonts.ready);
   await p.waitForTimeout(400);
