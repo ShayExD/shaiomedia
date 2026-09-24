@@ -34,6 +34,7 @@ export const verticals: Vertical[] = [
   { id: "roofing",      label: "גגות" },
   { id: "chimney",      label: "ארובות" },
   { id: "locksmith",    label: "מנעולנות" },
+  { id: "garage",       label: "דלתות גראז׳" },
 ];
 
 /* ---------- Hero backdrop: scattered crops from the real client sites.
@@ -116,6 +117,22 @@ export const projects: Project[] = [
       "עשרה עמודי שירות: גינון, הרדסקייפ, גג קריר, חלונות, מיזוג, בידוד, צביעה ובריכות",
       "עמוד המלצות ועמוד אודות שנושאים את האמון",
       "מבנה תפריט שמאפשר להגיע לכל שירות בקליק אחד",
+    ],
+  },
+  {
+    slug: "supremegaragedoornv",
+    pan: 45,
+    name: "Supreme Garage Doors",
+    vertical: "garage",
+    city: "לאס וגאס, נבאדה",
+    url: "https://supremegaragedoornv.com/",
+    brief: "חברת דלתות גראז׳ שעובדת מסביב לשעון, עם קריאות דחופות שמגיעות מכל עמק לאס וגאס.",
+    built: [
+      "עמוד נפרד לכל שירות: תיקון דלת, החלפת קפיצים, התקנת מנוע והתקנת דלת חדשה",
+      "עמודי אזור להנדרסון, צפון לאס וגאס, ספרינג ואלי, אנטרפרייז, וויטני וסאנרייז מנור",
+      "גלריית עבודות אמיתיות מהשטח במקום תמונות סטוק",
+      "שאלות נפוצות על עלויות קפיצים ועל מה מסוכן לעשות לבד",
+      "ביקורות גוגל מוטמעות בעמוד, ישירות מהפרופיל העסקי",
     ],
   },
   {
@@ -305,8 +322,9 @@ export const faq = [
 ];
 
 export const nav = [
-  { label: "עבודות", href: "#work" },
-  { label: "מה כלול", href: "#includes" },
-  { label: "תהליך", href: "#process" },
-  { label: "שאלות", href: "#faq" },
+  /* Absolute, not bare anchors: the nav renders on five pages now and a "#work"
+     from /about would scroll nowhere. */
+  { label: "שירותים", href: "/#services" },
+  { label: "אתרים שבנינו", href: "/websites#work" },
+  { label: "מי אנחנו", href: "/about" },
 ];

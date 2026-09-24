@@ -21,7 +21,8 @@ export const GET: APIRoute = ({ site: astroSite }) => {
 
 A small Israeli agency with two distinct offers. Websites and organic search
 for home-service businesses in the United States, and paid campaign management
-for lead-generation businesses in Israel. All pages are in Hebrew.
+across Google, Meta and ChatGPT for lead-generation businesses in Israel. All
+pages are in Hebrew. The root is the company page; each service has its own.
 
 ## When to use this
 
@@ -66,9 +67,11 @@ reach a founder directly.
 
 ## Pages
 
-- [Home — websites and organic search for US service businesses](${origin}/): the
-  offer, the built sites with links to each live client, what is included, and
-  the contact form.
+- [Home — the company and its four services](${origin}/): who Shaio Media is,
+  the client list, and the route into each service.
+- [Websites and organic search, United States](${origin}/websites): the offer,
+  the built sites with links to each live client, what is included, the process
+  and the contact form.
 ${campaigns
   .map((c) => `- [${c.title}](${origin}/${c.slug}): ${c.metaDescription}`)
   .join("\n")}

@@ -1,0 +1,97 @@
+---
+/**
+ * The client logo strip, carried over from shaiomedia.com.
+ *
+ * The track holds two copies of the list and slides exactly half its width, so
+ * the second copy lands where the first began and the loop has no seam. The
+ * overflow container is forced to LTR: in an RTL document the browser
+ * right-aligns an oversized track, and a negative translate then walks it into
+ * empty space instead of across the logos. Labels inside stay RTL.
+ *
+ * The logos are client marks, shown to say who the work was for. They are
+ * greyed back and lift to full colour on hover so the row reads as one texture
+ * rather than nine competing brands.
+ */
+import { asset } from "../lib/asset";
+
+interface Props {
+  title?: string;
+}
+const { title = "לקוחות שעובדים איתנו" } = Astro.props;
+
+const logos = Array.from({ length: 9 }, (_, i) => `${i + 1}.png`);
+---
+
+<section class="border-y border-ink-100 bg-white py-12 lg:py-16" aria-labelledby="clients-title">
+  <h2 id="clients-title" class="px-5 text-center text-sm font-semibold tracking-wide text-ink-500">
+    {title}
+  </h2>
+
+  <div class="cs-mask mt-8 overflow-hidden" dir="ltr">
+    <ul class="cs-track flex w-max items-center gap-12 lg:gap-16" role="list">
+      {[0, 1].map((copy) => (
+        <>
+          {logos.map((f) => (
+            <li class="shrink-0" aria-hidden={copy === 1 ? "true" : undefined}>
+              <img
+                src={asset(`images/clients/${f}`)}
+                alt={copy === 1 ? "" : "לוגו של לקוח"}
+                width="150"
+                height="60"
+                {/* Eager on purpose: the track moves by transform, so a logo
+                    never "scrolls into view" in the way lazy loading watches
+                    for, and a late arrival pops in mid-run. Nine small marks. */}
+                loading="eager"
+                decoding="async"
+                class="cs-logo h-10 w-auto object-contain lg:h-12"
+              />
+            </li>
+          ))}
+        </>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  /* Fading both ends stops a logo from being cut mid-mark at the edge. */
+  .cs-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 5rem, #000 calc(100% - 5rem), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 5rem, #000 calc(100% - 5rem), transparent);
+  }
+
+  .cs-track {
+    animation: cs-run 42s linear infinite;
+  }
+
+  /* Exactly half: the track is the list twice, so at -50% the second copy sits
+     where the first started and the restart is invisible. */
+  @keyframes cs-run {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .cs-logo {
+    filter: grayscale(1);
+    opacity: 0.55;
+    transition: filter 0.25s ease, opacity 0.25s ease;
+  }
+
+  .cs-logo:hover {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cs-track { animation: none; }
+    /* Without the run, a track twice the width would show only its first half;
+       wrapping shows the set once and still fills the row. */
+    .cs-track {
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .cs-track li[aria-hidden="true"] { display: none; }
+  }
+</style>

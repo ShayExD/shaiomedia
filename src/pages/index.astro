@@ -1,50 +1,85 @@
 ---
+/**
+ * The company page.
+ *
+ * This used to be the US websites offer. That offer now lives at /websites and
+ * the root is what the domain implies: who Shaio Media is and the four things
+ * it sells, so a visitor who arrives without a channel in mind has somewhere to
+ * land. The two markets are named on every card rather than blurred together.
+ */
 import Base from "../layouts/Base.astro";
-import Hero from "../components/Hero.astro";
-import Showcase from "../components/Showcase.astro";
-import Includes from "../components/Includes.astro";
-import Edge from "../components/Edge.astro";
-import Process from "../components/Process.astro";
-import Faq from "../components/Faq.astro";
+import Services from "../components/Services.astro";
+import ClientStrip from "../components/ClientStrip.astro";
 import Contact from "../components/Contact.astro";
-import { faq, projects } from "../data/site";
+import { site, stats } from "../data/site";
 
 const origin = Astro.site?.origin.replace(/\/$/, "") ?? "";
 
 const schema = [
   {
-    "@type": "FAQPage",
-    "@id": `${origin}/#faq`,
-    mainEntity: faq.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  },
-  {
     "@type": "ItemList",
-    "@id": `${origin}/#work`,
-    name: "אתרים שבנינו לעסקי שירות",
-    itemListElement: projects.map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: p.name,
-      url: p.url,
-    })),
+    "@id": `${origin}/#services`,
+    name: "השירותים של שיו מדיה",
+    itemListElement: [
+      { name: "בניית אתרים וקידום אורגני", url: `${origin}/websites` },
+      { name: "ניהול קמפיינים בגוגל", url: `${origin}/google-ads` },
+      { name: "ניהול קמפיינים במטא", url: `${origin}/meta` },
+      { name: "ניהול קמפיינים ב-ChatGPT", url: `${origin}/chatgpt-ads` },
+    ].map((s, i) => ({ "@type": "ListItem", position: i + 1, name: s.name, url: s.url })),
   },
 ];
 ---
+
 <Base
-  title="בניית אתרים וקידום אורגני לעסקי שירות בארצות הברית | שיו מדיה"
-  description="בונים אתרים ומקדמים אורגנית קבלנים, גגנים, מנקי ארובות, מנעולנים ומתקיני דלתות גראז׳ בארצות הברית. תיכנסו לקטלוג וראו אתרים אמיתיים שבנינו."
-  path="/"
+  title="שיו מדיה | אתרים, קידום אורגני וקמפיינים ממומנים"
+  description="בונים אתרים ומקדמים אורגנית עסקי שירות בארצות הברית, ומנהלים קמפיינים ממומנים בגוגל, במטא וב-ChatGPT לעסקים בישראל."
+  path=""
   schema={schema}
 >
-  <Hero />
-  <Showcase />
-  <Includes />
-  <Edge />
-  <Process />
-  <Faq />
+  <section class="relative overflow-hidden px-5 pt-32 pb-20 lg:px-8 lg:pt-40 lg:pb-24">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <div class="absolute inset-0 bg-ink-950"></div>
+      <div
+        class="absolute -top-1/3 start-1/2 h-[46rem] w-[46rem] -translate-x-1/2 rounded-full opacity-70"
+        style="background:radial-gradient(circle, rgb(46 111 184/0.22) 0%, rgb(27 79 138/0.07) 46%, transparent 70%)"
+      >
+      </div>
+      <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-paper"></div>
+    </div>
+
+    <div class="mx-auto max-w-4xl text-center">
+      <p class="eyebrow !text-brand-300">שיו מדיה</p>
+
+      <h1 class="mx-auto mt-6 max-w-4xl text-balance text-[clamp(2rem,4.8vw,3.6rem)] !text-white">
+        <span class="rise" data-rise><span>אתרים, קידום אורגני</span></span>
+        <span class="rise mt-1 !text-brand-300" data-rise style="--rise-delay:120ms"><span>וקמפיינים ממומנים.</span></span>
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-balance text-[1.0625rem] leading-relaxed text-ink-300 sm:text-[1.1875rem]">
+        סוכנות קטנה בכוונה. בונים ומקדמים אתרים לעסקי שירות בארצות הברית, ומנהלים
+        קמפיינים ממומנים בגוגל, במטא וב-ChatGPT לעסקים בישראל. אותו אדם שמדבר איתכם
+        הוא זה שעושה את העבודה.
+      </p>
+
+      <dl class="mx-auto mt-10 flex max-w-lg justify-center gap-10">
+        {stats.map((s) => (
+          <div>
+            <dd class="num text-4xl font-extrabold text-white">
+              {s.value}<span class="text-brand-300">{s.suffix}</span>
+            </dd>
+            <dt class="mt-1 text-sm text-ink-400">{s.label}</dt>
+          </div>
+        ))}
+      </dl>
+
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="#services" class="btn btn-accent w-full px-8 py-4 text-[1.0625rem] sm:w-auto">מה אנחנו עושים</a>
+        <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-glass w-full px-8 py-4 text-[1.0625rem] sm:w-auto">וואטסאפ</a>
+      </div>
+    </div>
+  </section>
+
+  <ClientStrip />
+  <Services />
   <Contact />
 </Base>
