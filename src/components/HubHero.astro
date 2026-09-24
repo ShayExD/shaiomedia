@@ -1,0 +1,121 @@
+---
+/**
+ * The company hero.
+ *
+ * It was a flat navy field, which said nothing about a business whose whole
+ * argument is the work it has shipped. It now scatters that work behind the
+ * headline: crops of built sites next to the redacted campaign exports, so
+ * both halves of the company are visible before a word is read.
+ *
+ * Light ground rather than dark. The campaign pages are dark because each one
+ * sells a single channel and wants a stage; the root is a catalogue, and
+ * catalogues read better on paper.
+ */
+import { asset } from "../lib/asset";
+import { site, stats, hubTiles } from "../data/site";
+---
+
+<section id="top" class="relative overflow-hidden px-5 pt-28 pb-16 lg:px-8 lg:pt-36 lg:pb-20">
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+    <div class="absolute inset-0 bg-paper"></div>
+    <div
+      class="absolute -top-1/3 start-1/2 h-[52rem] w-[52rem] -translate-x-1/2 rounded-full opacity-70"
+      style="background:radial-gradient(circle, rgb(46 111 184/0.10) 0%, rgb(27 79 138/0.04) 45%, transparent 70%)"
+    >
+    </div>
+
+    {/* Phones get two corners only. The full scatter crowds the headline at
+        390px, and a crowded headline is worse than a plain one. */}
+    <div class="absolute inset-x-0 top-0 h-72 overflow-hidden lg:hidden">
+      <img
+        src={asset("images/tiles/vita-design-0.webp")} alt="" width="420" height="280"
+        loading="lazy" fetchpriority="low" decoding="async"
+        class="tile absolute -start-16 top-2 w-44 rounded-xl object-cover shadow-[0_16px_36px_-16px_rgb(5_10_19/0.35)] ring-1 ring-ink-900/10"
+        style="--rot:-9deg; --delay:0; --fx:16px; --fy:-20px; --fdur:18s"
+      />
+      <img
+        src={asset("images/proof/meta-campaigns-narrow.webp")} alt="" width="715" height="288"
+        loading="lazy" fetchpriority="low" decoding="async"
+        class="tile absolute -end-12 top-12 w-48 rounded-xl bg-white object-cover shadow-[0_16px_36px_-16px_rgb(5_10_19/0.35)] ring-1 ring-ink-900/10"
+        style="--rot:7deg; --delay:1.2; --fx:-18px; --fy:22px; --fdur:21s"
+      />
+    </div>
+
+    <div class="tiles absolute inset-0 hidden lg:block">
+      {hubTiles.map((t) =>
+        t.src.startsWith("proof/") ? (
+          /* An account export is a white table on an almost-white ground, and
+             under the scrim it dissolves into the page. The dark bar gives it
+             an edge and makes it read as a screenshot of a dashboard rather
+             than a smudge. */
+          <span
+            class="tile parallax absolute block overflow-hidden rounded-xl bg-white shadow-[0_22px_50px_-22px_rgb(5_10_19/0.45)] ring-1 ring-ink-900/12"
+            class:list={[t.wide && "hidden 2xl:block"]}
+            style={`top:${t.top}; inset-inline-${t.side}:${t.offset}; width:${t.w}; --rot:${t.rot}deg; --delay:${t.delay}s; --fx:${t.fx}; --fy:${t.fy}; --fdur:${t.dur}s`}
+          >
+            <span class="flex h-5 items-center gap-1 bg-ink-900 px-2">
+              <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
+              <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
+              <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
+            </span>
+            <img
+              src={asset(`images/${t.src}.webp`)} alt="" width="420" height="280"
+              loading="lazy" fetchpriority="low" decoding="async"
+              class="block w-full object-cover object-top"
+            />
+          </span>
+        ) : (
+          <img
+            src={asset(`images/${t.src}.webp`)} alt="" width="420" height="280"
+            loading="lazy" fetchpriority="low" decoding="async"
+            class:list={[
+              "tile parallax absolute rounded-xl object-cover shadow-[0_22px_50px_-22px_rgb(5_10_19/0.4)] ring-1 ring-ink-900/10",
+              t.wide && "hidden 2xl:block",
+            ]}
+            style={`top:${t.top}; inset-inline-${t.side}:${t.offset}; width:${t.w}; --rot:${t.rot}deg; --delay:${t.delay}s; --fx:${t.fx}; --fy:${t.fy}; --fdur:${t.dur}s`}
+          />
+        ),
+      )}
+    </div>
+
+    {/* Keeps the headline column clean and fades the scatter toward the seam. */}
+    <div
+      class="absolute inset-0"
+      style="background:radial-gradient(ellipse 50% 64% at 50% 44%, rgb(244 247 250/0.93) 0%, rgb(244 247 250/0.82) 42%, rgb(244 247 250/0.5) 68%, rgb(244 247 250/0.2) 100%)"
+    >
+    </div>
+    <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-paper"></div>
+  </div>
+
+  <div class="mx-auto max-w-6xl">
+    <div class="flex justify-center">
+      <p data-hero="0" class="eyebrow">שיו מדיה</p>
+    </div>
+
+    <h1 class="mx-auto mt-7 max-w-5xl text-balance text-center text-[clamp(1.95rem,4.8vw,3.75rem)]">
+      <span class="rise" data-rise style="--rise-delay:420ms"><span>אתרים, קידום אורגני</span></span>
+      <span class="rise mt-2 !text-brand-600" data-rise style="--rise-delay:560ms"><span>וקמפיינים ממומנים.</span></span>
+    </h1>
+
+    <p data-hero="2" class="mx-auto mt-6 max-w-2xl text-balance text-center text-[clamp(1.0625rem,2.1vw,1.3125rem)] leading-relaxed text-ink-600">
+      סוכנות קטנה בכוונה. בונים ומקדמים אתרים לעסקי שירות בארצות הברית, ומנהלים
+      קמפיינים ממומנים בגוגל, במטא וב-ChatGPT לעסקים בישראל.
+    </p>
+
+    <dl data-hero="3" class="mx-auto mt-9 flex max-w-lg justify-center gap-10">
+      {stats.map((s) => (
+        <div class="text-center">
+          <dd class="num text-4xl font-extrabold text-ink-900">
+            {s.value}<span class="text-brand-600">{s.suffix}</span>
+          </dd>
+          <dt class="mt-1 text-sm text-ink-500">{s.label}</dt>
+        </div>
+      ))}
+    </dl>
+
+    <div data-hero="4" class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <a href="#services" class="btn btn-primary w-full px-8 py-4 text-[1.0625rem] sm:w-auto">מה אנחנו עושים</a>
+      <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-ghost w-full px-8 py-4 text-[1.0625rem] sm:w-auto">וואטסאפ</a>
+    </div>
+  </div>
+</section>

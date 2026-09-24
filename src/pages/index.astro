@@ -8,10 +8,12 @@
  * land. The two markets are named on every card rather than blurred together.
  */
 import Base from "../layouts/Base.astro";
+import HubHero from "../components/HubHero.astro";
 import Services from "../components/Services.astro";
+import WorkPreview from "../components/WorkPreview.astro";
+import ResultsPreview from "../components/ResultsPreview.astro";
 import ClientStrip from "../components/ClientStrip.astro";
 import Contact from "../components/Contact.astro";
-import { site, stats } from "../data/site";
 
 const origin = Astro.site?.origin.replace(/\/$/, "") ?? "";
 
@@ -36,50 +38,11 @@ const schema = [
   path=""
   schema={schema}
 >
-  <section class="relative overflow-hidden px-5 pt-32 pb-20 lg:px-8 lg:pt-40 lg:pb-24">
-    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      <div class="absolute inset-0 bg-ink-950"></div>
-      <div
-        class="absolute -top-1/3 start-1/2 h-[46rem] w-[46rem] -translate-x-1/2 rounded-full opacity-70"
-        style="background:radial-gradient(circle, rgb(46 111 184/0.22) 0%, rgb(27 79 138/0.07) 46%, transparent 70%)"
-      >
-      </div>
-      <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-paper"></div>
-    </div>
-
-    <div class="mx-auto max-w-4xl text-center">
-      <p class="eyebrow !text-brand-300">שיו מדיה</p>
-
-      <h1 class="mx-auto mt-6 max-w-4xl text-balance text-[clamp(2rem,4.8vw,3.6rem)] !text-white">
-        <span class="rise" data-rise><span>אתרים, קידום אורגני</span></span>
-        <span class="rise mt-1 !text-brand-300" data-rise style="--rise-delay:120ms"><span>וקמפיינים ממומנים.</span></span>
-      </h1>
-
-      <p class="mx-auto mt-6 max-w-2xl text-balance text-[1.0625rem] leading-relaxed text-ink-300 sm:text-[1.1875rem]">
-        סוכנות קטנה בכוונה. בונים ומקדמים אתרים לעסקי שירות בארצות הברית, ומנהלים
-        קמפיינים ממומנים בגוגל, במטא וב-ChatGPT לעסקים בישראל. אותו אדם שמדבר איתכם
-        הוא זה שעושה את העבודה.
-      </p>
-
-      <dl class="mx-auto mt-10 flex max-w-lg justify-center gap-10">
-        {stats.map((s) => (
-          <div>
-            <dd class="num text-4xl font-extrabold text-white">
-              {s.value}<span class="text-brand-300">{s.suffix}</span>
-            </dd>
-            <dt class="mt-1 text-sm text-ink-400">{s.label}</dt>
-          </div>
-        ))}
-      </dl>
-
-      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a href="#services" class="btn btn-accent w-full px-8 py-4 text-[1.0625rem] sm:w-auto">מה אנחנו עושים</a>
-        <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-glass w-full px-8 py-4 text-[1.0625rem] sm:w-auto">וואטסאפ</a>
-      </div>
-    </div>
-  </section>
+  <HubHero />
 
   <ClientStrip />
   <Services />
+  <WorkPreview />
+  <ResultsPreview />
   <Contact />
 </Base>

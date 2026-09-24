@@ -1,0 +1,77 @@
+---
+/**
+ * Campaign results on the company page.
+ *
+ * Both exports side by side, each with the figures that are legible in the
+ * image beside it. The caveats travel with the numbers rather than being left
+ * behind on the campaign pages: these are two accounts, not averages, and the
+ * Google figures are clicks rather than enquiries. A summary page is exactly
+ * where a number gets quoted out of context, so the context is attached here.
+ */
+import { asset } from "../lib/asset";
+import SectionHead from "./SectionHead.astro";
+import { campaigns } from "../data/campaigns";
+
+const shown = campaigns
+  .filter((c) => c.proof)
+  .map((c) => ({ slug: c.slug, nav: c.nav, proof: c.proof! }));
+---
+
+<section id="results" class="scroll-mt-20 border-t border-ink-100 bg-white px-5 py-24 lg:px-8 lg:py-32">
+  <SectionHead kicker="מהקמפיינים" title="מספרים מחשבונות אמיתיים" />
+
+  <p class="mx-auto mt-5 max-w-2xl text-center text-[0.9375rem] leading-relaxed text-ink-600" data-reveal>
+    שני חשבונות פעילים, בלי שינוי בנתונים. שמות הקמפיינים מושחרים כי הם מסגירים את
+    הלקוח. אלה לא ממוצעים ולא הבטחה, אלא מה שקרה בשני חשבונות מסוימים.
+  </p>
+
+  <div class="mx-auto mt-12 grid max-w-6xl gap-5 lg:grid-cols-2">
+    {shown.map((c, i) => (
+      <article class="card flex flex-col p-7" data-reveal style={`--reveal-delay:${i * 90}ms`}>
+        <h3 class="text-xl">{c.nav}</h3>
+
+        <dl class="mt-5 grid grid-cols-3 gap-3">
+          {c.proof.stats.map((s) => (
+            <div class="rounded-xl border border-ink-100 bg-paper p-3.5 text-center">
+              <dd class="num text-xl font-bold tabular-nums text-ink-900 sm:text-2xl">{s.v}</dd>
+              <dt class="mt-1 text-[0.6875rem] leading-tight text-ink-500">{s.l}</dt>
+            </div>
+          ))}
+        </dl>
+
+        <figure class="mt-5">
+          <div class="overflow-hidden rounded-xl border border-ink-100 bg-white">
+            <picture>
+              <source
+                media="(max-width: 639px)"
+                srcset={asset(`images/proof/${c.proof.image}-narrow.webp`)}
+                width={c.proof.nw}
+                height={c.proof.nh}
+              />
+              <img
+                src={asset(`images/proof/${c.proof.image}.webp`)}
+                alt={c.proof.alt}
+                width={c.proof.w}
+                height={c.proof.h}
+                loading="lazy"
+                decoding="async"
+                class="block h-auto w-full"
+              />
+            </picture>
+          </div>
+          <figcaption class="mt-3 text-[0.8125rem] leading-relaxed text-ink-500">{c.proof.note}</figcaption>
+        </figure>
+
+        <a
+          href={`/${c.slug}`}
+          class="mt-6 inline-flex items-center gap-2 text-[0.9375rem] font-bold text-brand-600"
+        >
+          {`לעמוד ${c.nav}`}
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" aria-hidden="true">
+            <path d="M14 6l-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </article>
+    ))}
+  </div>
+</section>

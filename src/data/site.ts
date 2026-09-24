@@ -52,6 +52,23 @@ export const heroTiles = [
   { src: "primework-2",      top: "12%", side: "end",   offset: "8%",  w: "10rem", rot: -9, delay: 4.2, wide: true,  fx: "15px",  fy: "-18px", dur: 22 },
 ];
 
+/* ---------- Company hero: the scatter behind the root page.
+   Deliberately mixed: site crops and redacted campaign exports side by side,
+   because the root sells both halves of the business and a wall of website
+   screenshots would say only one of them. ---------- */
+export const hubTiles = [
+  //                                                                                                 drift target      loop
+  { src: "tiles/vita-design-0",         top: "4%",  side: "start", offset: "-7%", w: "17rem", rot: -7, delay: 0,   wide: false, fx: "17px",  fy: "-24px", dur: 18 },
+  { src: "proof/meta-campaigns",        top: "34%", side: "start", offset: "-3%", w: "19rem", rot: 4,  delay: 1.3, wide: false, fx: "-20px", fy: "19px",  dur: 22 },
+  { src: "tiles/svchimneysweep-1",      top: "66%", side: "start", offset: "-8%", w: "15rem", rot: -5, delay: 2.5, wide: false, fx: "15px",  fy: "23px",  dur: 19 },
+  { src: "tiles/supremegaragedoornv-0", top: "3%",  side: "end",   offset: "-7%", w: "16rem", rot: 6,  delay: 0.6, wide: false, fx: "-18px", fy: "-21px", dur: 23 },
+  { src: "proof/google-performance",    top: "36%", side: "end",   offset: "-4%", w: "20rem", rot: -4, delay: 1.9, wide: false, fx: "19px",  fy: "17px",  dur: 17 },
+  { src: "tiles/pwcroofing-1",          top: "68%", side: "end",   offset: "-9%", w: "14rem", rot: 5,  delay: 3.0, wide: false, fx: "-16px", fy: "-19px", dur: 21 },
+  // Inner pair only where there is genuinely room beside the headline
+  { src: "tiles/247locksmith-0",        top: "15%", side: "start", offset: "6%",  w: "11rem", rot: 8,  delay: 3.3, wide: true,  fx: "-13px", fy: "21px",  dur: 18 },
+  { src: "tiles/primework-2",           top: "13%", side: "end",   offset: "7%",  w: "10rem", rot: -9, delay: 4.1, wide: true,  fx: "14px",  fy: "-17px", dur: 22 },
+];
+
 /** Phone mockups for the mobile strip. A portrait phone reads as "a website"
  *  at small sizes; a cropped landscape tile does not. */
 export const phoneStrip = [
